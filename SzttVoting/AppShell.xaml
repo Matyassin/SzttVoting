@@ -7,7 +7,7 @@
     Title="SzttVoting">
 
     <ShellContent
-        Title="Home"
+        Title="Voting System"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
 
