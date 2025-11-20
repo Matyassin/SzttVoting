@@ -1,6 +1,92 @@
-﻿################################################################################
-# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
-################################################################################
+﻿## -- .NET Core & MAUI Standard --
+[Bb]in/
+[Oo]bj/
+.config/
+*.user
+*.userosscache
+*.sln.docstates
+*.suo
+*.ncrunchproject
+*_i.c
+*_p.c
+*.ilk
+*.meta
+*.obj
+*.pch
+*.pdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.tmp_projgen
+*.log
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.svclog
+*.scc
+**/obj/*
+**/bin/*
 
-/.vs
-/SzttVoting
+## -- Visual Studio --
+.vs/
+Generated\ Files/
+*.suo
+*.user
+
+## -- JetBrains Rider / IntelliJ --
+.idea/
+*.sln.iml
+*.csproj.user
+
+## -- Mobile Specifics --
+
+# Android
+local.properties
+*.apk
+*.aab
+*.dex
+project.properties
+/captures/
+.externalNativeBuild/
+.cxx/
+
+# iOS / MacCatalyst
+*.mode1v3
+*.mode2v3
+*.moved-aside
+*.pbxuser
+!default.pbxuser
+*.perspectivev3
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+/podfile.lock
+Pods/
+
+## -- OS Specifics --
+
+# Mac
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+## -- Publish / Packages --
+*.nupkg
+*.snupkg
+/packages/
+!/packages/build/
+pub/
+releases/
