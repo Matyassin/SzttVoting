@@ -14,6 +14,7 @@ obj/
 ## Visual Studio
 .vs/
 .vscode/
+.idea
 
 ## MAUI generated resources
 Resources/*.designer.cs
@@ -50,7 +51,6 @@ build/
 DerivedData/
 
 ## Generated intermediate resources
-**/platforms/
 **/obj/Debug/
 **/obj/Release/
 
