@@ -5,7 +5,7 @@
 
     <ScrollView>
         <VerticalStackLayout>
-            
+            <Label Text="Voting System"/>
         </VerticalStackLayout>
     </ScrollView>
 
