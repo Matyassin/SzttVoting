@@ -8,9 +8,5 @@ namespace ViewModel;
 public partial class AppShellViewModel: BaseViewModel
 {
     [ObservableProperty]
-    private String _shellTitle = string.Empty;
-    public AppShellViewModel()
-    {
-        _shellTitle = "Welcome to the ultimate voting system!";
-    }
+    private String _shellTitle = "Welcome to the ultimate voting system!";
 }
