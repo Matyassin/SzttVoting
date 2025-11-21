@@ -1,7 +1,12 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+
 namespace ViewModel;
 
-public class RegisterViewModel
+public partial class RegisterViewModel: BaseViewModel
 {
-    public string EmailEntry = "example@example.com";
-    public string PasswordEntry = "";
+    [ObservableProperty]
+    private string _emailEntry = "example@example.com";
+    
+    [ObservableProperty]
+    private string _passwordEntry = "";
 }

@@ -1,7 +1,12 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+
 namespace ViewModel;
 
-public class LoginViewModel : BaseViewModel
+public partial class LoginViewModel : BaseViewModel
 {
-    public string EmailEntry = "example@example.com";
-    public string PasswordEntry = "";
+    [ObservableProperty]
+    public string _emailEntry = "example@example.com";
+    
+    [ObservableProperty]
+    public string _passwordEntry = "";
 }
