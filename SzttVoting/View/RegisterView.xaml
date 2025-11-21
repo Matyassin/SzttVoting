@@ -22,14 +22,14 @@
                    IsVisible="{Binding IsPasswordWarning}" 
                    TextColor="{Binding PasswordWarningColor}"/>
             
-            <Button x:Name="RegisterButton" Text="Sing up" 
+            <Button x:Name="RegisterButton" Text="Sign up" 
                     Clicked="RegisterButton_OnClicked"
                     IsEnabled="{Binding RegisterButtonEnabled}"/>
             
             <Button Text="Already have an account? Log in here!" 
                     TextColor="BlueViolet" 
                     BackgroundColor="Transparent"
-                    Clicked="RegisterButton_OnClicked"/>
+                    Clicked="ToLoginButton_OnClicked"/>
         </VerticalStackLayout>
 
 </ContentPage>

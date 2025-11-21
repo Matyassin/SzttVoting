@@ -26,9 +26,10 @@ public partial class RegisterView : ContentPage
     private void RegisterButton_OnClicked(object sender, EventArgs e)
     {
         _vm.SaveUserCommand.Execute(null);
+        // change view to have the user signed in
     }
 
-    private void LoginButton_OnClicked(object? sender, EventArgs e)
+    private void ToLoginButton_OnClicked(object? sender, EventArgs e)
     {
         Application.Current.MainPage = new LoginView();
     }

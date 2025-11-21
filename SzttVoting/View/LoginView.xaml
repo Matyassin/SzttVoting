@@ -24,7 +24,8 @@
                    TextColor="{Binding PasswordWarningColor}"/>
             
             <Button x:Name="LoginButton" Text="Log in" 
-                    Clicked="LoginButton_OnClicked" IsEnabled="False"/>
+                    Clicked="LoginButton_OnClicked"
+                    IsEnabled="{Binding LoginButtonEnabled}"/>
             
             <Button Text="Don't have an account? Sign up!" 
                     TextColor="BlueViolet" 

@@ -25,7 +25,12 @@ public static class UsersRepo
         string slnPath = Path.Combine(Directory.GetParent(currentDir).Parent.Parent.Parent.Parent.FullName, _fileName);
 
         if (!File.Exists(slnPath))
+        {
+            string emptyJson = JsonConvert.SerializeObject(_userProfiles, Formatting.Indented);
+            File.WriteAllText(slnPath, emptyJson);
+
             return;
+        }
 
         string json = File.ReadAllText(slnPath);
         _userProfiles = JsonConvert.DeserializeObject<List<UserProfile>>(json);
