@@ -7,12 +7,15 @@
         <VerticalStackLayout HorizontalOptions="Center" Padding="50" WidthRequest="700" Margin="20">
             <Label Text="Login" FontSize="100" HorizontalOptions="Center"/>
             <Entry Placeholder="Email" Text="{Binding EmailEntry, Mode=TwoWay}"/>
+            <Label Text="{Binding EmailErrorText}" IsVisible="{Binding IsEmailError}" TextColor="Red"/>
             <Entry Placeholder="Password" Text="{Binding PasswordEntry}" IsPassword="True"/>
-            <Button x:Name="LoginButton" Text="Login!" />
+            <Label Text="{Binding PasswordErrorText}" IsVisible="{Binding IsPasswordError}" TextColor="Red"/>
+            <Button x:Name="LoginButton" Text="Login!" 
+                    Clicked="LoginButton_OnClicked"/>
             <Button Text="Don't have an account? Sign up!" 
                     TextColor="BlueViolet" 
                     BackgroundColor="Transparent"
-                    Clicked="Button_OnClicked"/>
+                    Clicked="ToRegisterButton_OnClicked"/>
         </VerticalStackLayout>
 
 </ContentPage>

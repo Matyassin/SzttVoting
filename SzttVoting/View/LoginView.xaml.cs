@@ -15,9 +15,15 @@ namespace SzttVoting.View
             BindingContext = _vm;
         }
         
-        private void Button_OnClicked(object? sender, EventArgs e)
+        private void ToRegisterButton_OnClicked(object? sender, EventArgs e)
         {
             Application.Current.MainPage = new RegisterView();
+        }
+
+        private void LoginButton_OnClicked(object? sender, EventArgs e)
+        {
+            _vm.IsEmailError = true;
+            _vm.IsPasswordError = true;
         }
     }
 }
