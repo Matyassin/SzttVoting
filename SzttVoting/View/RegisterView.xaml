@@ -6,9 +6,25 @@
 
         <VerticalStackLayout HorizontalOptions="Center" Padding="50" WidthRequest="700" Margin="20">
             <Label Text="Register" FontSize="100" HorizontalOptions="Center"/>
-            <Entry Placeholder="Email" Text="{Binding EmailEntry, Mode=TwoWay}"/>
-            <Entry Placeholder="Password" Text="{Binding PasswordEntry}" IsPassword="True"/>
-            <Button x:Name="LoginButton" Text="Sign up" Clicked="Register_OnClicked"/>
+            <Entry Placeholder="Email" 
+                   Text="{Binding EmailEntry, Mode=TwoWay}"
+                   Unfocused="Email_OnUnfocused"/>
+            
+            <Label Text="{Binding EmailWarningText}" 
+                   IsVisible="{Binding IsEmailWarning}" 
+                   TextColor="{Binding EmailWarningColor}"/>
+            
+            <Entry Placeholder="Password" 
+                   Text="{Binding PasswordEntry}" IsPassword="True"
+                   Unfocused="Password_OnUnfocused"/>
+            
+            <Label Text="{Binding PasswordWarningText}" 
+                   IsVisible="{Binding IsPasswordWarning}" 
+                   TextColor="{Binding PasswordWarningColor}"/>
+            
+            <Button x:Name="LoginButton" Text="Register!" 
+                    Clicked="Register_OnClicked" IsEnabled="True"/>
+            
             <Button Text="Have an account? Log in here!" 
                     TextColor="BlueViolet" 
                     BackgroundColor="Transparent"

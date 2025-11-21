@@ -18,6 +18,16 @@ public partial class RegisterView : ContentPage
     {
         _vm.SaveUserCommand.Execute(null);
     }
+    
+    private void Email_OnUnfocused(object? sender, FocusEventArgs e)
+    {
+        _vm.CheckEmailEntryCommand.Execute(null);
+    }
+        
+    private void Password_OnUnfocused(object? sender, FocusEventArgs e)
+    {
+        _vm.CheckPasswordEntryCommand.Execute(null);
+    }
 
     private void Button_OnClicked(object? sender, EventArgs e)
     {

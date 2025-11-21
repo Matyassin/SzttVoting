@@ -7,8 +7,8 @@ namespace ViewModel;
 
 public partial class LoginViewModel : BaseViewModel
 {
-    [ObservableProperty] private string _emailEntry;
-    [ObservableProperty] private string _passwordEntry;
+    [ObservableProperty] private string _emailEntry = "";
+    [ObservableProperty] private string _passwordEntry = "";
     
     [ObservableProperty] private Boolean _isEmailWarning;
     [ObservableProperty] private string _emailWarningText;
@@ -22,18 +22,6 @@ public partial class LoginViewModel : BaseViewModel
     
     private bool _isPasswordValid => PasswordEntry.Length > 5;
     
-
-    public LoginViewModel()
-    {
-        //Default values
-        _emailEntry = "example@example.com";
-        _passwordEntry = "";
-        _isEmailWarning = false;
-        _isPasswordWarning = false;
-        _isEmailValid = false;
-    }
-    
-
     [RelayCommand]
     private void CheckEmailEntry()
     {
