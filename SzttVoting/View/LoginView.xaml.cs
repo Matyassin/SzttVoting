@@ -1,27 +1,28 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using CommunityToolkit.Mvvm.ComponentModel;
+using ViewModel;
 
 namespace SzttVoting.View
 {
     public partial class LoginView : ContentView, INotifyPropertyChanged
     {
-        private string _emailEntry = "example@example.com";
-        private string _passwordEntry = "";
+        private LoginViewModel _viewModel;
         public LoginView()
         {
             InitializeComponent();
+            _viewModel = new LoginViewModel();
             BindingContext = this;
         }
         
         public string EmailEntry
         {
-            get => _emailEntry;
+            get => _viewModel.EmailEntry;
             set
             {
-                if (_emailEntry != value)
+                if (_viewModel.EmailEntry != value)
                 {
-                    _emailEntry = value;
+                    _viewModel.EmailEntry = value;
                     OnPropertyChanged(); 
                 }
             }
@@ -29,12 +30,12 @@ namespace SzttVoting.View
 
         public string PasswordEntry
         {
-            get => _passwordEntry;
+            get => _viewModel.PasswordEntry;
             set
             {
-                if (_passwordEntry != value)
+                if (_viewModel.PasswordEntry != value)
                 {
-                    _passwordEntry = value;
+                    _viewModel.PasswordEntry = value;
                     OnPropertyChanged(); 
                 }
             }

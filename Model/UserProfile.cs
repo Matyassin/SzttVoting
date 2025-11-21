@@ -2,9 +2,11 @@ namespace Model;
 
 public class UserProfile
 {
-    public string name { get; }
-    public UserProfile(String name)
+    private string _email;
+    private string _password;
+    public UserProfile(string name, string password)
     {
-        this.name = name;
+       _email = name;
+       _password = password;
     }
 }
