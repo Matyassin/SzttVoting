@@ -5,8 +5,8 @@ namespace ViewModel;
 public partial class LoginViewModel : BaseViewModel
 {
     [ObservableProperty]
-    public string _emailEntry = "example@example.com";
+    private string _emailEntry = "example@example.com";
     
     [ObservableProperty]
-    public string _passwordEntry = "";
+    private string _passwordEntry = "";
 }
