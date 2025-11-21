@@ -1,7 +1,4 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using CommunityToolkit.Mvvm.ComponentModel;
-using ViewModel;
+﻿using ViewModel;
 
 namespace SzttVoting.View
 {
@@ -15,9 +12,22 @@ namespace SzttVoting.View
             BindingContext = _vm;
         }
         
-        private void Button_OnClicked(object? sender, EventArgs e)
+        private void ToRegisterButton_OnClicked(object? sender, EventArgs e)
         {
             Application.Current.MainPage = new RegisterView();
+        }
+
+        private void LoginButton_OnClicked(object? sender, EventArgs e)
+        { }
+
+        private void Email_OnUnfocused(object? sender, FocusEventArgs e)
+        {
+            _vm.CheckEmailEntryCommand.Execute(null);
+        }
+        
+        private void Password_OnUnfocused(object? sender, FocusEventArgs e)
+        {
+            _vm.CheckPasswordEntryCommand.Execute(null);
         }
     }
 }
