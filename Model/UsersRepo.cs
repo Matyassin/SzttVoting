@@ -1,37 +1,33 @@
 ﻿using Newtonsoft.Json;
 
-namespace Model
+namespace Model;
+
+public static class UsersRepo
 {
-    public class UsersRepo
+    private static List<UserProfile> _userProfiles = new();
+    private const string _fileName = "userprofiles.json";
+
+    public static void Save(UserProfile userToSave)
     {
-        private List<UserProfile> _userProfiles = new();
-        private const string _fileName = "userprofiles.json";
+        _userProfiles.Add(userToSave);
 
-        public void AddUser(UserProfile userToAdd)
-        {
-            _userProfiles.Add(userToAdd);
-        }
+        string json = JsonConvert.SerializeObject(_userProfiles, Formatting.Indented);
 
-        public void Save()
-        {
-            string json = JsonConvert.SerializeObject(_userProfiles, Formatting.Indented);
+        string currentDir = Directory.GetCurrentDirectory();
+        string slnPath = Path.Combine(Directory.GetParent(currentDir).Parent.Parent.Parent.Parent.FullName, _fileName);
 
-            string currentDir = Directory.GetCurrentDirectory();
-            string slnPath = Path.Combine(Directory.GetParent(currentDir).Parent.Parent.Parent.Parent.FullName, _fileName);
+        File.WriteAllText(slnPath, json);
+    }
 
-            File.WriteAllText(slnPath, json);
-        }
+    public static void Load()
+    {
+        string currentDir = Directory.GetCurrentDirectory();
+        string slnPath = Path.Combine(Directory.GetParent(currentDir).Parent.Parent.Parent.Parent.FullName, _fileName);
 
-        public void Load()
-        {
-            string currentDir = Directory.GetCurrentDirectory();
-            string slnPath = Path.Combine(Directory.GetParent(currentDir).Parent.Parent.Parent.Parent.FullName, _fileName);
+        if (!File.Exists(slnPath))
+            return;
 
-            if (!File.Exists(slnPath))
-                return;
-
-            string json = File.ReadAllText(slnPath);
-            _userProfiles = JsonConvert.DeserializeObject<List<UserProfile>>(json);
-        }
+        string json = File.ReadAllText(slnPath);
+        _userProfiles = JsonConvert.DeserializeObject<List<UserProfile>>(json);
     }
 }

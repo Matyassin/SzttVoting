@@ -15,7 +15,6 @@ public partial class RegisterViewModel: BaseViewModel
     [RelayCommand]
     private void SaveUser()
     {
-        UsersRepo usersRepo = new();
-        usersRepo.Save();
+        UsersRepo.Save(new UserProfile(EmailEntry, PasswordEntry));
     }
 }
