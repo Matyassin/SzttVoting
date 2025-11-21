@@ -8,20 +8,20 @@ namespace ViewModel;
 public partial class LoginViewModel : BaseViewModel
 {
     [ObservableProperty] private string _emailEntry;
-    
     [ObservableProperty] private string _passwordEntry;
     
     [ObservableProperty] private Boolean _isEmailWarning;
-
     [ObservableProperty] private string _emailWarningText;
-    
     [ObservableProperty] private Color _emailWarningColor;
     
     [ObservableProperty] private Boolean _isPasswordWarning;
-
     [ObservableProperty] private string _passwordWarningText;
-
     [ObservableProperty] private Color _passwordWarningColor;
+    
+    private bool _isEmailValid;
+    
+    private bool _isPasswordValid => PasswordEntry.Length > 5;
+    
 
     public LoginViewModel()
     {
@@ -30,33 +30,37 @@ public partial class LoginViewModel : BaseViewModel
         _passwordEntry = "";
         _isEmailWarning = false;
         _isPasswordWarning = false;
+        _isEmailValid = false;
     }
+    
 
     [RelayCommand]
     private void CheckEmailEntry()
     {
-        if (!IsEmailValid(EmailEntry))
+        if (!IsEmailValid())
         {
             IsEmailWarning = true;
             EmailWarningText = "Invalid email address!";
             EmailWarningColor = Colors.Red;
+            _isEmailValid = false;
         }
         else
         {
             IsEmailWarning = true;
             EmailWarningText = "Valid email address!";
             EmailWarningColor = Colors.Green;
+            _isEmailValid = true;
         }
     }
 
-    private bool IsEmailValid(string email)
+    private bool IsEmailValid()
     {
-        if (string.IsNullOrWhiteSpace(email))
+        if (string.IsNullOrWhiteSpace(EmailEntry))
             return false;
 
         try
         {
-            var addr = new MailAddress(email);
+            var addr = new MailAddress(EmailEntry);
             return true;
         }
         catch (FormatException)
@@ -68,27 +72,18 @@ public partial class LoginViewModel : BaseViewModel
     [RelayCommand]
     private void CheckPasswordEntry()
     {
-        if (!IsPasswordValid())
+        IsPasswordWarning = true;
+        if (!_isPasswordValid)
         {
-            IsPasswordWarning = true;
             PasswordWarningColor = Colors.Red;
-        }
-        else
-        {
-            IsPasswordWarning = true;
-            PasswordWarningColor = Colors.Green;
-        }
-    }
-
-    private Boolean IsPasswordValid()
-    {
-        if (string.IsNullOrWhiteSpace(PasswordEntry) || PasswordEntry.Length < 5)
-        {
             PasswordWarningText = "Password must be at least 5 characters long!";
-            return false;
+        } 
+        else 
+        {
+            PasswordWarningColor = Colors.Green;
+            PasswordWarningText = "Password is valid!";
         }
-
-        PasswordWarningText = "Password is valid!";
-        return true;
+        
     }
+        
 }
