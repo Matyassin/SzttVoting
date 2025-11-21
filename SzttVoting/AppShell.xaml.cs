@@ -10,6 +10,7 @@ namespace SzttVoting
         {
             InitializeComponent();
             _shellViewModel = vm;
+            this.BindingContext = _shellViewModel;
         }
     }
 }
