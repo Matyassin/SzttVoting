@@ -1,7 +1,4 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using CommunityToolkit.Mvvm.ComponentModel;
-using ViewModel;
+﻿using ViewModel;
 
 namespace SzttVoting.View
 {
@@ -21,9 +18,16 @@ namespace SzttVoting.View
         }
 
         private void LoginButton_OnClicked(object? sender, EventArgs e)
+        { }
+
+        private void Email_OnUnfocused(object? sender, FocusEventArgs e)
         {
-            _vm.IsEmailError = true;
-            _vm.IsPasswordError = true;
+            _vm.CheckEmailEntryCommand.Execute(null);
+        }
+        
+        private void Password_OnUnfocused(object? sender, FocusEventArgs e)
+        {
+            _vm.CheckPasswordEntryCommand.Execute(null);
         }
     }
 }
