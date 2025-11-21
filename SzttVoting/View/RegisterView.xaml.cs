@@ -11,7 +11,6 @@ public partial class RegisterView : ContentPage
         InitializeComponent();
         _vm = new RegisterViewModel();
         BindingContext = _vm;
-        
     }
 
     private void Register_OnClicked(object sender, EventArgs e)

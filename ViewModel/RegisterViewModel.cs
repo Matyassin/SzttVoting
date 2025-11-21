@@ -1,47 +1,39 @@
-using System.Net.Mail;
 using Model;
+using System.Net.Mail;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
 namespace ViewModel;
 
-public partial class RegisterViewModel: BaseViewModel
+public partial class RegisterViewModel: BaseViewModel, ICredentialsValidator
 {
-    [ObservableProperty] private Boolean _isEmailWarning;
+    [ObservableProperty] private bool _isEmailWarning;
     [ObservableProperty] private string _emailWarningText;
     [ObservableProperty] private Color _emailWarningColor;
     
-    [ObservableProperty] private Boolean _isPasswordWarning;
+    [ObservableProperty] private bool _isPasswordWarning;
     [ObservableProperty] private string _passwordWarningText;
     [ObservableProperty] private Color _passwordWarningColor;
     
     [ObservableProperty] private string _emailEntry = "";
     [ObservableProperty] private string _passwordEntry = "";
 
-    private bool _isEmailValid = false;
+    public bool RegisterButtonEnabled => IsEmailValid(EmailEntry) && IsPasswordValid(PasswordEntry);
 
-    [RelayCommand]
-    private void SaveUser()
-    {
-        UsersRepo.Save(new UserProfile(EmailEntry, PasswordEntry));
-    }
-    
     [RelayCommand]
     private void CheckEmailEntry()
     {
-        if (!IsEmailValid())
-        {
-            IsEmailWarning = true;
-            EmailWarningText = "Invalid email address!";
+        IsEmailWarning = true;
+
+        if (!IsEmailValid(EmailEntry))
+        {   
             EmailWarningColor = Colors.Red;
-            _isEmailValid = false;
+            EmailWarningText = "Invalid email address!";
         }
         else
         {
-            IsEmailWarning = true;
-            EmailWarningText = "Valid email address!";
             EmailWarningColor = Colors.Green;
-            _isEmailValid = true;
+            EmailWarningText = "Valid email address!";
         }
     }
     
@@ -49,7 +41,8 @@ public partial class RegisterViewModel: BaseViewModel
     private void CheckPasswordEntry()
     {
         IsPasswordWarning = true;
-        if (!IsPasswordValid())
+
+        if (!IsPasswordValid(PasswordEntry))
         {
             PasswordWarningColor = Colors.Red;
             PasswordWarningText = "Password must be at least 5 characters long!";
@@ -59,12 +52,21 @@ public partial class RegisterViewModel: BaseViewModel
             PasswordWarningColor = Colors.Green;
             PasswordWarningText = "Password is valid!";
         }
-        
     }
-    
-    private bool IsEmailValid()
+
+    [RelayCommand]
+    private void SaveUser()
     {
-        if (string.IsNullOrWhiteSpace(EmailEntry))
+        // The last 2 guards are TEMP, later we don't let the user click the button if those 2 aren't met
+        if (UsersRepo.ContainsEmail(EmailEntry) || IsEmailValid(EmailEntry) || !IsPasswordValid(PasswordEntry))
+            return;
+
+        UsersRepo.Save(new UserProfile(EmailEntry, PasswordEntry));
+    }
+
+    public bool IsEmailValid(string email)
+    {
+        if (UsersRepo.ContainsEmail(EmailEntry) || EmailEntry is null)
             return false;
 
         try
@@ -78,8 +80,11 @@ public partial class RegisterViewModel: BaseViewModel
         }
     }
 
-    private bool IsPasswordValid()
+    public bool IsPasswordValid(string password)
     {
-        return PasswordEntry.Length > 5;
+        if (PasswordEntry.Length > 5 || PasswordEntry is null)
+            return false;
+
+        return true;
     }
 }

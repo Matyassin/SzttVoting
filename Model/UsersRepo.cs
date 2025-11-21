@@ -30,4 +30,29 @@ public static class UsersRepo
         string json = File.ReadAllText(slnPath);
         _userProfiles = JsonConvert.DeserializeObject<List<UserProfile>>(json);
     }
+
+    public static bool ContainsEmail(string email)
+    {
+        foreach (var user in _userProfiles)
+        {
+            if (user.Email == email)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static bool ValidateUser(UserProfile userToValidate)
+    {
+        foreach (var user in _userProfiles)
+        {
+            if (user.Email == userToValidate.Email && user.Password == userToValidate.Password)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

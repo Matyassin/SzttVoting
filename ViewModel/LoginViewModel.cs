@@ -1,77 +1,68 @@
-using System.Net.Mail;
+using Model;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Maui.HotReload;
 
 namespace ViewModel;
 
-public partial class LoginViewModel : BaseViewModel
+public partial class LoginViewModel : BaseViewModel, ICredentialsValidator
 {
-    [ObservableProperty] private string _emailEntry = "";
-    [ObservableProperty] private string _passwordEntry = "";
-    
-    [ObservableProperty] private Boolean _isEmailWarning;
+    [ObservableProperty] private bool _isEmailWarning;
     [ObservableProperty] private string _emailWarningText;
     [ObservableProperty] private Color _emailWarningColor;
     
-    [ObservableProperty] private Boolean _isPasswordWarning;
+    [ObservableProperty] private bool _isPasswordWarning;
     [ObservableProperty] private string _passwordWarningText;
     [ObservableProperty] private Color _passwordWarningColor;
-    
-    private bool _isEmailValid;
-    
-    private bool _isPasswordValid => PasswordEntry.Length > 5;
-    
+
+    [ObservableProperty] private string _emailEntry = "";
+    [ObservableProperty] private string _passwordEntry = "";
+
+    public bool LoginButtonEnabled => IsEmailValid(EmailEntry) && IsPasswordValid(PasswordEntry);
+
     [RelayCommand]
     private void CheckEmailEntry()
     {
-        if (!IsEmailValid())
+        IsEmailWarning = true;
+
+        if (!IsEmailValid(EmailEntry))
         {
-            IsEmailWarning = true;
-            EmailWarningText = "Invalid email address!";
             EmailWarningColor = Colors.Red;
-            _isEmailValid = false;
+            EmailWarningText = "Invalid email address!";
         }
         else
         {
-            IsEmailWarning = true;
-            EmailWarningText = "Valid email address!";
             EmailWarningColor = Colors.Green;
-            _isEmailValid = true;
-        }
-    }
-
-    private bool IsEmailValid()
-    {
-        if (string.IsNullOrWhiteSpace(EmailEntry))
-            return false;
-
-        try
-        {
-            var addr = new MailAddress(EmailEntry);
-            return true;
-        }
-        catch (FormatException)
-        {
-            return false;
+            EmailWarningText = "";
         }
     }
 
     [RelayCommand]
-    private void CheckPasswordEntry()
+    private void CheckPasswordEntry(string password)
     {
         IsPasswordWarning = true;
-        if (!_isPasswordValid)
+
+        if (!IsPasswordValid(PasswordEntry))
         {
             PasswordWarningColor = Colors.Red;
             PasswordWarningText = "Password must be at least 5 characters long!";
-        } 
-        else 
+        }
+        else
         {
             PasswordWarningColor = Colors.Green;
-            PasswordWarningText = "Password is valid!";
+            PasswordWarningText = "";
         }
-        
     }
-        
+
+    public bool IsEmailValid(string email)
+    {
+        if (!UsersRepo.ContainsEmail(EmailEntry))
+            return false;
+
+        return true;
+    }
+
+    public bool IsPasswordValid(string password)
+    {
+        return PasswordEntry.Length > 5;
+    }
 }
