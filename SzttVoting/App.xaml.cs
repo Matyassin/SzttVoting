@@ -1,18 +1,11 @@
-﻿
-namespace SzttVoting
+﻿namespace SzttVoting;
+
+public partial class App : Application
 {
-    public partial class App : Application
+    public App()
     {
-        private readonly AppShell _shell;
-        public App(AppShell shell)
-        {
-            InitializeComponent();
-            _shell = shell;
-        }
+        InitializeComponent();
+        MainPage = new MainPage();
         
-        protected override Window CreateWindow(IActivationState? activationState)
-        {
-            return new Window(_shell);
-        }
     }
 }

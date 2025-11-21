@@ -19,8 +19,6 @@ namespace SzttVoting
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
-            builder.Services.AddSingleton<AppShell>();
-            builder.Services.AddSingleton<AppShellViewModel>();
             
             return builder.Build();
         }
