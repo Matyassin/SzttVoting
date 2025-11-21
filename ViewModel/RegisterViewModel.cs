@@ -1,7 +1,8 @@
-using Model;
-using System.Net.Mail;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Maui.ApplicationModel.Communication;
+using Model;
+using System.Net.Mail;
 
 namespace ViewModel;
 
@@ -18,7 +19,9 @@ public partial class RegisterViewModel: BaseViewModel, ICredentialsValidator
     [ObservableProperty] private string _emailEntry = "";
     [ObservableProperty] private string _passwordEntry = "";
 
-    public bool RegisterButtonEnabled => IsEmailValid(EmailEntry) && IsPasswordValid(PasswordEntry);
+    public bool RegisterButtonEnabled =>
+        IsEmailValid(EmailEntry) &&
+        IsPasswordValid(PasswordEntry);
 
     [RelayCommand]
     private void CheckEmailEntry()
@@ -57,8 +60,7 @@ public partial class RegisterViewModel: BaseViewModel, ICredentialsValidator
     [RelayCommand]
     private void SaveUser()
     {
-        // The last 2 guards are TEMP, later we don't let the user click the button if those 2 aren't met
-        if (UsersRepo.ContainsEmail(EmailEntry) || IsEmailValid(EmailEntry) || !IsPasswordValid(PasswordEntry))
+        if (UsersRepo.ContainsEmail(EmailEntry))
             return;
 
         UsersRepo.Save(new UserProfile(EmailEntry, PasswordEntry));
@@ -66,7 +68,7 @@ public partial class RegisterViewModel: BaseViewModel, ICredentialsValidator
 
     public bool IsEmailValid(string email)
     {
-        if (UsersRepo.ContainsEmail(EmailEntry) || EmailEntry is null)
+        if (UsersRepo.ContainsEmail(EmailEntry) || string.IsNullOrWhiteSpace(email) || EmailEntry is null)
             return false;
 
         try
@@ -82,9 +84,19 @@ public partial class RegisterViewModel: BaseViewModel, ICredentialsValidator
 
     public bool IsPasswordValid(string password)
     {
-        if (PasswordEntry.Length > 5 || PasswordEntry is null)
+        if (PasswordEntry.Length < 5 || string.IsNullOrWhiteSpace(password) || PasswordEntry is null)
             return false;
 
         return true;
+    }
+
+    partial void OnEmailEntryChanged(string value)
+    {
+        OnPropertyChanged(nameof(RegisterButtonEnabled));
+    }
+
+    partial void OnPasswordEntryChanged(string value)
+    {
+        OnPropertyChanged(nameof(RegisterButtonEnabled));
     }
 }

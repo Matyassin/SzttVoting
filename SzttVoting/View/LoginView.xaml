@@ -5,7 +5,7 @@
              x:Class="SzttVoting.View.LoginView">
     
         <VerticalStackLayout HorizontalOptions="Center" Padding="50" WidthRequest="700" Margin="20">
-            <Label Text="Login" FontSize="100" HorizontalOptions="Center"/>
+            <Label Text="Log in" FontSize="100" HorizontalOptions="Center"/>
             
             <Entry Placeholder="Email" 
                    Text="{Binding EmailEntry, Mode=TwoWay}"
@@ -23,7 +23,7 @@
                    IsVisible="{Binding IsPasswordWarning}" 
                    TextColor="{Binding PasswordWarningColor}"/>
             
-            <Button x:Name="LoginButton" Text="Login!" 
+            <Button x:Name="LoginButton" Text="Log in" 
                     Clicked="LoginButton_OnClicked" IsEnabled="False"/>
             
             <Button Text="Don't have an account? Sign up!" 

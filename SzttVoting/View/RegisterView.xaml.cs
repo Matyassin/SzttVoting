@@ -12,11 +12,6 @@ public partial class RegisterView : ContentPage
         _vm = new RegisterViewModel();
         BindingContext = _vm;
     }
-
-    private void Register_OnClicked(object sender, EventArgs e)
-    {
-        _vm.SaveUserCommand.Execute(null);
-    }
     
     private void Email_OnUnfocused(object? sender, FocusEventArgs e)
     {
@@ -28,7 +23,12 @@ public partial class RegisterView : ContentPage
         _vm.CheckPasswordEntryCommand.Execute(null);
     }
 
-    private void Button_OnClicked(object? sender, EventArgs e)
+    private void RegisterButton_OnClicked(object sender, EventArgs e)
+    {
+        _vm.SaveUserCommand.Execute(null);
+    }
+
+    private void LoginButton_OnClicked(object? sender, EventArgs e)
     {
         Application.Current.MainPage = new LoginView();
     }

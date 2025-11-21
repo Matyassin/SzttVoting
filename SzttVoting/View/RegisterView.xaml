@@ -5,7 +5,7 @@
              x:Class="SzttVoting.View.RegisterView">
 
         <VerticalStackLayout HorizontalOptions="Center" Padding="50" WidthRequest="700" Margin="20">
-            <Label Text="Register" FontSize="100" HorizontalOptions="Center"/>
+            <Label Text="Sign up" FontSize="100" HorizontalOptions="Center"/>
             <Entry Placeholder="Email" 
                    Text="{Binding EmailEntry, Mode=TwoWay}"
                    Unfocused="Email_OnUnfocused"/>
@@ -22,13 +22,14 @@
                    IsVisible="{Binding IsPasswordWarning}" 
                    TextColor="{Binding PasswordWarningColor}"/>
             
-            <Button x:Name="LoginButton" Text="Register!" 
-                    Clicked="Register_OnClicked" IsEnabled="True"/>
+            <Button x:Name="RegisterButton" Text="Sing up" 
+                    Clicked="RegisterButton_OnClicked"
+                    IsEnabled="{Binding RegisterButtonEnabled}"/>
             
-            <Button Text="Have an account? Log in here!" 
+            <Button Text="Already have an account? Log in here!" 
                     TextColor="BlueViolet" 
                     BackgroundColor="Transparent"
-                    Clicked="Button_OnClicked"/>
+                    Clicked="RegisterButton_OnClicked"/>
         </VerticalStackLayout>
 
 </ContentPage>
