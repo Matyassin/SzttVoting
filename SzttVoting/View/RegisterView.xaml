@@ -8,7 +8,7 @@
             <Label Text="Register" FontSize="100" HorizontalOptions="Center"/>
             <Entry Placeholder="Email" Text="{Binding EmailEntry, Mode=TwoWay}"/>
             <Entry Placeholder="Password" Text="{Binding PasswordEntry}" IsPassword="True"/>
-            <Button x:Name="LoginButton" Text="Sign up" />
+            <Button x:Name="LoginButton" Text="Sign up" Clicked="Register_OnClicked"/>
             <Button Text="Have an account? Log in here!" 
                     TextColor="BlueViolet" 
                     BackgroundColor="Transparent"

@@ -5,12 +5,18 @@ namespace SzttVoting.View;
 public partial class RegisterView : ContentPage
 {
     private RegisterViewModel _vm;
+
     public RegisterView()
     {
         InitializeComponent();
         _vm = new RegisterViewModel();
         BindingContext = _vm;
         
+    }
+
+    private void Register_OnClicked(object sender, EventArgs e)
+    {
+        _vm.SaveUserCommand.Execute(null);
     }
 
     private void Button_OnClicked(object? sender, EventArgs e)
