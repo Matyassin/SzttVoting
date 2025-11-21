@@ -5,24 +5,24 @@ using ViewModel;
 
 namespace SzttVoting.View
 {
-    public partial class LoginView : ContentView, INotifyPropertyChanged
+    public partial class LoginView : ContentPage, INotifyPropertyChanged
     {
-        private LoginViewModel _viewModel;
+        private LoginViewModel _vm;
         public LoginView()
         {
             InitializeComponent();
-            _viewModel = new LoginViewModel();
-            BindingContext = this;
+            _vm = new LoginViewModel();
+            BindingContext = _vm;
         }
         
         public string EmailEntry
         {
-            get => _viewModel.EmailEntry;
+            get => _vm.EmailEntry;
             set
             {
-                if (_viewModel.EmailEntry != value)
+                if (_vm.EmailEntry != value)
                 {
-                    _viewModel.EmailEntry = value;
+                    _vm.EmailEntry = value;
                     OnPropertyChanged(); 
                 }
             }
@@ -30,16 +30,20 @@ namespace SzttVoting.View
 
         public string PasswordEntry
         {
-            get => _viewModel.PasswordEntry;
+            get => _vm.PasswordEntry;
             set
             {
-                if (_viewModel.PasswordEntry != value)
+                if (_vm.PasswordEntry != value)
                 {
-                    _viewModel.PasswordEntry = value;
+                    _vm.PasswordEntry = value;
                     OnPropertyChanged(); 
                 }
             }
         }
-        
+
+        private void Button_OnClicked(object? sender, EventArgs e)
+        {
+            Application.Current.MainPage = new RegisterView();
+        }
     }
 }

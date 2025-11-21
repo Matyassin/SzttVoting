@@ -1,15 +1,15 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:View="clr-namespace:SzttVoting.View"
-             x:Class="SzttVoting.View.LoginView">
-    
+             x:Class="SzttVoting.View.RegisterView">
+
         <VerticalStackLayout HorizontalOptions="Center" Padding="50" WidthRequest="700" Margin="20">
-            <Label Text="Login" FontSize="100" HorizontalOptions="Center"/>
+            <Label Text="Register" FontSize="100" HorizontalOptions="Center"/>
             <Entry Placeholder="Email" Text="{Binding EmailEntry, Mode=TwoWay}"/>
             <Entry Placeholder="Password" Text="{Binding PasswordEntry}" IsPassword="True"/>
-            <Button x:Name="LoginButton" Text="Login!" />
-            <Button Text="Don't have an account? Sign up!" 
+            <Button x:Name="LoginButton" Text="Sign up" />
+            <Button Text="Have an account? Log in here!" 
                     TextColor="BlueViolet" 
                     BackgroundColor="Transparent"
                     Clicked="Button_OnClicked"/>

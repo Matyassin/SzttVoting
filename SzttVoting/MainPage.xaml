@@ -4,6 +4,6 @@
              xmlns:view="clr-namespace:SzttVoting.View"
              x:Class="SzttVoting.MainPage">
     
-    <view:LoginView WidthRequest="800" VerticalOptions="Center" HorizontalOptions="Center"/>
+    <ContentPresenter Content="{Binding CurrentView}" VerticalOptions="Center" HorizontalOptions="Center"/>
 
 </ContentPage>
