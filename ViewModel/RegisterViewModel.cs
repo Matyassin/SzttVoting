@@ -19,8 +19,7 @@ public partial class RegisterViewModel : BaseViewModel, ICredentialsValidator
     [ObservableProperty] private string _passwordEntry = "";
 
     public bool IsRegisterButtonEnabled =>
-        IsEmailValid(EmailEntry) &&
-        IsPasswordValid(PasswordEntry);
+        IsEmailValid(EmailEntry) && IsPasswordValid(PasswordEntry);
 
     [RelayCommand]
     private void CheckEmailEntry()

@@ -25,7 +25,14 @@ public partial class LoginView : ContentPage
 
     private void LoginButton_OnClicked(object? sender, EventArgs e)
     {
-        Application.Current.MainPage = new UserView();
+        if (_vm.IsUserAdmin(_vm.EmailEntry, _vm.PasswordEntry))
+        {
+            Application.Current.MainPage = new AdminView();
+        }
+        else if (_vm.IsEmailValid(_vm.EmailEntry) && _vm.IsPasswordValid(_vm.PasswordEntry))
+        {
+            Application.Current.MainPage = new UserView();
+        }
     }
 
     private void ToRegisterButton_OnClicked(object? sender, EventArgs e)
