@@ -4,7 +4,7 @@ namespace SzttVoting.View;
 
 public partial class RegisterView : ContentPage
 {
-    private RegisterViewModel _vm;
+    private readonly RegisterViewModel _vm;
 
     public RegisterView()
     {

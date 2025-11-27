@@ -18,7 +18,7 @@ public partial class RegisterViewModel : BaseViewModel, ICredentialsValidator
     [ObservableProperty] private string _emailEntry = "";
     [ObservableProperty] private string _passwordEntry = "";
 
-    public bool RegisterButtonEnabled =>
+    public bool IsRegisterButtonEnabled =>
         IsEmailValid(EmailEntry) &&
         IsPasswordValid(PasswordEntry);
 
@@ -67,7 +67,7 @@ public partial class RegisterViewModel : BaseViewModel, ICredentialsValidator
 
     public bool IsEmailValid(string email)
     {
-        if (UsersRepo.ContainsEmail(EmailEntry) || string.IsNullOrWhiteSpace(email) || EmailEntry is null)
+        if (UsersRepo.ContainsEmail(EmailEntry) || string.IsNullOrWhiteSpace(email))
             return false;
 
         try
@@ -83,7 +83,7 @@ public partial class RegisterViewModel : BaseViewModel, ICredentialsValidator
 
     public bool IsPasswordValid(string password)
     {
-        if (PasswordEntry.Length < 5 || string.IsNullOrWhiteSpace(password) || PasswordEntry is null)
+        if (PasswordEntry.Length < 5 || string.IsNullOrWhiteSpace(password))
             return false;
 
         return true;
@@ -91,11 +91,11 @@ public partial class RegisterViewModel : BaseViewModel, ICredentialsValidator
 
     partial void OnEmailEntryChanged(string value)
     {
-        OnPropertyChanged(nameof(RegisterButtonEnabled));
+        OnPropertyChanged(nameof(IsRegisterButtonEnabled));
     }
 
     partial void OnPasswordEntryChanged(string value)
     {
-        OnPropertyChanged(nameof(RegisterButtonEnabled));
+        OnPropertyChanged(nameof(IsRegisterButtonEnabled));
     }
 }

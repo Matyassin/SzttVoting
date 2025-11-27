@@ -31,7 +31,7 @@
         <Button x:Name="LoginButton"
                 Text="Log in" 
                 Clicked="LoginButton_OnClicked"
-                IsEnabled="{Binding LoginButtonEnabled}"/>
+                IsEnabled="{Binding IsLoginButtonEnabled}"/>
 
         <Button Text="Don't have an account? Sign up!" 
                 TextColor="BlueViolet" 

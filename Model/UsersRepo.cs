@@ -36,7 +36,7 @@ public static class UsersRepo
 
         if (!File.Exists(filePath))
         {
-            File.WriteAllText(slnPath, "{}");
+            File.WriteAllText(filePath, "{}");
             return;
         }
 

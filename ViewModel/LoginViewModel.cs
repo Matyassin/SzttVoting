@@ -17,7 +17,7 @@ public partial class LoginViewModel : BaseViewModel, ICredentialsValidator
     [ObservableProperty] private string _emailEntry = "";
     [ObservableProperty] private string _passwordEntry = "";
 
-    public bool LoginButtonEnabled =>
+    public bool IsLoginButtonEnabled =>
         IsEmailValid(EmailEntry) &&
         IsPasswordValid(PasswordEntry);
 
@@ -70,11 +70,11 @@ public partial class LoginViewModel : BaseViewModel, ICredentialsValidator
 
     partial void OnEmailEntryChanged(string value)
     {
-        OnPropertyChanged(nameof(LoginButtonEnabled));
+        OnPropertyChanged(nameof(IsLoginButtonEnabled));
     }
 
     partial void OnPasswordEntryChanged(string value)
     {
-        OnPropertyChanged(nameof(LoginButtonEnabled));
+        OnPropertyChanged(nameof(IsLoginButtonEnabled));
     }
 }

@@ -3,16 +3,16 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:View="clr-namespace:SzttVoting.View"
-             x:Class="SzttVoting.View.UserView">
+             x:Class="SzttVoting.View.AdminView">
 
     <VerticalStackLayout HorizontalOptions="Center" Padding="50" WidthRequest="700" Margin="20">
 
-        <Label Text="Welcome user!"
+        <Label Text="Welcome admin!"
                 FontSize="100"
                 HorizontalOptions="Center"/>
 
         <Button Text="Sign out!" 
-                TextColor="BlueViolet" 
+                TextColor="BlueViolet"
                 BackgroundColor="Transparent"
                 Clicked="Signout_OnClicked"/>
 

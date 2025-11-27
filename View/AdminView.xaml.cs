@@ -2,9 +2,9 @@ using ViewModel;
 
 namespace SzttVoting.View;
 
-public partial class UserView : ContentPage
+public partial class AdminView : ContentPage
 {
-    public UserView()
+    public AdminView()
     {
         InitializeComponent();
     }

@@ -4,7 +4,7 @@ namespace SzttVoting.View;
 
 public partial class LoginView : ContentPage
 {
-    private LoginViewModel _vm;
+    private readonly LoginViewModel _vm;
 
     public LoginView()
     {
@@ -25,7 +25,7 @@ public partial class LoginView : ContentPage
 
     private void LoginButton_OnClicked(object? sender, EventArgs e)
     {
-        // change view to have the user signed in
+        Application.Current.MainPage = new UserView();
     }
 
     private void ToRegisterButton_OnClicked(object? sender, EventArgs e)
