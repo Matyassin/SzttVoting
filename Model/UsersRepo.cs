@@ -7,6 +7,9 @@ public static class UsersRepo
     private static Dictionary<string, string> _userProfiles = new();
     private const string _fileName = "userprofiles.json";
 
+    public const string EmailPattern = @"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}";
+    public const string PasswordPattern = @"^(?=.*[A-Z])[a-zA-Z0-9]+$";
+
     public static void Save(UserData userToSave)
     {
         _userProfiles.Add(userToSave.Email, userToSave.Password);
