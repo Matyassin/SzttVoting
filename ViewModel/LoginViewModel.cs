@@ -47,9 +47,9 @@ public partial class LoginViewModel : BaseViewModel, ICredentialsValidator
         {
             PasswordWarningColor = "Red";
             /*
-            PasswordWarningText = "Password must be at least 5 characters long," +
-                                  "must not contain any symbols," +
-                                  "must have at least 1 number" +
+            PasswordWarningText = "Password must be at least 5 characters long, " +
+                                  "must not contain any symbols, " +
+                                  "must have at least 1 number " +
                                   "and at least 1 upper case character!";
             */
         }
