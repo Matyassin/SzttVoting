@@ -36,20 +36,27 @@ public class InputValidationTests
     public void PasswordLengthLessThanFiveCharacters()
     {
         var vm = new RegisterViewModel();
-        Assert.False(vm.IsPasswordValid("Wasd"));
+        Assert.False(vm.IsPasswordValid("Wasd1"));
     }
 
     [Fact]
     public void PasswordContainsSymbol()
     {
         var vm = new RegisterViewModel();
-        Assert.False(vm.IsPasswordValid("Wasd@{"));
+        Assert.False(vm.IsPasswordValid("Wasd1@{"));
     }
 
     [Fact]
     public void PasswordContainsOnlyLowercaseCharacters()
     {
         var vm = new RegisterViewModel();
-        Assert.False(vm.IsPasswordValid("wasdf"));
+        Assert.False(vm.IsPasswordValid("wasdf1"));
+    }
+
+    [Fact]
+    public void PasswordWithNoNumbers()
+    {
+        var vm = new RegisterViewModel();
+        Assert.False(vm.IsPasswordValid("Wasdfg"));
     }
 }

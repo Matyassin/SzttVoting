@@ -46,7 +46,10 @@ public partial class RegisterViewModel : BaseViewModel, ICredentialsValidator
         if (!IsPasswordValid(PasswordEntry))
         {
             PasswordWarningColor = "Red";
-            PasswordWarningText = "Password must be at least 5 characters long, must not contain any symbols and must have at least 1 upper case character!";
+            PasswordWarningText = "Password must be at least 5 characters long," +
+                                  "must not contain any symbols," +
+                                  "must have at least 1 number" +
+                                  "and at least 1 upper case character!";
         } 
         else 
         {
