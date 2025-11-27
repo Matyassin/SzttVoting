@@ -71,7 +71,7 @@ public partial class LoginViewModel : BaseViewModel, ICredentialsValidator
         if (PasswordEntry.Length < 5 || string.IsNullOrWhiteSpace(password))
             return false;
 
-        return Regex.IsMatch(password, UsersRepo.PasswordPattern);
+        return Regex.IsMatch(password, ValidationPatterns.PasswordPattern);
     }
 
     public bool IsUserAdmin(string email, string password)
