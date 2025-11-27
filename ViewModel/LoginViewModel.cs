@@ -8,11 +8,11 @@ public partial class LoginViewModel : BaseViewModel, ICredentialsValidator
 {
     [ObservableProperty] private bool _isEmailWarning;
     [ObservableProperty] private string _emailWarningText;
-    [ObservableProperty] private Color _emailWarningColor;
-    
+    [ObservableProperty] private string _emailWarningColor;     // string is only TEMP
+
     [ObservableProperty] private bool _isPasswordWarning;
     [ObservableProperty] private string _passwordWarningText;
-    [ObservableProperty] private Color _passwordWarningColor;
+    [ObservableProperty] private string _passwordWarningColor; // string is only TEMP
 
     [ObservableProperty] private string _emailEntry = "";
     [ObservableProperty] private string _passwordEntry = "";
@@ -27,12 +27,12 @@ public partial class LoginViewModel : BaseViewModel, ICredentialsValidator
 
         if (!IsEmailValid(EmailEntry))
         {
-            EmailWarningColor = Colors.Red;
+            EmailWarningColor = "Red";
             EmailWarningText = "Invalid email address!";
         }
         else
         {
-            EmailWarningColor = Colors.Green;
+            EmailWarningColor = "Green";
             EmailWarningText = "";
         }
     }
@@ -44,12 +44,12 @@ public partial class LoginViewModel : BaseViewModel, ICredentialsValidator
 
         if (!IsPasswordValid(PasswordEntry))
         {
-            PasswordWarningColor = Colors.Red;
+            PasswordWarningColor = "Red";
             PasswordWarningText = "Password must be at least 5 characters long!";
         }
         else
         {
-            PasswordWarningColor = Colors.Green;
+            PasswordWarningColor = "Green";
             PasswordWarningText = "";
         }
     }
