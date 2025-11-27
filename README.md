@@ -1,2 +1,2 @@
-# sztt_voting
+# SzttVoting
 Szoftvertechnológia és technikák – II. házi feladat
