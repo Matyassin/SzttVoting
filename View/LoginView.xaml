@@ -8,25 +8,27 @@
     <VerticalStackLayout HorizontalOptions="Center" Padding="50" WidthRequest="700" Margin="20">
 
         <Label Text="Log in"
-                FontSize="100"
-                HorizontalOptions="Center"/>
+               FontSize="100"
+               HorizontalOptions="Center"/>
 
         <Entry Placeholder="Email" 
-                Text="{Binding EmailEntry, Mode=TwoWay}"
-                Unfocused="Email_OnUnfocused"/>
+               Text="{Binding EmailEntry, Mode=TwoWay}"
+               Unfocused="Email_OnUnfocused"
+               Completed="LoginButton_OnClicked"/>
 
         <Label Text="{Binding EmailWarningText}" 
-                IsVisible="{Binding IsEmailWarning}" 
-                TextColor="{Binding EmailWarningColor}"/>
+               IsVisible="{Binding IsEmailWarning}" 
+               TextColor="{Binding EmailWarningColor}"/>
 
         <Entry Placeholder="Password" 
-                Text="{Binding PasswordEntry}"
-                IsPassword="True"
-                Unfocused="Password_OnUnfocused"/>
+               Text="{Binding PasswordEntry}"
+               IsPassword="True"
+               Unfocused="Password_OnUnfocused"
+               Completed="LoginButton_OnClicked"/>
 
         <Label Text="{Binding PasswordWarningText}" 
-                IsVisible="{Binding IsPasswordWarning}" 
-                TextColor="{Binding PasswordWarningColor}"/>
+               IsVisible="{Binding IsPasswordWarning}" 
+               TextColor="{Binding PasswordWarningColor}"/>
 
         <Button x:Name="LoginButton"
                 Text="Log in" 

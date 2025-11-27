@@ -25,6 +25,9 @@ public partial class LoginView : ContentPage
 
     private void LoginButton_OnClicked(object? sender, EventArgs e)
     {
+        if (!LoginButton.IsEnabled)
+            return;
+
         if (_vm.IsUserAdmin(_vm.EmailEntry, _vm.PasswordEntry))
         {
             Application.Current.MainPage = new AdminView();
