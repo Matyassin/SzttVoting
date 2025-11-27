@@ -91,3 +91,4 @@ Desktop.ini
 pub/
 releases/
 /SzttVoting/SzttVoting.csproj.user
+**/*.csproj
