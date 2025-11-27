@@ -4,60 +4,56 @@ namespace Model;
 
 public static class UsersRepo
 {
-    private static List<UserProfile> _userProfiles = new();
+    private static Dictionary<string, string> _userProfiles = new();
     private const string _fileName = "userprofiles.json";
 
-    public static void Save(UserProfile userToSave)
+    public static void Save(UserData userToSave)
     {
-        _userProfiles.Add(userToSave);
+        _userProfiles.Add(userToSave.Email, userToSave.Password);
 
         string json = JsonConvert.SerializeObject(_userProfiles, Formatting.Indented);
+        string? slnPath = Directory.GetParent(Directory.GetCurrentDirectory())
+            .Parent?
+            .Parent?
+            .Parent?
+            .Parent?
+            .FullName;
 
-        string currentDir = Directory.GetCurrentDirectory();
-        string slnPath = Path.Combine(Directory.GetParent(currentDir).Parent.Parent.Parent.Parent.FullName, _fileName);
-
-        File.WriteAllText(slnPath, json);
+        string filePath = Path.Combine(slnPath, _fileName);
+        File.WriteAllText(filePath, json);
     }
 
     public static void Load()
     {
-        string currentDir = Directory.GetCurrentDirectory();
-        string slnPath = Path.Combine(Directory.GetParent(currentDir).Parent.Parent.Parent.Parent.FullName, _fileName);
+        string? slnPath = Directory.GetParent(Directory.GetCurrentDirectory())
+            .Parent?
+            .Parent?
+            .Parent?
+            .Parent?
+            .FullName;
 
-        if (!File.Exists(slnPath))
+        string filePath = Path.Combine(slnPath, _fileName);
+
+        if (!File.Exists(filePath))
         {
-            string emptyJson = JsonConvert.SerializeObject(_userProfiles, Formatting.Indented);
-            File.WriteAllText(slnPath, emptyJson);
-
+            File.WriteAllText(slnPath, "{}");
             return;
         }
 
-        string json = File.ReadAllText(slnPath);
-        _userProfiles = JsonConvert.DeserializeObject<List<UserProfile>>(json);
+        string json = File.ReadAllText(filePath);
+        _userProfiles = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
     }
 
     public static bool ContainsEmail(string email)
     {
-        foreach (var user in _userProfiles)
-        {
-            if (user.Email == email)
-            {
-                return true;
-            }
-        }
-        return false;
+        return _userProfiles.ContainsKey(email);
     }
 
-    public static bool ValidateUser(UserProfile userToValidate)
+    public static bool ValidateUser(UserData userToValidate)
     {
-        foreach (var user in _userProfiles)
-        {
-            if (user.Email == userToValidate.Email && user.Password == userToValidate.Password)
-            {
-                return true;
-            }
-        }
+        bool emailFound = _userProfiles.TryGetValue(userToValidate.Email, out string? storedPassword);
+        bool passwordMatches = userToValidate.Password == storedPassword;
 
-        return false;
+        return emailFound && passwordMatches;
     }
 }

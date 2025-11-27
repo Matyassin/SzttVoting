@@ -1,11 +1,11 @@
 using Model;
 using System.Net.Mail;
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace ViewModel;
 
-public partial class RegisterViewModel: BaseViewModel, ICredentialsValidator
+public partial class RegisterViewModel : BaseViewModel, ICredentialsValidator
 {
     [ObservableProperty] private bool _isEmailWarning;
     [ObservableProperty] private string _emailWarningText;
@@ -62,7 +62,7 @@ public partial class RegisterViewModel: BaseViewModel, ICredentialsValidator
         if (UsersRepo.ContainsEmail(EmailEntry))
             return;
 
-        UsersRepo.Save(new UserProfile(EmailEntry, PasswordEntry));
+        UsersRepo.Save(new UserData(EmailEntry, PasswordEntry));
     }
 
     public bool IsEmailValid(string email)
