@@ -26,7 +26,7 @@ public partial class RegisterView : ContentPage
     private void RegisterButton_OnClicked(object sender, EventArgs e)
     {
         _vm.SaveUserCommand.Execute(null);
-        Application.Current.MainPage = new UserView();
+        Application.Current.MainPage = new UserView(_vm.EmailEntry);
     }
 
     private void ToLoginButton_OnClicked(object? sender, EventArgs e)

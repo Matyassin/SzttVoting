@@ -5,16 +5,28 @@
              xmlns:View="clr-namespace:SzttVoting.View"
              x:Class="SzttVoting.View.UserView">
 
-    <VerticalStackLayout HorizontalOptions="Center" Padding="50" WidthRequest="700" Margin="20">
+    <VerticalStackLayout>
+        <!-- HEADER -->
+        <Grid BackgroundColor="Grey" Padding="10"
+              ColumnDefinitions="*, Auto">
 
-        <Label Text="Welcome user!"
-                FontSize="100"
-                HorizontalOptions="Center"/>
+            <Label Grid.Column="0"
+                   Text="{Binding UserEmail, StringFormat='Welcome, {0}!'}"
+                   FontSize="15"
+                   VerticalOptions="Center"/>
 
-        <Button Text="Sign out!" 
-                TextColor="BlueViolet" 
-                BackgroundColor="Transparent"
-                Clicked="Signout_OnClicked"/>
+            <Button Grid.Column="1"
+                    Text="Sign out!"
+                    TextColor="BlueViolet"
+                    BackgroundColor="Transparent"
+                    VerticalOptions="Center"
+                    Clicked="Signout_OnClicked"/>
+        </Grid>
+        <!-- HEADER END -->
+
+
+
+
 
     </VerticalStackLayout>
 

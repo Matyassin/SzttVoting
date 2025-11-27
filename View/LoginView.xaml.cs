@@ -31,7 +31,7 @@ public partial class LoginView : ContentPage
         }
         else if (_vm.IsEmailValid(_vm.EmailEntry) && _vm.IsPasswordValid(_vm.PasswordEntry))
         {
-            Application.Current.MainPage = new UserView();
+            Application.Current.MainPage = new UserView(_vm.EmailEntry);
         }
     }
 
