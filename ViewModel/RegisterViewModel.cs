@@ -1,5 +1,5 @@
 using Model;
-using System.Net.Mail;
+using System.Text.RegularExpressions;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 
@@ -46,7 +46,10 @@ public partial class RegisterViewModel : BaseViewModel, ICredentialsValidator
         if (!IsPasswordValid(PasswordEntry))
         {
             PasswordWarningColor = "Red";
-            PasswordWarningText = "Password must be at least 5 characters long!";
+            PasswordWarningText = "Password must be at least 5 characters long," +
+                                  "must not contain any symbols," +
+                                  "must have at least 1 number" +
+                                  "and at least 1 upper case character!";
         } 
         else 
         {
@@ -69,15 +72,7 @@ public partial class RegisterViewModel : BaseViewModel, ICredentialsValidator
         if (UsersRepo.ContainsEmail(EmailEntry) || string.IsNullOrWhiteSpace(email))
             return false;
 
-        try
-        {
-            var addr = new MailAddress(EmailEntry);
-            return true;
-        }
-        catch (FormatException)
-        {
-            return false;
-        }
+        return Regex.IsMatch(email, UsersRepo.EmailPattern);
     }
 
     public bool IsPasswordValid(string password)
@@ -85,7 +80,7 @@ public partial class RegisterViewModel : BaseViewModel, ICredentialsValidator
         if (PasswordEntry.Length < 5 || string.IsNullOrWhiteSpace(password))
             return false;
 
-        return true;
+        return Regex.IsMatch(password, UsersRepo.PasswordPattern);
     }
 
     partial void OnEmailEntryChanged(string value)

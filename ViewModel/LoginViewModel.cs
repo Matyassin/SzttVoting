@@ -1,4 +1,5 @@
 using Model;
+using System.Text.RegularExpressions;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 
@@ -45,7 +46,10 @@ public partial class LoginViewModel : BaseViewModel, ICredentialsValidator
         if (!IsPasswordValid(PasswordEntry))
         {
             PasswordWarningColor = "Red";
-            PasswordWarningText = "Password must be at least 5 characters long!";
+            PasswordWarningText = "Password must be at least 5 characters long," +
+                                  "must not contain any symbols," +
+                                  "must have at least 1 number" +
+                                  "and at least 1 upper case character!";
         }
         else
         {
@@ -64,7 +68,10 @@ public partial class LoginViewModel : BaseViewModel, ICredentialsValidator
 
     public bool IsPasswordValid(string password)
     {
-        return PasswordEntry.Length > 5;
+        if (PasswordEntry.Length < 5 || string.IsNullOrWhiteSpace(password))
+            return false;
+
+        return Regex.IsMatch(password, UsersRepo.PasswordPattern);
     }
 
     public bool IsUserAdmin(string email, string password)
