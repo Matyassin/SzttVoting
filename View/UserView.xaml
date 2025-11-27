@@ -3,15 +3,25 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="View.UserView">
-    <Grid>
+    <Grid RowDefinitions="Auto,*">
         <Border Stroke="DarkViolet"
-                StrokeThickness="4"
-                VerticalOptions="Start"
-                HeightRequest="100">
-            <VerticalStackLayout BackgroundColor="BlueViolet" >
-                
-            </VerticalStackLayout>
+                StrokeThickness="4">
+            <Grid BackgroundColor="BlueViolet"
+                         HeightRequest="100"
+                         Padding="10">
+                <Label Text="{Binding HeaderMainText}"
+                       FontSize="20"
+                       VerticalOptions="Center"/>
+                <Button Text="SIGN OUT" 
+                        WidthRequest="100" 
+                        HeightRequest="50"
+                        HorizontalOptions="End"
+                        Clicked="Signout_OnClicked" />
+
+            </Grid>
         </Border>
+        
+        <ContentView x:Name="DynamicsArea" Grid.Row="1"/>
     </Grid>
     
 </ContentPage>

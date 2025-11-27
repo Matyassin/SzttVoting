@@ -5,7 +5,7 @@ namespace View;
 public partial class UserView : ContentPage
 {
     private readonly UserViewModel _vm;
-
+    
     public UserView(string email)
     {
         InitializeComponent();
@@ -16,5 +16,13 @@ public partial class UserView : ContentPage
     private void Signout_OnClicked(object sender, EventArgs e)
     {
         Application.Current.MainPage = new LoginView();
+    }
+
+    private void LoadInitialContent()
+    {
+        DynamicsArea.Content = new Label
+        {
+            Text = "Welcome to the App!"
+        };
     }
 }
