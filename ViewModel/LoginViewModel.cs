@@ -29,12 +29,12 @@ public partial class LoginViewModel : BaseViewModel, ICredentialsValidator
         if (!IsEmailValid(EmailEntry))
         {
             EmailWarningColor = "Red";
-            EmailWarningText = "Invalid email address!";
+            //EmailWarningText = "Invalid email address!";
         }
         else
         {
             EmailWarningColor = "Green";
-            EmailWarningText = "";
+            //EmailWarningText = "";
         }
     }
 
@@ -46,15 +46,17 @@ public partial class LoginViewModel : BaseViewModel, ICredentialsValidator
         if (!IsPasswordValid(PasswordEntry))
         {
             PasswordWarningColor = "Red";
+            /*
             PasswordWarningText = "Password must be at least 5 characters long," +
                                   "must not contain any symbols," +
                                   "must have at least 1 number" +
                                   "and at least 1 upper case character!";
+            */
         }
         else
         {
             PasswordWarningColor = "Green";
-            PasswordWarningText = "";
+            //PasswordWarningText = "";
         }
     }
 
