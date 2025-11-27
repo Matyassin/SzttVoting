@@ -2,32 +2,16 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:View="clr-namespace:SzttVoting.View"
-             x:Class="SzttVoting.View.UserView">
-
-    <VerticalStackLayout>
-        <!-- HEADER -->
-        <Grid BackgroundColor="Grey" Padding="10"
-              ColumnDefinitions="*, Auto">
-
-            <Label Grid.Column="0"
-                   Text="{Binding UserEmail, StringFormat='Welcome, {0}!'}"
-                   FontSize="15"
-                   VerticalOptions="Center"/>
-
-            <Button Grid.Column="1"
-                    Text="Sign out!"
-                    TextColor="BlueViolet"
-                    BackgroundColor="Transparent"
-                    VerticalOptions="Center"
-                    Clicked="Signout_OnClicked"/>
-        </Grid>
-        <!-- HEADER END -->
-
-
-
-
-
-    </VerticalStackLayout>
-
+             x:Class="View.UserView">
+    <Grid>
+        <Border Stroke="DarkViolet"
+                StrokeThickness="4"
+                VerticalOptions="Start"
+                HeightRequest="100">
+            <VerticalStackLayout BackgroundColor="BlueViolet" >
+                
+            </VerticalStackLayout>
+        </Border>
+    </Grid>
+    
 </ContentPage>

@@ -1,5 +1,5 @@
 ﻿using Model;
-using SzttVoting.View;
+using View;
 
 namespace SzttVoting;
 

@@ -1,6 +1,6 @@
 ﻿using ViewModel;
 
-namespace SzttVoting.View;
+namespace View;
 
 public partial class LoginView : ContentPage
 {
