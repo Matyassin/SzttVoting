@@ -22,7 +22,7 @@ public class InputValidationTests
     public void EmailWithoutDot()
     {
         var vm = new RegisterViewModel();
-        Assert.False(vm.IsEmailValid("terminatorponthu"));
+        Assert.False(vm.IsEmailValid("terminator@valamiponthu"));
     }
 
     [Fact]
@@ -33,10 +33,17 @@ public class InputValidationTests
     }
 
     [Fact]
+    public void EmailIsCorrect()
+    {
+        var vm = new RegisterViewModel();
+        Assert.True(vm.IsEmailValid("metin2@citromail.com"));
+    }
+
+    [Fact]
     public void PasswordLengthLessThanFiveCharacters()
     {
         var vm = new RegisterViewModel();
-        Assert.False(vm.IsPasswordValid("Wasd1"));
+        Assert.False(vm.IsPasswordValid("Wsd1"));
     }
 
     [Fact]
@@ -58,5 +65,12 @@ public class InputValidationTests
     {
         var vm = new RegisterViewModel();
         Assert.False(vm.IsPasswordValid("Wasdfg"));
+    }
+
+    [Fact]
+    public void PasswordIsCorrect()
+    {
+        var vm = new RegisterViewModel();
+        Assert.True(vm.IsPasswordValid("Halflife3when"));
     }
 }

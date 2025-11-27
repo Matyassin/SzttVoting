@@ -69,7 +69,7 @@ public partial class RegisterViewModel : BaseViewModel, ICredentialsValidator
 
     public bool IsEmailValid(string email)
     {
-        if (UsersRepo.ContainsEmail(EmailEntry) || string.IsNullOrWhiteSpace(email))
+        if (UsersRepo.ContainsEmail(email) || string.IsNullOrWhiteSpace(email))
             return false;
 
         return Regex.IsMatch(email, ValidationPatterns.EmailPattern);
@@ -77,7 +77,7 @@ public partial class RegisterViewModel : BaseViewModel, ICredentialsValidator
 
     public bool IsPasswordValid(string password)
     {
-        if (PasswordEntry.Length < 5 || string.IsNullOrWhiteSpace(password))
+        if (password.Length < 5 || string.IsNullOrWhiteSpace(password))
             return false;
 
         return Regex.IsMatch(password, ValidationPatterns.PasswordPattern);
