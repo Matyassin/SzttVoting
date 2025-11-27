@@ -5,6 +5,7 @@ namespace SzttVoting.View;
 public partial class LoginView : ContentPage
 {
     private LoginViewModel _vm;
+
     public LoginView()
     {
         InitializeComponent();

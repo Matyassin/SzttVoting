@@ -64,19 +64,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\ViewModel\ViewModel.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiXaml Update="View\LoginView.xaml">
-	    <SubType>Designer</SubType>
-	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Compile Update="View\LoginView.xaml.cs">
-	    <DependentUpon>MainPage.xaml</DependentUpon>
-	    <SubType>Code</SubType>
-	  </Compile>
+	  <ProjectReference Include="..\View\View.csproj" />
 	</ItemGroup>
 
 </Project>
