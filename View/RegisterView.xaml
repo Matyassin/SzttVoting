@@ -5,39 +5,39 @@
              xmlns:View="clr-namespace:SzttVoting.View"
              x:Class="SzttVoting.View.RegisterView">
 
-        <VerticalStackLayout HorizontalOptions="Center" Padding="50" WidthRequest="700" Margin="20">
-            
-            <Label Text="Sign up"
-                   FontSize="100"
-                   HorizontalOptions="Center"/>
-            
-            <Entry Placeholder="Email" 
-                   Text="{Binding EmailEntry, Mode=TwoWay}"
-                   Unfocused="Email_OnUnfocused"/>
-            
-            <Label Text="{Binding EmailWarningText}" 
-                   IsVisible="{Binding IsEmailWarning}" 
-                   TextColor="{Binding EmailWarningColor}"/>
-            
-            <Entry Placeholder="Password" 
-                   Text="{Binding PasswordEntry}"
-                   IsPassword="True"
-                   Unfocused="Password_OnUnfocused"/>
-            
-            <Label Text="{Binding PasswordWarningText}" 
-                   IsVisible="{Binding IsPasswordWarning}" 
-                   TextColor="{Binding PasswordWarningColor}"/>
-            
-            <Button x:Name="RegisterButton"
-                    Text="Sign up" 
-                    Clicked="RegisterButton_OnClicked"
-                    IsEnabled="{Binding RegisterButtonEnabled}"/>
-            
-            <Button Text="Already have an account? Log in here!" 
-                    TextColor="BlueViolet" 
-                    BackgroundColor="Transparent"
-                    Clicked="ToLoginButton_OnClicked"/>
-            
-        </VerticalStackLayout>
+    <VerticalStackLayout HorizontalOptions="Center" Padding="50" WidthRequest="700" Margin="20">
+
+        <Label Text="Sign up"
+                FontSize="100"
+                HorizontalOptions="Center"/>
+
+        <Entry Placeholder="Email" 
+                Text="{Binding EmailEntry, Mode=TwoWay}"
+                Unfocused="Email_OnUnfocused"/>
+
+        <Label Text="{Binding EmailWarningText}" 
+                IsVisible="{Binding IsEmailWarning}" 
+                TextColor="{Binding EmailWarningColor}"/>
+
+        <Entry Placeholder="Password" 
+                Text="{Binding PasswordEntry}"
+                IsPassword="True"
+                Unfocused="Password_OnUnfocused"/>
+
+        <Label Text="{Binding PasswordWarningText}" 
+                IsVisible="{Binding IsPasswordWarning}" 
+                TextColor="{Binding PasswordWarningColor}"/>
+
+        <Button x:Name="RegisterButton"
+                Text="Sign up" 
+                Clicked="RegisterButton_OnClicked"
+                IsEnabled="{Binding RegisterButtonEnabled}"/>
+
+        <Button Text="Already have an account? Log in here!" 
+                TextColor="BlueViolet" 
+                BackgroundColor="Transparent"
+                Clicked="ToLoginButton_OnClicked"/>
+
+    </VerticalStackLayout>
 
 </ContentPage>
