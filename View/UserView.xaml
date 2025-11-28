@@ -10,7 +10,7 @@
                          HeightRequest="100"
                          Padding="20">
                 <Label Text="{Binding HeaderMainText}"
-                       FontSize="20"
+                       FontSize="50"
                        VerticalOptions="Center"
                        TextColor="White"/>
                 <HorizontalStackLayout HorizontalOptions="End" Spacing="10">

@@ -2,6 +2,18 @@
 
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Scale="1"
              x:Class="View.HomepageView">
-    <Label Text="This is the home page" HorizontalOptions="Center" VerticalOptions="Center" FontSize="20"/>
+    
+    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="20">
+        <Label Text="Welcome to the home page!" 
+               HorizontalOptions="Center" 
+               VerticalOptions="Center" FontSize="100"/>
+        
+        <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+            <Button Text="Create a new vote" HeightRequest="75" WidthRequest="300" FontSize="20"/>
+            <Button Text="Modify your vote" HeightRequest="75" WidthRequest="300" FontSize="20"/>
+            <Button Text="Archived / Inactive votes" HeightRequest="75" WidthRequest="300" FontSize="20"/>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
 </ContentView>
