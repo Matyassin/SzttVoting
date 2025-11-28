@@ -8,15 +8,25 @@
                 StrokeThickness="4">
             <Grid BackgroundColor="BlueViolet"
                          HeightRequest="100"
-                         Padding="10">
+                         Padding="20">
                 <Label Text="{Binding HeaderMainText}"
                        FontSize="20"
-                       VerticalOptions="Center"/>
-                <Button Text="SIGN OUT" 
-                        WidthRequest="100" 
-                        HeightRequest="50"
-                        HorizontalOptions="End"
-                        Clicked="Signout_OnClicked" />
+                       VerticalOptions="Center"
+                       TextColor="White"/>
+                <HorizontalStackLayout HorizontalOptions="End" Spacing="10">
+                    <Button Text="HOMEPAGE" 
+                            WidthRequest="150" 
+                            HeightRequest="50"
+                            Clicked="HomepageHeader_Clicked" />
+                    <Button Text="ONGOING VOTES" 
+                            WidthRequest="150" 
+                            HeightRequest="50"
+                            Clicked="OngoingVotesHeader_Clicked" />
+                    <Button Text="SIGN OUT" 
+                            WidthRequest="150" 
+                            HeightRequest="50"
+                            Clicked="Signout_OnClicked" />
+                </HorizontalStackLayout>
 
             </Grid>
         </Border>
