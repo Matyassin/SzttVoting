@@ -21,9 +21,14 @@ public partial class UserView : ContentPage
         DynamicsArea.Content = _nestedUserViews.ElementAt(_currentNestedViewID);
     }
 
-    private void Signout_OnClicked(object sender, EventArgs e)
+    async private void Signout_OnClicked(object sender, EventArgs e)
     {
-        Application.Current.MainPage = new LoginView();
+        bool answer = await DisplayAlert("Sign Out?", "Are you sure you want to log out?", "Yes", "No");
+
+        if (answer)
+        {
+            Application.Current.MainPage = new LoginView();
+        }
     }
 
     private void HomepageHeader_Clicked(object sender, EventArgs e)
@@ -36,15 +41,5 @@ public partial class UserView : ContentPage
     {
         _currentNestedViewID = 1;
         DynamicsArea.Content = _nestedUserViews.ElementAt(_currentNestedViewID);
-    }
-    
-    
-
-    private void LoadInitialContent()
-    {
-        DynamicsArea.Content = new Label
-        {
-            Text = "Welcome to the App!"
-        };
     }
 }
