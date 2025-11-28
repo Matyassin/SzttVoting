@@ -9,8 +9,8 @@ public partial class AdminView : ContentPage
         InitializeComponent();
     }
 
-    private void Signout_OnClicked(object sender, EventArgs e)
+    private async void Signout_OnClicked(object sender, EventArgs e)
     {
-        Application.Current.MainPage = new LoginView();
+        await Navigation.PopToRootAsync();
     }
 }

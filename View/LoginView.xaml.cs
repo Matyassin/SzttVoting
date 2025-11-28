@@ -23,23 +23,23 @@ public partial class LoginView : ContentPage
         _vm.CheckPasswordEntryCommand.Execute(null);
     }
 
-    private void LoginButton_OnClicked(object? sender, EventArgs e)
+    private async void LoginButton_OnClicked(object? sender, EventArgs e)
     {
         if (!LoginButton.IsEnabled)
             return;
 
         if (_vm.IsUserAdmin(_vm.EmailEntry, _vm.PasswordEntry))
         {
-            Application.Current.MainPage = new AdminView();
+            await Navigation.PushAsync(new AdminView());
         }
         else if (_vm.IsEmailValid(_vm.EmailEntry) && _vm.IsPasswordValid(_vm.PasswordEntry))
         {
-            Application.Current.MainPage = new UserView(_vm.EmailEntry);
+            await Navigation.PushAsync(new UserView(_vm.EmailEntry));
         }
     }
 
-    private void ToRegisterButton_OnClicked(object? sender, EventArgs e)
+    private async void ToRegisterButton_OnClicked(object? sender, EventArgs e)
     {
-        Application.Current.MainPage = new RegisterView();
+        await Navigation.PushAsync(new RegisterView());
     }
 }

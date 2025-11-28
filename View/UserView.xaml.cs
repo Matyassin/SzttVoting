@@ -21,9 +21,9 @@ public partial class UserView : ContentPage
         DynamicsArea.Content = _nestedUserViews.ElementAt(_currentNestedViewID);
     }
 
-    private void Signout_OnClicked(object sender, EventArgs e)
+    private async void Signout_OnClicked(object sender, EventArgs e)
     {
-        Application.Current.MainPage = new LoginView();
+        await Navigation.PopToRootAsync();
     }
 
     private void HomepageHeader_Clicked(object sender, EventArgs e)
