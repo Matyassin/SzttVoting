@@ -3,35 +3,46 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="View.UserView">
+    
     <Grid RowDefinitions="Auto,*">
+        
         <Border Stroke="DarkViolet"
                 StrokeThickness="4">
+            
             <Grid BackgroundColor="BlueViolet"
                          HeightRequest="100"
                          Padding="20">
+                
                 <Label Text="{Binding HeaderMainText}"
                        FontSize="50"
                        VerticalOptions="Center"
                        TextColor="White"/>
+                
                 <HorizontalStackLayout HorizontalOptions="End" Spacing="10">
+                    
                     <Button Text="HOMEPAGE" 
                             WidthRequest="150" 
                             HeightRequest="50"
-                            Clicked="HomepageHeader_Clicked" />
+                            Clicked="HomepageHeader_Clicked"/>
+                    
                     <Button Text="ONGOING VOTES" 
                             WidthRequest="150" 
                             HeightRequest="50"
                             Clicked="OngoingVotesHeader_Clicked" />
+                    
                     <Button Text="SIGN OUT" 
                             WidthRequest="150" 
                             HeightRequest="50"
-                            Clicked="Signout_OnClicked" />
+                            Clicked="Signout_OnClicked"/>
+                    
                 </HorizontalStackLayout>
 
             </Grid>
+            
         </Border>
-        
-        <ContentView x:Name="DynamicsArea" Grid.Row="1"/>
+
+        <ContentView x:Name="DynamicsArea"
+                     Grid.Row="1"/>
     </Grid>
     
 </ContentPage>

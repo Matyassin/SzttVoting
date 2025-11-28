@@ -21,13 +21,12 @@ public partial class UserView : ContentPage
         DynamicsArea.Content = _nestedUserViews.ElementAt(_currentNestedViewID);
     }
 
-    async private void Signout_OnClicked(object sender, EventArgs e)
+    private async void Signout_OnClicked(object sender, EventArgs e)
     {
         bool answer = await DisplayAlert("Sign Out?", "Are you sure you want to log out?", "Yes", "No");
-
         if (answer)
         {
-            Application.Current.MainPage = new LoginView();
+            await Navigation.PopToRootAsync();
         }
     }
 
