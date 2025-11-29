@@ -5,7 +5,7 @@
              xmlns:View="clr-namespace:View"
              x:Class="View.LoginView">
 
-    <VerticalStackLayout HorizontalOptions="Center" Padding="50" WidthRequest="700" Margin="20">
+    <VerticalStackLayout HorizontalOptions="Center" Padding="50" WidthRequest="700" Margin="20" Spacing="10">
 
         <Label Text="Log in"
                FontSize="100"
