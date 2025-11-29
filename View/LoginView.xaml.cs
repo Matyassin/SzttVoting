@@ -1,4 +1,5 @@
-﻿using ViewModel;
+﻿using Foundation;
+using ViewModel;
 
 namespace View;
 
@@ -30,11 +31,11 @@ public partial class LoginView : ContentPage
 
         if (_vm.IsUserAdmin(_vm.EmailEntry, _vm.PasswordEntry))
         {
-            await Navigation.PushAsync(new AdminView());
+            Application.Current!.MainPage = new AdminView();
         }
         else if (_vm.IsEmailValid(_vm.EmailEntry) && _vm.IsPasswordValid(_vm.PasswordEntry))
         {
-            await Navigation.PushAsync(new UserView(_vm.EmailEntry));
+            Application.Current!.MainPage = new LoginView();
         }
     }
 

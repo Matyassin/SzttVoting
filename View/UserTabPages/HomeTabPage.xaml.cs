@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace View;
+namespace View.UserTabPages;
 
-public partial class HomepageView : ContentView
+public partial class HomeTabPage : ContentPage
 {
-    public HomepageView()
+    public HomeTabPage()
     {
         InitializeComponent();
     }

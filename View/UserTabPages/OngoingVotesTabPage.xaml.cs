@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace View;
+namespace View.UserTabPages;
 
-public partial class OngoingVotesView : ContentView
+public partial class OngoingVotesTabPage : ContentPage
 {
-    public OngoingVotesView()
+    public OngoingVotesTabPage()
     {
         InitializeComponent();
     }

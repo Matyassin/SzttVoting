@@ -1,49 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:View"
+    xmlns:userpages="clr-namespace:View.UserTabPages"
+    x:Class="View.UserView">
 
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             NavigationPage.HasBackButton="False"
-             x:Class="View.UserView">
-    
-    <Grid RowDefinitions="Auto,*">
-        
-        <Border Stroke="DarkViolet"
-                StrokeThickness="4">
-            
-            <Grid BackgroundColor="BlueViolet"
-                         HeightRequest="100"
-                         Padding="20">
-                
-                <Label Text="{Binding HeaderMainText}"
-                       FontSize="50"
-                       VerticalOptions="Center"
-                       TextColor="White"/>
-                
-                <HorizontalStackLayout HorizontalOptions="End" Spacing="10">
-                    
-                    <Button Text="HOMEPAGE" 
-                            WidthRequest="150" 
-                            HeightRequest="50"
-                            Clicked="HomepageHeader_Clicked"/>
-                    
-                    <Button Text="ONGOING VOTES" 
-                            WidthRequest="150" 
-                            HeightRequest="50"
-                            Clicked="OngoingVotesHeader_Clicked" />
-                    
-                    <Button Text="SIGN OUT" 
-                            WidthRequest="150" 
-                            HeightRequest="50"
-                            Clicked="Signout_OnClicked"/>
-                    
-                </HorizontalStackLayout>
+    <!-- TAB 1 -->
+    <userpages:HomeTabPage Title="Homepage" />
 
-            </Grid>
-            
-        </Border>
+    <!-- TAB 2 -->
+    <userpages:OngoingVotesTabPage Title="Ongoing Votes" />
 
-        <ContentView x:Name="DynamicsArea"
-                     Grid.Row="1"/>
-    </Grid>
-    
-</ContentPage>
+</TabbedPage>
