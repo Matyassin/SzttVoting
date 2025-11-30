@@ -1,3 +1,4 @@
+using Services;
 using Model;
 using System.Text.RegularExpressions;
 using CommunityToolkit.Mvvm.Input;
@@ -17,10 +18,16 @@ public partial class RegisterViewModel : BaseViewModel, ICredentialsValidator
 
     [ObservableProperty] private string _emailEntry = "";
     [ObservableProperty] private string _passwordEntry = "";
+    private UserServices _userServices;
 
     public bool IsRegisterButtonEnabled =>
         IsEmailValid(EmailEntry) && IsPasswordValid(PasswordEntry);
 
+    public RegisterViewModel(UserServices userServices)
+    {
+        _userServices = userServices;
+    }
+    
     [RelayCommand]
     private void CheckEmailEntry()
     {
@@ -61,15 +68,15 @@ public partial class RegisterViewModel : BaseViewModel, ICredentialsValidator
     [RelayCommand]
     private void SaveUser()
     {
-        if (UsersRepo.ContainsEmail(EmailEntry))
+        if (_userServices.ContainsEmail(EmailEntry))
             return;
 
-        UsersRepo.Save(new UserData(EmailEntry, PasswordEntry));
+        _userServices.Save(new UserData(EmailEntry, PasswordEntry));
     }
 
     public bool IsEmailValid(string email)
     {
-        if (UsersRepo.ContainsEmail(email) || string.IsNullOrWhiteSpace(email))
+        if (_userServices.ContainsEmail(email) || string.IsNullOrWhiteSpace(email))
             return false;
 
         return Regex.IsMatch(email, ValidationPatterns.EmailPattern);

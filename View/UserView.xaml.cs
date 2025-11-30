@@ -1,15 +1,18 @@
 using ViewModel;
 
 namespace View;
+using Services;
 
-public partial class UserView : TabbedPage
+public partial class UserView : ContentPage
 {
     private readonly UserViewModel _vm;
+    private readonly UserServices _userServices;
 
-    public UserView(string email)
+    public UserView(UserServices userServices)
     {
         InitializeComponent();
-        _vm = new UserViewModel(email);
+        _userServices = userServices;
+        _vm = new UserViewModel(_userServices);
         BindingContext = _vm;
     }
 
@@ -18,7 +21,18 @@ public partial class UserView : TabbedPage
         bool answer = await DisplayAlert("Sign Out?", "Are you sure you want to log out?", "Yes", "No");
         if (answer)
         {
-            await Navigation.PopToRootAsync();
+            _userServices.ClearLoggedInUser();
+            await Navigation.PopAsync();
         }
+    }
+
+    private void CreateNewVote_OnClicked(object? sender, EventArgs e)
+    {
+        throw new NotImplementedException();
+    }
+
+    private void SeeOngoingVotes_OnClicked(object? sender, EventArgs e)
+    {
+        throw new NotImplementedException();
     }
 }

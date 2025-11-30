@@ -1,19 +1,28 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Services;
 
 namespace ViewModel;
 
 public partial class UserViewModel : BaseViewModel
 {
-    [ObservableProperty] private string _userEmail;
-    [ObservableProperty] private string _headerMainText;
-
-    public UserViewModel(string email)
+    public string UserEmail {get { return _userServices.LoggedInUser.Email; }}
+    public string UserName 
     {
-        UserEmail = email;
+        get
+        {
+            var temp = UserEmail.Split('@').First();
+            return char.ToUpper(temp[0]) + temp.Substring(1);
+        }
+    }
+    public string HeaderMainText
+    {
+        get { return $"Welcome, {UserName}!"; }
+    }
+    
+    private readonly UserServices _userServices;
 
-        string emailFirstPart = UserEmail.Split('@').First();
-        string userName = char.ToUpper(emailFirstPart[0]) + emailFirstPart.Substring(1);
-
-        HeaderMainText = $"Welcome, {userName}!";
+    public UserViewModel(UserServices userServices)
+    {
+        _userServices = userServices;
     }
 }

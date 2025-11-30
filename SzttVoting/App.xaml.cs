@@ -1,5 +1,6 @@
 ﻿using Model;
 using View;
+using Services;
 
 namespace SzttVoting;
 
@@ -7,13 +8,9 @@ public partial class App : Application
 {
     public App()
     {
-
         InitializeComponent();
-        UsersRepo.Load();
-    }
-
-    protected override Window CreateWindow(IActivationState? activationState)
-    {
-        return new Window(new NavigationPage(new LoginView()));
+        var userService = new UserServices();
+        userService.Load();
+        MainPage = new NavigationPage(new LoginView(userService));
     }
 }

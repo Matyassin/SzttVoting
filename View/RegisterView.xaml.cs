@@ -1,3 +1,5 @@
+using Model;
+using Services;
 using ViewModel;
 
 namespace View;
@@ -5,11 +7,13 @@ namespace View;
 public partial class RegisterView : ContentPage
 {
     private readonly RegisterViewModel _vm;
+    private readonly UserServices _userServices;
 
-    public RegisterView()
+    public RegisterView(UserServices userServices)
     {
         InitializeComponent();
-        _vm = new RegisterViewModel();
+        _userServices = userServices;
+        _vm = new RegisterViewModel(_userServices);
         BindingContext = _vm;
     }
     
@@ -28,12 +32,18 @@ public partial class RegisterView : ContentPage
         if (RegisterButton.IsEnabled)
         {
             _vm.SaveUserCommand.Execute(null);
-            await Navigation.PushAsync(new UserView(_vm.EmailEntry));
+            _userServices.SetLoggedInUser(GetCurrentUser());
+            await Navigation.PushAsync(new UserView(_userServices));
         }
     }
 
     private async void ToLoginButton_OnClicked(object? sender, EventArgs e)
     {
         await Navigation.PopAsync();
+    }
+
+    private UserData GetCurrentUser()
+    {
+        return new UserData(_vm.EmailEntry, _vm.PasswordEntry);
     }
 }

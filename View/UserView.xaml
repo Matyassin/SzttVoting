@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<TabbedPage 
+<ContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:View"
-    xmlns:userpages="clr-namespace:View.UserTabPages"
+    NavigationPage.HasBackButton="False"
     x:Class="View.UserView">
-
-    <!-- TAB 1 -->
-    <userpages:HomeTabPage Title="Homepage" />
-
-    <!-- TAB 2 -->
-    <userpages:OngoingVotesTabPage Title="Ongoing Votes" />
-
-</TabbedPage>
+    <Border StrokeThickness="10"
+            Stroke="DarkViolet"
+            HeightRequest="500"
+            WidthRequest="1000"
+            BackgroundColor="BlueViolet">
+        <Border.StrokeShape>
+             <RoundRectangle CornerRadius="40"/> 
+        </Border.StrokeShape>
+        
+        <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="20">
+            <Label Text="{Binding HeaderMainText}" FontSize="100"  HorizontalOptions="Center"/>
+            <Label Text="See your options below!" FontSize="30" HorizontalOptions="Center"/>
+            <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                <Button Text="Create a new vote!" Clicked="CreateNewVote_OnClicked"/>
+                <Button Text="See the ongoing votes!" Clicked="SeeOngoingVotes_OnClicked" />
+                <Button Text="Log out" Clicked="Signout_OnClicked"/>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </Border>
+</ContentPage>

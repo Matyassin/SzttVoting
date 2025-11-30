@@ -1,4 +1,5 @@
 using Model;
+using Services;
 using System.Text.RegularExpressions;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -17,10 +18,22 @@ public partial class LoginViewModel : BaseViewModel, ICredentialsValidator
 
     [ObservableProperty] private string _emailEntry = "";
     [ObservableProperty] private string _passwordEntry = "";
+    
+    private UserServices _userService;
 
     public bool IsLoginButtonEnabled =>
         (IsEmailValid(EmailEntry) && IsPasswordValid(PasswordEntry)) || IsUserAdmin(EmailEntry, PasswordEntry);
 
+    public LoginViewModel(UserServices userService)
+    {
+        _userService = userService;
+    }
+
+    public void SetLoggedinUser()
+    {
+        _userService.SetLoggedInUser(new UserData(_emailEntry, _passwordEntry));
+    }
+    
     [RelayCommand]
     private void CheckEmailEntry()
     {
@@ -62,7 +75,7 @@ public partial class LoginViewModel : BaseViewModel, ICredentialsValidator
 
     public bool IsEmailValid(string email)
     {
-        if (!UsersRepo.ContainsEmail(email))
+        if (!_userService.ContainsEmail(email))
             return false;
 
         return true;

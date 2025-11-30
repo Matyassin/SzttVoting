@@ -1,13 +1,23 @@
 ﻿using Newtonsoft.Json;
+using Model;
 
-namespace Model;
+namespace Services;
 
-public static class UsersRepo
+public  class UserServices
 {
-    private static Dictionary<string, string> _userProfiles = new();
-    private const string _fileName = "userprofiles.json";
+    private Dictionary<string, string> _userProfiles = new();
+    private string _fileName = "userprofiles.json";
+    public UserData LoggedInUser { get; private set; }
 
-    public static void Save(UserData userToSave)
+    #region User login
+    public void SetLoggedInUser(UserData loggedInUser) { LoggedInUser = loggedInUser; }
+    
+    public void ClearLoggedInUser(){ LoggedInUser = default; }
+    
+    #endregion
+
+    #region User data management from files
+    public void Save(UserData userToSave)
     {
         _userProfiles.Add(userToSave.Email, userToSave.Password);
 
@@ -23,7 +33,7 @@ public static class UsersRepo
         File.WriteAllText(filePath, json);
     }
 
-    public static void Load()
+    public void Load()
     {
         string? slnPath = Directory.GetParent(Directory.GetCurrentDirectory())
             .Parent?
@@ -44,16 +54,18 @@ public static class UsersRepo
         _userProfiles = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
     }
 
-    public static bool ContainsEmail(string email)
+    public bool ContainsEmail(string email)
     {
         return _userProfiles.ContainsKey(email);
     }
+    #endregion
 
-    public static bool ValidateUser(UserData userToValidate)
+    public bool ValidateUser(UserData userToValidate)
     {
         bool emailFound = _userProfiles.TryGetValue(userToValidate.Email, out string? storedPassword);
         bool passwordMatches = userToValidate.Password == storedPassword;
 
         return emailFound && passwordMatches;
     }
+    
 }
