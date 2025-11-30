@@ -2,11 +2,11 @@ using Newtonsoft.Json;
 
 namespace Model;
 
-public struct UserData(string name, string password)
+public class UserData(string username,string email, string password)
 {
-    [JsonProperty]
-    public string Email = name;
+    [JsonProperty("username")] public string Username = username;
+    
+    [JsonProperty("email")] public string Email = email;
 
-    [JsonProperty]
-    public string Password = password;
+    [JsonProperty("password")] public string Password = password;
 }
