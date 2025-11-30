@@ -12,6 +12,11 @@
                FontSize="100"
                HorizontalOptions="Center"/>
 
+        <Entry Placeholder="Username" 
+               Text="{Binding UsernameEntry, Mode=TwoWay}"
+               Unfocused="Username_OnUnfocused"
+               Completed="RegisterButton_OnClicked"/>
+        
         <Entry Placeholder="Email" 
                Text="{Binding EmailEntry, Mode=TwoWay}"
                Unfocused="Email_OnUnfocused"

@@ -1,25 +1,32 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using System.IO;
+using Newtonsoft.Json;
 using Model;
 
 namespace Services;
 
-public  class UserServices
+public class UserServices
 {
-    private Dictionary<string, string> _userProfiles = new();
+    private Dictionary<string, UserData> _userProfiles = new();
     private string _fileName = "userprofiles.json";
     public UserData LoggedInUser { get; private set; }
-
+    
     #region User login
-    public void SetLoggedInUser(UserData loggedInUser) { LoggedInUser = loggedInUser; }
+    
+    //Checking if user exists based on user and if failed return false, if succedes return true
+    public void SetLoggedInUser(string email)
+    {
+        LoggedInUser = GetUserFromEmail(email);
+    }
     
     public void ClearLoggedInUser(){ LoggedInUser = default; }
     
     #endregion
 
     #region User data management from files
-    public void Save(UserData userToSave)
+    public void Save(string username, string email, string password)
     {
-        _userProfiles.Add(userToSave.Email, userToSave.Password);
+        _userProfiles.Add(email, CreateUserDataObj(username,email,password));
 
         string json = JsonConvert.SerializeObject(_userProfiles, Formatting.Indented);
         string? slnPath = Directory.GetParent(Directory.GetCurrentDirectory())
@@ -51,7 +58,7 @@ public  class UserServices
         }
 
         string json = File.ReadAllText(filePath);
-        _userProfiles = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+        _userProfiles = JsonConvert.DeserializeObject<Dictionary<string, UserData>>(json);
     }
 
     public bool ContainsEmail(string email)
@@ -60,12 +67,25 @@ public  class UserServices
     }
     #endregion
 
-    public bool ValidateUser(UserData userToValidate)
+    #region User Utils
+    
+     public bool ValidateUser(string emailToBeValidated, string password)
     {
-        bool emailFound = _userProfiles.TryGetValue(userToValidate.Email, out string? storedPassword);
-        bool passwordMatches = userToValidate.Password == storedPassword;
+        var isUserFound = _userProfiles.TryGetValue(emailToBeValidated, out UserData user);
+        if (!isUserFound) return false;
+        
+        var foundUser = _userProfiles[emailToBeValidated];
+        
+        bool passwordMatches = CryptographyServices.IsPasswordValid(password, foundUser.Password);
 
-        return emailFound && passwordMatches;
+        return isUserFound && passwordMatches;
     }
+
+    private UserData CreateUserDataObj(string username, string email, string password)
+    {
+        return new UserData(Guid.NewGuid().ToString(), username, email, CryptographyServices.HashPassword(password));
+    }
+    private UserData GetUserFromEmail(string email) { return _userProfiles[email]; }
+    #endregion
     
 }

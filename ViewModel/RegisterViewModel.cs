@@ -8,6 +8,11 @@ namespace ViewModel;
 
 public partial class RegisterViewModel : BaseViewModel, ICredentialsValidator
 {
+    
+    [ObservableProperty] private bool _isUserWarning;
+    [ObservableProperty] private string _userWarningText;
+    [ObservableProperty] private string _userWarningColor;   // string is only TEMP
+    
     [ObservableProperty] private bool _isEmailWarning;
     [ObservableProperty] private string _emailWarningText;
     [ObservableProperty] private string _emailWarningColor;   // string is only TEMP
@@ -16,8 +21,10 @@ public partial class RegisterViewModel : BaseViewModel, ICredentialsValidator
     [ObservableProperty] private string _passwordWarningText;
     [ObservableProperty] private string _passwordWarningColor; // string is only TEMP
 
+    [ObservableProperty] private string _usernameEntry = "";
     [ObservableProperty] private string _emailEntry = "";
     [ObservableProperty] private string _passwordEntry = "";
+    
     private UserServices _userServices;
 
     public bool IsRegisterButtonEnabled =>
@@ -26,6 +33,21 @@ public partial class RegisterViewModel : BaseViewModel, ICredentialsValidator
     public RegisterViewModel(UserServices userServices)
     {
         _userServices = userServices;
+    }
+
+    [RelayCommand]
+    private void CheckUsernameEntry()
+    {
+        if (!IsUsernameValid(UsernameEntry))
+        {   
+            EmailWarningColor = "Red";
+            EmailWarningText = "Invalid username";
+        }
+        else
+        {
+            EmailWarningColor = "Green";
+            EmailWarningText = "Valid username";
+        }
     }
     
     [RelayCommand]
@@ -71,11 +93,12 @@ public partial class RegisterViewModel : BaseViewModel, ICredentialsValidator
         if (_userServices.ContainsEmail(EmailEntry))
             return;
 
-        _userServices.Save(new UserData(EmailEntry, PasswordEntry));
+        _userServices.Save(UsernameEntry,EmailEntry,PasswordEntry);
     }
 
     public bool IsEmailValid(string email)
     {
+
         if (_userServices.ContainsEmail(email) || string.IsNullOrWhiteSpace(email))
             return false;
 
@@ -88,6 +111,11 @@ public partial class RegisterViewModel : BaseViewModel, ICredentialsValidator
             return false;
 
         return Regex.IsMatch(password, ValidationPatterns.PasswordPattern);
+    }
+
+    public void SetLoggedInUser()
+    {
+        _userServices.SetLoggedInUser(EmailEntry);
     }
 
     partial void OnEmailEntryChanged(string value)

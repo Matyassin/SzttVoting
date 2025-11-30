@@ -27,12 +27,17 @@ public partial class RegisterView : ContentPage
         _vm.CheckPasswordEntryCommand.Execute(null);
     }
 
+    private void Username_OnUnfocused(object? sender, FocusEventArgs e)
+    {
+        _vm.CheckUsernameEntryCommand.Execute(null);
+    }
+
     private async void RegisterButton_OnClicked(object sender, EventArgs e)
     {
         if (RegisterButton.IsEnabled)
         {
             _vm.SaveUserCommand.Execute(null);
-            _userServices.SetLoggedInUser(GetCurrentUser());
+            _vm.SetLoggedInUser();
             await Navigation.PushAsync(new UserView(_userServices));
         }
     }
@@ -41,9 +46,5 @@ public partial class RegisterView : ContentPage
     {
         await Navigation.PopAsync();
     }
-
-    private UserData GetCurrentUser()
-    {
-        return new UserData(_vm.EmailEntry, _vm.PasswordEntry);
-    }
+    
 }

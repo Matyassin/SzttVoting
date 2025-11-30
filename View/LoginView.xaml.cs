@@ -30,16 +30,21 @@ public partial class LoginView : ContentPage
     {
         if (!LoginButton.IsEnabled)
             return;
+        
 
         if (_vm.IsUserAdmin(_vm.EmailEntry, _vm.PasswordEntry))
         {
             await Navigation.PushAsync(new RegisterView(_userService));
+            return;
         }
-        else if (_vm.IsEmailValid(_vm.EmailEntry) && _vm.IsPasswordValid(_vm.PasswordEntry))
+        
+        if (_vm.AuthUser())
         {
             _vm.SetLoggedinUser();
             await Navigation.PushAsync(new UserView(_userService));
+            return;
         }
+        await DisplayAlert("Incorrect credentials", "Try again later!", "OK");
     }
 
     private async void ToRegisterButton_OnClicked(object? sender, EventArgs e)

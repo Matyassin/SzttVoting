@@ -22,7 +22,7 @@ public partial class LoginViewModel : BaseViewModel, ICredentialsValidator
     private UserServices _userService;
 
     public bool IsLoginButtonEnabled =>
-        (IsEmailValid(EmailEntry) && IsPasswordValid(PasswordEntry)) || IsUserAdmin(EmailEntry, PasswordEntry);
+        (IsEmailValid(EmailEntry) || IsUserAdmin(EmailEntry, PasswordEntry));
 
     public LoginViewModel(UserServices userService)
     {
@@ -31,7 +31,7 @@ public partial class LoginViewModel : BaseViewModel, ICredentialsValidator
 
     public void SetLoggedinUser()
     {
-        _userService.SetLoggedInUser(new UserData(_emailEntry, _passwordEntry));
+        _userService.SetLoggedInUser(EmailEntry);
     }
     
     [RelayCommand]
@@ -75,18 +75,19 @@ public partial class LoginViewModel : BaseViewModel, ICredentialsValidator
 
     public bool IsEmailValid(string email)
     {
-        if (!_userService.ContainsEmail(email))
-            return false;
-
-        return true;
+        return _userService.ContainsEmail(email);
     }
 
+    public bool AuthUser()
+    {
+        //string email, string password
+        // _vm.IsEmailValid(_vm.EmailEntry) && _vm.IsPasswordValid(_vm.PasswordEntry)
+
+        return _userService.ValidateUser(EmailEntry, PasswordEntry);
+    }
     public bool IsPasswordValid(string password)
     {
-        if (password.Length < 5 || string.IsNullOrWhiteSpace(password))
-            return false;
-
-        return Regex.IsMatch(password, ValidationPatterns.PasswordPattern);
+        return !(password.Length < 5 || string.IsNullOrWhiteSpace(password));
     }
 
     public bool IsUserAdmin(string email, string password)
