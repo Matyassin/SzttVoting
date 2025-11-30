@@ -31,6 +31,8 @@
 *.svclog
 *.scc
 **/obj/*
+**/obj
+**/bin
 **/bin/*
 
 ## -- Visual Studio --
