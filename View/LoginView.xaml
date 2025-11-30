@@ -31,7 +31,7 @@
                TextColor="{Binding PasswordWarningColor}"/>
 
         <Button x:Name="LoginButton"
-                Text="Log in" 
+                Text="{Binding LoginButtonText}" 
                 Clicked="LoginButton_OnClicked"
                 IsEnabled="{Binding IsLoginButtonEnabled}"/>
 

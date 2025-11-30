@@ -24,27 +24,42 @@ public partial class LoginView : ContentPage
     private void Password_OnUnfocused(object? sender, FocusEventArgs e)
     {
         _vm.CheckPasswordEntryCommand.Execute(null);
+        
     }
 
     private async void LoginButton_OnClicked(object? sender, EventArgs e)
     {
-        if (!LoginButton.IsEnabled)
-            return;
-        
+        var isAdmin = false;
+        var isAuthorized = false;
+        if(_vm.IsBusy) return;
+        try
+        {
+            _vm.IsBusy = true;
+            
+            await Task.Run(() =>
+            {
+                isAdmin = _vm.IsUserAdmin(_vm.EmailEntry, _vm.PasswordEntry);
+                if (!isAdmin) isAuthorized = _vm.AuthUser();
+            });
+            
+            if (isAdmin)
+            {
+                await Navigation.PushAsync(new RegisterView(_userService));
+                return;
+            }
+    
+            if (isAuthorized)
+            {
+                _vm.SetLoggedinUser();
+                await Navigation.PushAsync(new UserView(_userService));
+                return;
+            }
+            await DisplayAlert("Incorrect credentials", "Try again later!", "OK");
+            
+        } finally{
+            _vm.IsBusy = false;
+        }
 
-        if (_vm.IsUserAdmin(_vm.EmailEntry, _vm.PasswordEntry))
-        {
-            await Navigation.PushAsync(new RegisterView(_userService));
-            return;
-        }
-        
-        if (_vm.AuthUser())
-        {
-            _vm.SetLoggedinUser();
-            await Navigation.PushAsync(new UserView(_userService));
-            return;
-        }
-        await DisplayAlert("Incorrect credentials", "Try again later!", "OK");
     }
 
     private async void ToRegisterButton_OnClicked(object? sender, EventArgs e)

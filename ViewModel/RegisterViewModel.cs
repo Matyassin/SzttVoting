@@ -34,21 +34,6 @@ public partial class RegisterViewModel : BaseViewModel, ICredentialsValidator
     {
         _userServices = userServices;
     }
-
-    [RelayCommand]
-    private void CheckUsernameEntry()
-    {
-        if (!IsUsernameValid(UsernameEntry))
-        {   
-            EmailWarningColor = "Red";
-            EmailWarningText = "Invalid username";
-        }
-        else
-        {
-            EmailWarningColor = "Green";
-            EmailWarningText = "Valid username";
-        }
-    }
     
     [RelayCommand]
     private void CheckEmailEntry()

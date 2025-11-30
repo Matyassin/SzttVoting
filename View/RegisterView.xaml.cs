@@ -29,7 +29,7 @@ public partial class RegisterView : ContentPage
 
     private void Username_OnUnfocused(object? sender, FocusEventArgs e)
     {
-        _vm.CheckUsernameEntryCommand.Execute(null);
+        //MAYBE TODO - Implement Username validation
     }
 
     private async void RegisterButton_OnClicked(object sender, EventArgs e)

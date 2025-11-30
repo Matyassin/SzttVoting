@@ -16,13 +16,29 @@ public partial class LoginViewModel : BaseViewModel, ICredentialsValidator
     [ObservableProperty] private string _passwordWarningText;
     [ObservableProperty] private string _passwordWarningColor; // string is only TEMP
 
-    [ObservableProperty] private string _emailEntry = "";
-    [ObservableProperty] private string _passwordEntry = "";
+    [ObservableProperty] 
+    [NotifyPropertyChangedFor(nameof(IsLoginButtonEnabled))]
+    private string _emailEntry = "";
+    
+    [ObservableProperty] 
+    [NotifyPropertyChangedFor(nameof(IsLoginButtonEnabled))]
+    private string _passwordEntry = "";
+    
+    public string LoginButtonText
+    {
+        get { return IsBusy ? "Authenticating..." : "Log in!"; }
+    }
+    
+    [ObservableProperty] 
+    [NotifyPropertyChangedFor(nameof(IsLoginButtonEnabled))]
+    [NotifyPropertyChangedFor(nameof(LoginButtonText))]
+    public bool _isBusy = false;
     
     private UserServices _userService;
 
+    
     public bool IsLoginButtonEnabled =>
-        (IsEmailValid(EmailEntry) || IsUserAdmin(EmailEntry, PasswordEntry));
+        (IsEmailValid(EmailEntry) || IsUserAdmin(EmailEntry, PasswordEntry)) && !IsBusy;
 
     public LoginViewModel(UserServices userService)
     {
@@ -80,10 +96,11 @@ public partial class LoginViewModel : BaseViewModel, ICredentialsValidator
 
     public bool AuthUser()
     {
-        //string email, string password
-        // _vm.IsEmailValid(_vm.EmailEntry) && _vm.IsPasswordValid(_vm.PasswordEntry)
-
-        return _userService.ValidateUser(EmailEntry, PasswordEntry);
+        if(_userService.ValidateUser(EmailEntry, PasswordEntry)){
+            SetLoggedinUser();
+            return true;
+        }
+        return false;
     }
     public bool IsPasswordValid(string password)
     {
