@@ -15,11 +15,12 @@
         </Border.StrokeShape>
         
         <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="20">
-            <Label Text="{Binding HeaderMainText}" FontSize="100"  HorizontalOptions="Center"/>
+            <Label Text="{Binding HeaderMainText}" FontSize="60"  HorizontalOptions="Center"/>
             <Label Text="See your options below!" FontSize="30" HorizontalOptions="Center"/>
             <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
                 <Button Text="Create a new vote!" Clicked="CreateNewVote_OnClicked"/>
                 <Button Text="See the ongoing votes!" Clicked="SeeOngoingVotes_OnClicked" />
+                <Button Text="My Profile" Clicked="MyProfile_OnClicked"/>
                 <Button Text="Log out" Clicked="Signout_OnClicked"/>
             </HorizontalStackLayout>
         </VerticalStackLayout>

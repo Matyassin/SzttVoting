@@ -1,7 +1,11 @@
+using System.Data;
+using System.Security.AccessControl;
 using ViewModel;
+using Services;
+using View.UserViews;
 
 namespace View;
-using Services;
+
 
 public partial class UserView : ContentPage
 {
@@ -28,11 +32,15 @@ public partial class UserView : ContentPage
 
     private void CreateNewVote_OnClicked(object? sender, EventArgs e)
     {
-        throw new NotImplementedException();
+        Navigation.PushAsync(new NewVoteView(_userServices));
     }
 
+    private void MyProfile_OnClicked(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new MyProfile(_userServices));
+    }
     private void SeeOngoingVotes_OnClicked(object? sender, EventArgs e)
     {
-        throw new NotImplementedException();
+        Navigation.PushAsync(new SeeOngoingVotesView(_userServices));
     }
 }

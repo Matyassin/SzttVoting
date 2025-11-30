@@ -5,19 +5,9 @@ namespace ViewModel;
 
 public partial class UserViewModel : BaseViewModel
 {
-    public string UserEmail {get { return _userServices.LoggedInUser.Email; }}
-    public string UserName 
-    {
-        get
-        {
-            var temp = UserEmail.Split('@').First();
-            return char.ToUpper(temp[0]) + temp.Substring(1);
-        }
-    }
-    public string HeaderMainText
-    {
-        get { return $"Welcome, {UserName}!"; }
-    }
+    public string UserEmail => _userServices.LoggedInUser.Email;
+    public string UserName => _userServices.LoggedInUser.Username;
+    public string HeaderMainText => $"Welcome, {UserName}!";
     
     private readonly UserServices _userServices;
 

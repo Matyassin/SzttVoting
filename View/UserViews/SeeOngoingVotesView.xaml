@@ -2,8 +2,8 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="View.UserTabPages.OngoingVotesTabPage">
+             x:Class="View.UserViews.SeeOngoingVotesView">
     <ContentPage.Content>
-        <Label Text="ONGOING VOTES TAB " FontSize="40" />
+        
     </ContentPage.Content>
 </ContentPage>
