@@ -1,30 +1,36 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using System.IO;
+using Newtonsoft.Json;
 using Model;
 
 namespace Services;
 
 public class UserServices
 {
-    public UserData LoggedInUser { get; private set; }
-
     private Dictionary<string, UserData> _userProfiles = new();
-    private readonly string _fileName = "userprofiles.json";
+    private string _fileName = "userprofiles.json";
+    public UserData LoggedInUser { get; private set; }
     
-    //Checking if user exists based on user and if failed return false, if succedes return true
+    #region User login
     public void SetLoggedInUser(string email)
     {
         LoggedInUser = GetUserFromEmail(email);
     }
     
-    public void ClearLoggedInUser()
-    {
-        LoggedInUser = default;
-    }
+    public void ClearLoggedInUser(){ LoggedInUser = default; }
+    
+    #endregion
 
-    public void Save(string username, string email, string password)
+    #region User data management from files
+
+    public void AddUser(string username, string email, string password)
     {
         _userProfiles.Add(email, CreateUserDataObj(username,email,password));
-
+        Save();
+    }
+    
+    public void Save()
+    {
         string json = JsonConvert.SerializeObject(_userProfiles, Formatting.Indented);
         string? slnPath = Directory.GetParent(Directory.GetCurrentDirectory())
             .Parent?
@@ -62,14 +68,17 @@ public class UserServices
     {
         return _userProfiles.ContainsKey(email);
     }
+    #endregion
 
-    public bool ValidateUser(string emailToBeValidated, string password)
+    #region User Utils
+    
+     public bool ValidateUser(string emailToBeValidated, string password)
     {
         var isUserFound = _userProfiles.TryGetValue(emailToBeValidated, out UserData user);
-        if (!isUserFound)
-            return false;
+        if (!isUserFound) return false;
         
         var foundUser = _userProfiles[emailToBeValidated];
+        
         bool passwordMatches = CryptographyServices.IsPasswordValid(password, foundUser.Password);
 
         return isUserFound && passwordMatches;
@@ -79,9 +88,7 @@ public class UserServices
     {
         return new UserData(Guid.NewGuid().ToString(), username, email, CryptographyServices.HashPassword(password));
     }
-
-    private UserData GetUserFromEmail(string email)
-    {
-        return _userProfiles[email];
-    }
+    private UserData GetUserFromEmail(string email) { return _userProfiles[email]; }
+    #endregion
+    
 }
