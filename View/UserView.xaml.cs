@@ -36,6 +36,7 @@ public partial class UserView : ContentPage
     {
         Navigation.PushAsync(new MyProfile(_userServices));
     }
+
     private void SeeOngoingVotes_OnClicked(object? sender, EventArgs e)
     {
         Navigation.PushAsync(new SeeOngoingVotesView(_userServices));

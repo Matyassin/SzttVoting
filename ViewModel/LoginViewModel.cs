@@ -22,15 +22,17 @@ public partial class LoginViewModel : BaseViewModel, ICredentialsValidator
     [NotifyPropertyChangedFor(nameof(IsLoginButtonEnabled))]
     private string _passwordEntry = "";
     
-    public string LoginButtonText { get { return IsBusy ? "Authenticating..." : "Log in!"; } }
-    
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsLoginButtonEnabled))]
     [NotifyPropertyChangedFor(nameof(LoginButtonText))]
+    private bool _isBusy = false;
 
-    public bool _isBusy = false;
+    private readonly UserServices _userService;
 
-    private UserServices _userService;
+    public string LoginButtonText
+    {
+        get { return IsBusy ? "Authenticating..." : "Log in!"; }
+    }
 
     public bool IsLoginButtonEnabled =>
         (IsEmailValid(EmailEntry) || IsUserAdmin(EmailEntry, PasswordEntry)) && !IsBusy;
@@ -91,12 +93,14 @@ public partial class LoginViewModel : BaseViewModel, ICredentialsValidator
 
     public bool AuthUser()
     {
-        if(_userService.ValidateUser(EmailEntry, PasswordEntry)){
+        if (_userService.ValidateUser(EmailEntry, PasswordEntry)){
             SetLoggedinUser();
             return true;
         }
+
         return false;
     }
+
     public bool IsPasswordValid(string password)
     {
         return !(password.Length < 5 || string.IsNullOrWhiteSpace(password));

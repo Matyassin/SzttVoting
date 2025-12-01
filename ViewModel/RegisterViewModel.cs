@@ -77,7 +77,7 @@ public partial class RegisterViewModel : BaseViewModel, ICredentialsValidator
         if (_userServices.ContainsEmail(EmailEntry))
             return;
 
-        _userServices.Save(UsernameEntry,EmailEntry,PasswordEntry);
+        _userServices.AddUser(UsernameEntry,EmailEntry,PasswordEntry);
     }
 
     public bool IsEmailValid(string email)

@@ -41,7 +41,10 @@ public partial class LoginView : ContentPage
             await Task.Run(() =>
             {
                 isAdmin = _vm.IsUserAdmin(_vm.EmailEntry, _vm.PasswordEntry);
-                if (!isAdmin) isAuthorized = _vm.AuthUser();
+                if (!isAdmin)
+                {
+                    isAuthorized = _vm.AuthUser();
+                }
             });
             
             if (isAdmin)
