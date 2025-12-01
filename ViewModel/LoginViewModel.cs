@@ -1,6 +1,4 @@
-using Model;
 using Services;
-using System.Text.RegularExpressions;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 
@@ -20,23 +18,20 @@ public partial class LoginViewModel : BaseViewModel, ICredentialsValidator
     [NotifyPropertyChangedFor(nameof(IsLoginButtonEnabled))]
     private string _emailEntry = "";
     
-    [ObservableProperty] 
+    [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsLoginButtonEnabled))]
     private string _passwordEntry = "";
     
-    public string LoginButtonText
-    {
-        get { return IsBusy ? "Authenticating..." : "Log in!"; }
-    }
+    public string LoginButtonText { get { return IsBusy ? "Authenticating..." : "Log in!"; } }
     
-    [ObservableProperty] 
+    [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsLoginButtonEnabled))]
     [NotifyPropertyChangedFor(nameof(LoginButtonText))]
+
     public bool _isBusy = false;
-    
+
     private UserServices _userService;
 
-    
     public bool IsLoginButtonEnabled =>
         (IsEmailValid(EmailEntry) || IsUserAdmin(EmailEntry, PasswordEntry)) && !IsBusy;
 

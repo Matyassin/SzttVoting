@@ -1,11 +1,8 @@
-using System.Data;
-using System.Security.AccessControl;
 using ViewModel;
 using Services;
 using View.UserViews;
 
 namespace View;
-
 
 public partial class UserView : ContentPage
 {

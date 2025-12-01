@@ -8,7 +8,6 @@ namespace ViewModel;
 
 public partial class RegisterViewModel : BaseViewModel, ICredentialsValidator
 {
-    
     [ObservableProperty] private bool _isUserWarning;
     [ObservableProperty] private string _userWarningText;
     [ObservableProperty] private string _userWarningColor;   // string is only TEMP

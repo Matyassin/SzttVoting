@@ -1,5 +1,6 @@
 ﻿using Services;
 using ViewModel;
+
 namespace View;
 
 public partial class LoginView : ContentPage
@@ -22,19 +23,21 @@ public partial class LoginView : ContentPage
     
     private void Password_OnUnfocused(object? sender, FocusEventArgs e)
     {
-        _vm.CheckPasswordEntryCommand.Execute(null);
-        
+        _vm.CheckPasswordEntryCommand.Execute(null);   
     }
 
     private async void LoginButton_OnClicked(object? sender, EventArgs e)
     {
+        if (_vm.IsBusy)
+            return;
+
         var isAdmin = false;
         var isAuthorized = false;
-        if(_vm.IsBusy) return;
+        
         try
         {
             _vm.IsBusy = true;
-            
+
             await Task.Run(() =>
             {
                 isAdmin = _vm.IsUserAdmin(_vm.EmailEntry, _vm.PasswordEntry);
@@ -53,12 +56,14 @@ public partial class LoginView : ContentPage
                 await Navigation.PushAsync(new UserView(_userService));
                 return;
             }
+            
             await DisplayAlert("Incorrect credentials", "Try again later!", "OK");
             
-        } finally{
+        }
+        finally
+        {
             _vm.IsBusy = false;
         }
-
     }
 
     private async void ToRegisterButton_OnClicked(object? sender, EventArgs e)

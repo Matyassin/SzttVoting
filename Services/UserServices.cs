@@ -1,17 +1,14 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Model;
 
 namespace Services;
 
 public class UserServices
 {
-    private Dictionary<string, UserData> _userProfiles = new();
-    private string _fileName = "userprofiles.json";
     public UserData LoggedInUser { get; private set; }
-    
-    #region User login
+
+    private Dictionary<string, UserData> _userProfiles = new();
+    private readonly string _fileName = "userprofiles.json";
     
     //Checking if user exists based on user and if failed return false, if succedes return true
     public void SetLoggedInUser(string email)
@@ -19,11 +16,11 @@ public class UserServices
         LoggedInUser = GetUserFromEmail(email);
     }
     
-    public void ClearLoggedInUser(){ LoggedInUser = default; }
-    
-    #endregion
+    public void ClearLoggedInUser()
+    {
+        LoggedInUser = default;
+    }
 
-    #region User data management from files
     public void Save(string username, string email, string password)
     {
         _userProfiles.Add(email, CreateUserDataObj(username,email,password));
@@ -65,17 +62,14 @@ public class UserServices
     {
         return _userProfiles.ContainsKey(email);
     }
-    #endregion
 
-    #region User Utils
-    
-     public bool ValidateUser(string emailToBeValidated, string password)
+    public bool ValidateUser(string emailToBeValidated, string password)
     {
         var isUserFound = _userProfiles.TryGetValue(emailToBeValidated, out UserData user);
-        if (!isUserFound) return false;
+        if (!isUserFound)
+            return false;
         
         var foundUser = _userProfiles[emailToBeValidated];
-        
         bool passwordMatches = CryptographyServices.IsPasswordValid(password, foundUser.Password);
 
         return isUserFound && passwordMatches;
@@ -85,7 +79,9 @@ public class UserServices
     {
         return new UserData(Guid.NewGuid().ToString(), username, email, CryptographyServices.HashPassword(password));
     }
-    private UserData GetUserFromEmail(string email) { return _userProfiles[email]; }
-    #endregion
-    
+
+    private UserData GetUserFromEmail(string email)
+    {
+        return _userProfiles[email];
+    }
 }
