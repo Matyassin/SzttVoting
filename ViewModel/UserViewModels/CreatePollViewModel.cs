@@ -1,0 +1,46 @@
+using System.Collections.ObjectModel;
+using System.Windows.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
+using Model;
+using Services;
+
+namespace ViewModel.UserViewModels;
+
+public partial class CreatePollViewModel : BaseViewModel
+{
+    #region Services
+    private UserServices _userServices;
+    private VoteServices _voteServices;
+    #endregion
+    
+    #region View Properties
+
+    [ObservableProperty] private string _title = "";
+    [ObservableProperty] private string _description = "";
+    [ObservableProperty] private DateTime _deadlineDate = DateTime.Now.AddDays(6);
+    [ObservableProperty] private TimeSpan _deadlineTime = TimeSpan.FromHours(23);
+
+    public ObservableCollection<OptionStruct> Options {get; set;}
+    #endregion
+    
+    #region Commands
+
+    public ICommand AddOptionCommand { get; }
+    public ICommand RemoveOptionCommand { get;}
+    public ICommand PublishCommand { get; }
+    
+    #endregion
+    
+    public CreatePollViewModel(UserServices userServices, VoteServices voteServices)
+    {
+        _userServices = userServices;
+        _voteServices = voteServices;
+        
+    }
+    
+    #region Command Implementations
+    
+    
+    
+    #endregion
+}

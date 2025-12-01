@@ -1,42 +1,28 @@
 namespace Model;
 
-public class PollModel
+public struct PollModel(UserData user, string title, string description, DateTime deadline)
 {
-    private static int _lastPoolId = 0;
-    public UserData Creator { get; private set; }
-    public string Id { get; private set; }
-    public string Title { get; private set; }
-    public string Description { get; private set; }
-    public DateTime Created { get; private set; }
-    public DateTime Deadline { get; private set; }
-    public Boolean IsActive { get; private set; }
-    
+    public UserData Creator = user;
+    public string Id = Guid.NewGuid().ToString();
+    public string Title = title;
+    public string Description = description;
+    public DateTime Created = DateTime.Now;
+    public DateTime Deadline = deadline;
+    public Boolean IsActive = true;
     public List<OptionStruct> Options = new List<OptionStruct>();
-
     private List<VotesStruct> Votes = new List<VotesStruct>();
-    
-    public PollModel(UserData user, string title, string description, DateTime deadline)
-    {
-        Creator = user;
-        Id = user.Email + (++_lastPoolId).ToString();
-        Title = title;
-        Description = description;
-        Created = DateTime.Now;
-        Deadline = deadline;
-        IsActive = false;
-    }
 
 }
 
-public struct OptionStruct
+public struct OptionStruct(string text)
 {
-    public int Id;
+    public string Id = Guid.NewGuid().ToString();
     public string Text;
 }
 
 public struct VotesStruct
 {
-    public int Id;
+    public string Id;
     public UserData Voter;
     public OptionStruct RelatedOption;
     public DateTime Created;
