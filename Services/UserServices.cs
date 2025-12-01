@@ -12,8 +12,6 @@ public class UserServices
     public UserData LoggedInUser { get; private set; }
     
     #region User login
-    
-    //Checking if user exists based on user and if failed return false, if succedes return true
     public void SetLoggedInUser(string email)
     {
         LoggedInUser = GetUserFromEmail(email);
@@ -24,10 +22,15 @@ public class UserServices
     #endregion
 
     #region User data management from files
-    public void Save(string username, string email, string password)
+
+    public void AddUser(string username, string email, string password)
     {
         _userProfiles.Add(email, CreateUserDataObj(username,email,password));
-
+        Save();
+    }
+    
+    public void Save()
+    {
         string json = JsonConvert.SerializeObject(_userProfiles, Formatting.Indented);
         string? slnPath = Directory.GetParent(Directory.GetCurrentDirectory())
             .Parent?
