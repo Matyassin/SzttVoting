@@ -1,5 +1,4 @@
-﻿using Foundation;
-using Services;
+﻿using Services;
 using ViewModel;
 namespace View;
 
