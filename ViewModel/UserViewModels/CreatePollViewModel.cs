@@ -10,7 +10,7 @@ public partial class CreatePollViewModel : BaseViewModel
 {
     #region Services
     private UserServices _userServices;
-    private VoteServices _voteServices;
+    private PollServices _pollServices;
     #endregion
     
     #region View Properties
@@ -31,10 +31,10 @@ public partial class CreatePollViewModel : BaseViewModel
     
     #endregion
     
-    public CreatePollViewModel(UserServices userServices, VoteServices voteServices)
+    public CreatePollViewModel(UserServices userServices, PollServices pollServices)
     {
         _userServices = userServices;
-        _voteServices = voteServices;
+        _pollServices = pollServices;
         
     }
     

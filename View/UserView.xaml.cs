@@ -32,7 +32,7 @@ public partial class UserView : ContentPage
 
     private void CreateNewVote_OnClicked(object? sender, EventArgs e)
     {
-        Navigation.PushAsync(new NewVoteView(_userServices));
+        Navigation.PushAsync(new NewPollView(_userServices));
     }
 
     private void MyProfile_OnClicked(object sender, EventArgs e)
