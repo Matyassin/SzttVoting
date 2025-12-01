@@ -14,4 +14,9 @@ public partial class NewVoteView : ContentPage
     {
         InitializeComponent();
     }
+
+    private void CancelButton_OnClicked(object? sender, EventArgs e)
+    {
+        Navigation.PopAsync();
+    }
 }

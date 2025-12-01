@@ -2,8 +2,125 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="View.UserViews.MyProfile">
-    <ContentPage.Content>
-        
-    </ContentPage.Content>
+             x:Class="View.UserViews.MyProfile"
+             NavigationPage.HasBackButton="False">
+    <Border Margin="20"
+        StrokeShape="RoundRectangle 40"
+        StrokeThickness="0"
+        HorizontalOptions="Center"
+        VerticalOptions="Center"
+        Padding="0"
+        BackgroundColor="SlateGray">
+
+    <Border.Shadow>
+        <Shadow Brush="Black" Offset="0,15" Radius="40" Opacity="0.4" />
+    </Border.Shadow>
+
+    <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto"
+          ColumnDefinitions="*"
+          Padding="60"
+          RowSpacing="25"
+          MaximumWidthRequest="900">
+
+        <VerticalStackLayout Grid.Row="0" Spacing="15" HorizontalOptions="Center">
+            <Border HeightRequest="120" 
+                    WidthRequest="120" 
+                    StrokeShape="RoundRectangle 60"
+                    Stroke="White"
+                    StrokeThickness="3"
+                    BackgroundColor="#30FFFFFF">
+                <Label Text="{Binding Initials}" 
+                       TextColor="White" 
+                       FontSize="40" 
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center" 
+                       VerticalOptions="Center"/>
+            </Border>
+            <Label Text="My Profile" 
+                   TextColor="White" 
+                   FontSize="40" 
+                   FontAttributes="Bold" 
+                   HorizontalTextAlignment="Center"/>
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Grid.Row="1" Spacing="5">
+            <Label Text="Username" TextColor="#E0E0E0" FontSize="18" Margin="5,0,0,0"/>
+            <Border StrokeShape="RoundRectangle 15" BackgroundColor="#20FFFFFF" StrokeThickness="0" HeightRequest="60">
+                <Entry Text="{Binding Username}" 
+                       TextColor="White" 
+                       FontSize="20" 
+                       Placeholder="Enter username" 
+                       PlaceholderColor="#80FFFFFF"
+                       Margin="15,0"/>
+            </Border>
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Grid.Row="2" Spacing="5">
+            <Label Text="Email Address" TextColor="#E0E0E0" FontSize="18" Margin="5,0,0,0"/>
+            <Border StrokeShape="RoundRectangle 15" BackgroundColor="#20FFFFFF" StrokeThickness="0" HeightRequest="60">
+                <Entry Text="{Binding Email}" 
+                       TextColor="White" 
+                       FontSize="20" 
+                       Keyboard="Email"
+                       Placeholder="Enter email" 
+                       PlaceholderColor="#80FFFFFF"
+                       Margin="15,0"/>
+            </Border>
+        </VerticalStackLayout>
+
+        <Grid Grid.Row="3" ColumnDefinitions="*, Auto" ColumnSpacing="15">
+            <VerticalStackLayout Grid.Column="0" Spacing="5">
+                <Label Text="Password" TextColor="#E0E0E0" FontSize="18" Margin="5,0,0,0"/>
+                <Border StrokeShape="RoundRectangle 15" BackgroundColor="#20FFFFFF" StrokeThickness="0" HeightRequest="60">
+                    <Entry Text="PasswordPlaceholder" 
+                           IsPassword="True"
+                           IsReadOnly="True"
+                           TextColor="White" 
+                           FontSize="20" 
+                           Margin="15,0"/>
+                </Border>
+            </VerticalStackLayout>
+            
+            <Button Grid.Column="1" 
+                    Text="Reset" 
+                    VerticalOptions="End"
+                    HeightRequest="60"
+                    WidthRequest="120"
+                    BackgroundColor="#40FFFFFF" 
+                    TextColor="White"
+                    CornerRadius="15"/>
+        </Grid>
+
+        <VerticalStackLayout Grid.Row="4" Spacing="30" Margin="0,20,0,0">
+            
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="10">
+                <Label Text="User ID:" TextColor="#AAFFFFFF" FontSize="14"/>
+                <Label Text="{Binding Guid}" TextColor="#AAFFFFFF" FontSize="14" FontAttributes="Italic"/>
+            </StackLayout>
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="20">
+                <Button Grid.Column="0"
+                        Text="Back"
+                        BackgroundColor="Transparent"
+                        BorderColor="White"
+                        BorderWidth="2"
+                        TextColor="White"
+                        HeightRequest="65"
+                        CornerRadius="20"
+                        FontSize="20"
+                        Clicked="BackButton_OnClicked"/>
+
+                <Button Grid.Column="1"
+                        Text="Save Changes"
+                        BackgroundColor="White"
+                        TextColor="#7B42F6"
+                        FontAttributes="Bold"
+                        HeightRequest="65"
+                        CornerRadius="20"
+                        FontSize="20"/>
+            </Grid>
+        </VerticalStackLayout>
+
+    </Grid>
+</Border>
 </ContentPage>
