@@ -6,13 +6,11 @@ namespace View;
 public partial class LoginView : ContentPage
 {
     private readonly LoginViewModel _vm;
-    private readonly UserServices _userService;
 
     public LoginView(UserServices userService)
     {
         InitializeComponent();
         _vm = new LoginViewModel(userService);
-        _userService = userService;
         BindingContext = _vm;
     }
     
@@ -31,46 +29,27 @@ public partial class LoginView : ContentPage
         if (_vm.IsBusy)
             return;
 
-        var isAdmin = false;
-        var isAuthorized = false;
-        
-        try
-        {
-            _vm.IsBusy = true;
+        _vm.IsBusy = true;
 
-            await Task.Run(() =>
-            {
-                isAdmin = _vm.IsUserAdmin(_vm.EmailEntry, _vm.PasswordEntry);
-                if (!isAdmin)
-                {
-                    isAuthorized = _vm.AuthUser();
-                }
-            });
-            
-            if (isAdmin)
-            {
-                await Navigation.PushAsync(new RegisterView(_userService));
-                return;
-            }
-    
-            if (isAuthorized)
-            {
-                _vm.SetLoggedinUser();
-                await Navigation.PushAsync(new UserView(_userService));
-                return;
-            }
-            
-            await DisplayAlert("Incorrect credentials", "Try again later!", "OK");
-            
-        }
-        finally
+        if (_vm.IsUserAdmin(_vm.EmailEntry, _vm.PasswordEntry))
         {
-            _vm.IsBusy = false;
+            await Navigation.PushAsync(new AdminView());
         }
+        else if (_vm.TryAuthUser())
+        {
+            _vm.SetLoggedinUser();
+            await Navigation.PushAsync(new UserView(_vm.UserServices));
+        }
+        else
+        {
+            await DisplayAlert("Incorrect credentials", "Try again later!", "OK");
+        }
+
+        _vm.IsBusy = false;
     }
 
     private async void ToRegisterButton_OnClicked(object? sender, EventArgs e)
     {
-        await Navigation.PushAsync(new RegisterView(_userService));
+        await Navigation.PushAsync(new RegisterView(_vm.UserServices));
     }
 }

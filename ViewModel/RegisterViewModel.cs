@@ -24,14 +24,14 @@ public partial class RegisterViewModel : BaseViewModel, ICredentialsValidator
     [ObservableProperty] private string _emailEntry = "";
     [ObservableProperty] private string _passwordEntry = "";
     
-    private readonly UserServices _userServices;
+    public UserServices UserServices { get; private set; }
 
     public bool IsRegisterButtonEnabled =>
         IsEmailValid(EmailEntry) && IsPasswordValid(PasswordEntry);
 
     public RegisterViewModel(UserServices userServices)
     {
-        _userServices = userServices;
+        UserServices = userServices;
     }
     
     [RelayCommand]
@@ -74,15 +74,15 @@ public partial class RegisterViewModel : BaseViewModel, ICredentialsValidator
     [RelayCommand]
     private void SaveUser()
     {
-        if (_userServices.ContainsEmail(EmailEntry))
+        if (UserServices.ContainsEmail(EmailEntry))
             return;
 
-        _userServices.Save(UsernameEntry,EmailEntry,PasswordEntry);
+        UserServices.Save(UsernameEntry,EmailEntry,PasswordEntry);
     }
 
     public bool IsEmailValid(string email)
     {
-        if (_userServices.ContainsEmail(email) || string.IsNullOrWhiteSpace(email))
+        if (UserServices.ContainsEmail(email) || string.IsNullOrWhiteSpace(email))
             return false;
 
         return Regex.IsMatch(email, ValidationPatterns.EmailPattern);
@@ -98,7 +98,7 @@ public partial class RegisterViewModel : BaseViewModel, ICredentialsValidator
 
     public void SetLoggedInUser()
     {
-        _userServices.SetLoggedInUser(EmailEntry);
+        UserServices.SetLoggedInUser(EmailEntry);
     }
 
     partial void OnEmailEntryChanged(string value)

@@ -1,4 +1,3 @@
-using Model;
 using Services;
 using ViewModel;
 
@@ -7,13 +6,11 @@ namespace View;
 public partial class RegisterView : ContentPage
 {
     private readonly RegisterViewModel _vm;
-    private readonly UserServices _userServices;
 
     public RegisterView(UserServices userServices)
     {
         InitializeComponent();
-        _userServices = userServices;
-        _vm = new RegisterViewModel(_userServices);
+        _vm = new RegisterViewModel(userServices);
         BindingContext = _vm;
     }
     
@@ -38,7 +35,7 @@ public partial class RegisterView : ContentPage
         {
             _vm.SaveUserCommand.Execute(null);
             _vm.SetLoggedInUser();
-            await Navigation.PushAsync(new UserView(_userServices));
+            await Navigation.PushAsync(new UserView(_vm.UserServices));
         }
     }
 

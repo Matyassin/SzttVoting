@@ -2,11 +2,20 @@
 
 namespace ViewModel;
 
-public class UserViewModel(UserServices userServices) : BaseViewModel
+public class UserViewModel : BaseViewModel
 {
-    public string UserEmail => _userServices.LoggedInUser.Email;
-    public string UserName => _userServices.LoggedInUser.Username;
-    public string HeaderMainText => $"Welcome, {UserName}!";
-    
-    private readonly UserServices _userServices = userServices;
+    public string UserEmail { get; private set; }
+    public string UserName { get; private set; }
+    public string HeaderMainText { get; private set; }
+
+    public UserServices UserServices { get; private set; }
+
+    public UserViewModel(UserServices userServices)
+    {
+        UserServices = userServices;
+
+        UserEmail = UserServices.LoggedInUser.Email;
+        UserName = UserServices.LoggedInUser.Username;
+        HeaderMainText = $"Welcome, {UserName}!";
+    }
 }

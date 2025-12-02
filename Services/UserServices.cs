@@ -23,10 +23,12 @@ public class UserServices
     public void Save(string username, string email, string password)
     {
         _users.Add(email,
-                   new UserData(Guid.NewGuid().ToString(),
-                                username,
-                                email,
-                                CryptographyServices.HashPassword(password))
+            new UserData(
+                Guid.NewGuid().ToString(),
+                username,
+                email,
+                CryptographyServices.HashPassword(password)
+            )
         );
 
         string json = JsonConvert.SerializeObject(_users, Formatting.Indented);
@@ -67,14 +69,14 @@ public class UserServices
         return _users.ContainsKey(email);
     }
 
-    public bool ValidateUser(string emailToBeValidated, string password)
+    public bool ValidateUser(string emailToValidate, string passwordToValidate)
     {
-        bool userIsFound = _users.TryGetValue(emailToBeValidated, out UserData user);
+        bool userIsFound = _users.TryGetValue(emailToValidate, out UserData user);
 
         if (!userIsFound)
             return false;
 
-        bool passwordMatches = CryptographyServices.IsPasswordValid(password, user.Password);
+        bool passwordMatches = CryptographyServices.IsPasswordValid(passwordToValidate, user.Password);
         return userIsFound && passwordMatches;
     }
 }

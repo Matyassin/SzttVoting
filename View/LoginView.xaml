@@ -16,9 +16,11 @@
                Unfocused="Email_OnUnfocused"
                Completed="LoginButton_OnClicked"/>
 
+        <!--
         <Label Text="{Binding EmailWarningText}" 
                IsVisible="{Binding IsEmailWarning}" 
                TextColor="{Binding EmailWarningColor}"/>
+        -->
 
         <Entry Placeholder="Password" 
                Text="{Binding PasswordEntry}"
@@ -26,9 +28,11 @@
                Unfocused="Password_OnUnfocused"
                Completed="LoginButton_OnClicked"/>
 
+        <!--
         <Label Text="{Binding PasswordWarningText}" 
                IsVisible="{Binding IsPasswordWarning}" 
                TextColor="{Binding PasswordWarningColor}"/>
+        -->
 
         <Button x:Name="LoginButton"
                 Text="{Binding LoginButtonText}" 

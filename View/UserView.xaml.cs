@@ -7,13 +7,11 @@ namespace View;
 public partial class UserView : ContentPage
 {
     private readonly UserViewModel _vm;
-    private readonly UserServices _userServices;
 
     public UserView(UserServices userServices)
     {
         InitializeComponent();
-        _userServices = userServices;
-        _vm = new UserViewModel(_userServices);
+        _vm = new UserViewModel(userServices);
         BindingContext = _vm;
     }
 
@@ -22,23 +20,23 @@ public partial class UserView : ContentPage
         bool answer = await DisplayAlert("Sign Out?", "Are you sure you want to log out?", "Yes", "No");
         if (answer)
         {
-            _userServices.ClearLoggedInUser();
+            _vm.UserServices.ClearLoggedInUser();
             await Navigation.PopAsync();
         }
     }
 
     private void CreateNewVote_OnClicked(object? sender, EventArgs e)
     {
-        Navigation.PushAsync(new NewPollView(_userServices));
+        Navigation.PushAsync(new NewPollView(_vm.UserServices));
     }
 
     private void MyProfile_OnClicked(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new MyProfile(_userServices));
+        Navigation.PushAsync(new MyProfile(_vm.UserServices));
     }
 
     private void SeeOngoingVotes_OnClicked(object? sender, EventArgs e)
     {
-        Navigation.PushAsync(new SeeOngoingVotesView(_userServices));
+        Navigation.PushAsync(new SeeOngoingVotesView(_vm.UserServices));
     }
 }

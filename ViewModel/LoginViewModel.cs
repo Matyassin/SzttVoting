@@ -27,7 +27,7 @@ public partial class LoginViewModel : BaseViewModel, ICredentialsValidator
     [NotifyPropertyChangedFor(nameof(LoginButtonText))]
     private bool _isBusy = false;
 
-    private readonly UserServices _userServices;
+    public UserServices UserServices { get; private set; }
 
     public string LoginButtonText
     {
@@ -39,12 +39,12 @@ public partial class LoginViewModel : BaseViewModel, ICredentialsValidator
 
     public LoginViewModel(UserServices userService)
     {
-        _userServices = userService;
+        UserServices = userService;
     }
 
     public void SetLoggedinUser()
     {
-        _userServices.SetLoggedInUser(EmailEntry);
+        UserServices.SetLoggedInUser(EmailEntry);
     }
     
     [RelayCommand]
@@ -88,12 +88,12 @@ public partial class LoginViewModel : BaseViewModel, ICredentialsValidator
 
     public bool IsEmailValid(string email)
     {
-        return _userServices.ContainsEmail(email);
+        return UserServices.ContainsEmail(email);
     }
 
-    public bool AuthUser()
+    public bool TryAuthUser()
     {
-        if (_userServices.ValidateUser(EmailEntry, PasswordEntry)){
+        if (UserServices.ValidateUser(EmailEntry, PasswordEntry)){
             SetLoggedinUser();
             return true;
         }

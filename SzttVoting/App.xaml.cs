@@ -1,5 +1,4 @@
-﻿using Model;
-using View;
+﻿using View;
 using Services;
 
 namespace SzttVoting;
