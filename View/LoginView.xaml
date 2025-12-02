@@ -14,7 +14,7 @@
         <Entry Placeholder="Email" 
                Text="{Binding EmailEntry, Mode=TwoWay}"
                Unfocused="Email_OnUnfocused"
-               Completed="LoginButton_OnClicked"/>
+               Completed="LoginButton_OnClickedAsync"/>
 
         <!--
         <Label Text="{Binding EmailWarningText}" 
@@ -26,7 +26,7 @@
                Text="{Binding PasswordEntry}"
                IsPassword="True"
                Unfocused="Password_OnUnfocused"
-               Completed="LoginButton_OnClicked"/>
+               Completed="LoginButton_OnClickedAsync"/>
 
         <!--
         <Label Text="{Binding PasswordWarningText}" 
@@ -36,13 +36,13 @@
 
         <Button x:Name="LoginButton"
                 Text="{Binding LoginButtonText}" 
-                Clicked="LoginButton_OnClicked"
+                Clicked="LoginButton_OnClickedAsync"
                 IsEnabled="{Binding IsLoginButtonEnabled}"/>
 
         <Button Text="Don't have an account? Sign up!" 
                 TextColor="BlueViolet" 
                 BackgroundColor="Transparent"
-                Clicked="ToRegisterButton_OnClicked"/>
+                Clicked="ToRegisterButton_OnClickedAsync"/>
 
     </VerticalStackLayout>
 

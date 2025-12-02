@@ -24,7 +24,7 @@ public partial class LoginView : ContentPage
         _vm.CheckPasswordEntryCommand.Execute(null);   
     }
 
-    private async void LoginButton_OnClicked(object? sender, EventArgs e)
+    private async void LoginButton_OnClickedAsync(object? sender, EventArgs e)
     {
         if (_vm.IsBusy)
             return;
@@ -48,7 +48,7 @@ public partial class LoginView : ContentPage
         _vm.IsBusy = false;
     }
 
-    private async void ToRegisterButton_OnClicked(object? sender, EventArgs e)
+    private async void ToRegisterButton_OnClickedAsync(object? sender, EventArgs e)
     {
         await Navigation.PushAsync(new RegisterView(_vm.UserServices));
     }

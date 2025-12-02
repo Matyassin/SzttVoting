@@ -29,7 +29,7 @@ public partial class RegisterView : ContentPage
         //MAYBE TODO - Implement Username validation
     }
 
-    private async void RegisterButton_OnClicked(object sender, EventArgs e)
+    private async void RegisterButton_OnClickedAsync(object sender, EventArgs e)
     {
         if (RegisterButton.IsEnabled)
         {

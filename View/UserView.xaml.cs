@@ -15,7 +15,7 @@ public partial class UserView : ContentPage
         BindingContext = _vm;
     }
 
-    private async void Signout_OnClicked(object sender, EventArgs e)
+    private async void Signout_OnClickedAsync(object sender, EventArgs e)
     {
         bool answer = await DisplayAlert("Sign Out?", "Are you sure you want to log out?", "Yes", "No");
         if (answer)

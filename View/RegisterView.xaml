@@ -15,12 +15,12 @@
         <Entry Placeholder="Username" 
                Text="{Binding UsernameEntry, Mode=TwoWay}"
                Unfocused="Username_OnUnfocused"
-               Completed="RegisterButton_OnClicked"/>
+               Completed="RegisterButton_OnClickedAsync"/>
         
         <Entry Placeholder="Email" 
                Text="{Binding EmailEntry, Mode=TwoWay}"
                Unfocused="Email_OnUnfocused"
-               Completed="RegisterButton_OnClicked"/>
+               Completed="RegisterButton_OnClickedAsync"/>
 
         <Label Text="{Binding EmailWarningText}" 
                IsVisible="{Binding IsEmailWarning}" 
@@ -30,7 +30,7 @@
                Text="{Binding PasswordEntry}"
                IsPassword="True"
                Unfocused="Password_OnUnfocused"
-               Completed="RegisterButton_OnClicked"/>
+               Completed="RegisterButton_OnClickedAsync"/>
 
         <Label Text="{Binding PasswordWarningText}" 
                IsVisible="{Binding IsPasswordWarning}" 
@@ -38,7 +38,7 @@
 
         <Button x:Name="RegisterButton"
                 Text="Sign up" 
-                Clicked="RegisterButton_OnClicked"
+                Clicked="RegisterButton_OnClickedAsync"
                 IsEnabled="{Binding IsRegisterButtonEnabled}"/>
 
         <Button Text="Already have an account? Log in here!" 

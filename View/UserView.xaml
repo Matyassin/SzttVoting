@@ -90,7 +90,7 @@
 
             <Button Grid.Row="1" Grid.Column="1"
                     Text="Log Out"
-                    Clicked="Signout_OnClicked"
+                    Clicked="Signout_OnClickedAsync"
                     BackgroundColor="#80FF0000" 
                     TextColor="White"
                     FontSize="24"
