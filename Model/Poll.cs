@@ -1,6 +1,6 @@
 namespace Model;
 
-public struct PollModel(UserData user, string title, string description, DateTime? deadline)
+public class Poll(UserData user, string title, string description, DateTime? deadline)
 {
     public UserData Creator = user;
     public string Id = Guid.NewGuid().ToString();
@@ -8,22 +8,22 @@ public struct PollModel(UserData user, string title, string description, DateTim
     public string Description = description;
     public DateTime Created = DateTime.Now;
     public DateTime? Deadline = deadline;
-    public Boolean IsActive = true;
-    public List<OptionStruct> Options = new List<OptionStruct>();
-    private List<VotesStruct> Votes = new List<VotesStruct>();
+    public bool IsActive = true;
 
+    public List<OptionData> Options = new List<OptionData>();
+    private List<VotesData> Votes = new List<VotesData>();
 }
 
-public struct OptionStruct(string text)
+public struct OptionData(string text)
 {
     public string Id = Guid.NewGuid().ToString();
     public string Text;
 }
 
-public struct VotesStruct
+public struct VotesData
 {
     public string Id;
     public UserData Voter;
-    public OptionStruct RelatedOption;
+    public OptionData RelatedOption;
     public DateTime Created;
 }

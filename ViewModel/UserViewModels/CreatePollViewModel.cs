@@ -20,7 +20,7 @@ public partial class CreatePollViewModel : BaseViewModel
     [ObservableProperty] private DateTime _deadlineDate = DateTime.Now.AddDays(6);
     [ObservableProperty] private TimeSpan _deadlineTime = TimeSpan.FromHours(23);
 
-    public ObservableCollection<OptionStruct> Options {get; set;}
+    public ObservableCollection<OptionData> Options {get; set;}
     #endregion
     
     #region Commands
