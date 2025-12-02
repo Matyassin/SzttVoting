@@ -22,7 +22,16 @@ public class UserServices
 
     public void AddUser(string username, string email, string password)
     {
-        _userProfiles.Add(email, CreateUserDataObj(username, email, password));
+        _userProfiles.Add(
+            email,
+            new UserData(
+                Guid.NewGuid().ToString(),
+                username,
+                email,
+                CryptographyServices.HashPassword(password)
+            )
+        );
+
         Save();
     }
     
@@ -75,15 +84,5 @@ public class UserServices
 
         bool passwordMatches = CryptographyServices.IsPasswordValid(password, user.Password);
         return userIsFound && passwordMatches;
-    }
-
-    private UserData CreateUserDataObj(string username, string email, string password)
-    {
-        return new UserData(
-            Guid.NewGuid().ToString(),
-            username,
-            email,
-            CryptographyServices.HashPassword(password)
-        );
     }
 }
