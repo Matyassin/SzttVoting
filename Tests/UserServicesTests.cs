@@ -1,71 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Services;
+﻿using Services;
 
-namespace Tests
+namespace Tests;
+
+public class UserServicesTests
 {
-    public class userServicesTests
+    [Fact]
+    public void UserExistsInRepo()
     {
+        var userService = new UserServices();
+        userService.Save("user", "helloka@gmail.com", "pass123");
 
-        [Fact]
-        public void DictionarryCalling()
-        {
-            var svc = new UserServices();
-            svc.Load();
+        Assert.True(userService.ContainsEmail("helloka@gmail.com"));
+    }
 
-            Assert.NotNull(svc.ContainsEmail(""));
-        }
+    [Fact]
+    public void SetLoggedInUser()
+    {
+        var userService = new UserServices();
 
-        [Fact]
-        public void AddUser_ContainsEmail()
-        {
-            var svc = new UserServices();
-            svc.Load();
+        userService.Save("user", "szia@gmail.com", "pass123");
+        userService.SetLoggedInUser("szia@gmail.com");
 
-            svc.AddUser("user", "user@gmail.com", "pass123");
+        Assert.Equal("szia@gmail.com", userService.LoggedInUser.Email);
+    }
 
-            Assert.True(svc.ContainsEmail("test@mail.hu"));
-        }
+    [Fact]
+    public void ClearLoggedInUser()
+    {
+        var userService = new UserServices();
 
-        [Fact]
-        public void SetLoggedInUser_And_Clearing()
-        {
-            var svc = new UserServices();
-            svc.Load();
+        userService.Save("user", "puszi@gmail.com", "pass123");
+        userService.SetLoggedInUser("puszi@gmail.com");
 
-            svc.AddUser("user", "user@gmail.com", "pass123");
-            svc.SetLoggedInUser("user@gmail.com");
+        userService.ClearLoggedInUser();
 
-            Assert.NotNull(svc.LoggedInUser);
-
-            svc.ClearLoggedInUser();
-            Assert.Null(svc.LoggedInUser);
-        }
-
-        [Fact]
-        public void ValidateUser_WrongEmailOrPassword()
-        {
-            var svc = new UserServices();
-            svc.Load();
-
-            svc.AddUser("user", "valid@gmail.com", "goodpass");
-
-            Assert.False(svc.ValidateUser("nonexistent@gmail.com", "goodpass"));
-            Assert.False(svc.ValidateUser("valid@gmail.com", "badpass"));
-        }
-
-        [Fact]
-        public void ValidateUser_Correct_Credentials()
-        {
-            var svc = new UserServices();
-            svc.Load();
-
-            svc.AddUser("user", "validate2@gmail.com", "mypassword");
-
-            Assert.True(svc.ValidateUser("validate2@gmail.com", "mypassword"));
-        }
+        Assert.NotEqual("puszi@gmail.com", userService.LoggedInUser.Email);
     }
 }

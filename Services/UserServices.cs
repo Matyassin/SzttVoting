@@ -1,5 +1,5 @@
-﻿using Newtonsoft.Json;
-using Model;
+﻿using Model;
+using Newtonsoft.Json;
 
 namespace Services;
 
@@ -7,37 +7,29 @@ public class UserServices
 {
     public UserData LoggedInUser { get; private set; }
 
-    private Dictionary<string, UserData> _userProfiles = new();
+    private Dictionary<string, UserData> _users = new();
     private readonly string _fileName = "userprofiles.json";
     
     public void SetLoggedInUser(string email)
     {
-        LoggedInUser = _userProfiles[email];
+        LoggedInUser = _users[email];
     }
     
     public void ClearLoggedInUser()
     {
         LoggedInUser = default;
     }
-
-    public void AddUser(string username, string email, string password)
+    
+    public void Save(string username, string email, string password)
     {
-        _userProfiles.Add(
-            email,
-            new UserData(
-                Guid.NewGuid().ToString(),
-                username,
-                email,
-                CryptographyServices.HashPassword(password)
-            )
+        _users.Add(email,
+                   new UserData(Guid.NewGuid().ToString(),
+                                username,
+                                email,
+                                CryptographyServices.HashPassword(password))
         );
 
-        Save();
-    }
-    
-    private void Save()
-    {
-        string json = JsonConvert.SerializeObject(_userProfiles, Formatting.Indented);
+        string json = JsonConvert.SerializeObject(_users, Formatting.Indented);
         string? slnPath = Directory.GetParent(Directory.GetCurrentDirectory())
             .Parent?
             .Parent?
@@ -67,17 +59,17 @@ public class UserServices
         }
 
         string json = File.ReadAllText(filePath);
-        _userProfiles = JsonConvert.DeserializeObject<Dictionary<string, UserData>>(json);
+        _users = JsonConvert.DeserializeObject<Dictionary<string, UserData>>(json);
     }
 
     public bool ContainsEmail(string email)
     {
-        return _userProfiles.ContainsKey(email);
+        return _users.ContainsKey(email);
     }
 
     public bool ValidateUser(string emailToBeValidated, string password)
     {
-        bool userIsFound = _userProfiles.TryGetValue(emailToBeValidated, out UserData user);
+        bool userIsFound = _users.TryGetValue(emailToBeValidated, out UserData user);
 
         if (!userIsFound)
             return false;

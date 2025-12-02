@@ -24,7 +24,7 @@ public partial class RegisterViewModel : BaseViewModel, ICredentialsValidator
     [ObservableProperty] private string _emailEntry = "";
     [ObservableProperty] private string _passwordEntry = "";
     
-    private UserServices _userServices;
+    private readonly UserServices _userServices;
 
     public bool IsRegisterButtonEnabled =>
         IsEmailValid(EmailEntry) && IsPasswordValid(PasswordEntry);
@@ -77,12 +77,11 @@ public partial class RegisterViewModel : BaseViewModel, ICredentialsValidator
         if (_userServices.ContainsEmail(EmailEntry))
             return;
 
-        _userServices.AddUser(UsernameEntry,EmailEntry,PasswordEntry);
+        _userServices.Save(UsernameEntry,EmailEntry,PasswordEntry);
     }
 
     public bool IsEmailValid(string email)
     {
-
         if (_userServices.ContainsEmail(email) || string.IsNullOrWhiteSpace(email))
             return false;
 
