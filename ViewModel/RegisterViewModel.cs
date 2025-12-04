@@ -1,6 +1,5 @@
-using Services;
-using Model;
 using System.Text.RegularExpressions;
+using Services;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 

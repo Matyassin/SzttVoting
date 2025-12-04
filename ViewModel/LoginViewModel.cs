@@ -14,24 +14,20 @@ public partial class LoginViewModel : BaseViewModel, ICredentialsValidator
     [ObservableProperty] private string _passwordWarningText;
     [ObservableProperty] private string _passwordWarningColor; // string is only TEMP
 
-    [ObservableProperty] 
-    [NotifyPropertyChangedFor(nameof(IsLoginButtonEnabled))]
+    [ObservableProperty, NotifyPropertyChangedFor(nameof(IsLoginButtonEnabled))]
     private string _emailEntry = "";
     
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(IsLoginButtonEnabled))]
+    [ObservableProperty, NotifyPropertyChangedFor(nameof(IsLoginButtonEnabled))]
     private string _passwordEntry = "";
     
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(IsLoginButtonEnabled))]
-    [NotifyPropertyChangedFor(nameof(LoginButtonText))]
+    [ObservableProperty, NotifyPropertyChangedFor(nameof(IsLoginButtonEnabled)), NotifyPropertyChangedFor(nameof(LoginButtonText))]
     private bool _isBusy = false;
 
     public UserServices UserServices { get; private set; }
 
     public string LoginButtonText
     {
-        get { return IsBusy ? "Authenticating..." : "Log in!"; }
+        get => IsBusy ? "Authenticating..." : "Log in!";
     }
 
     public bool IsLoginButtonEnabled =>
@@ -55,12 +51,12 @@ public partial class LoginViewModel : BaseViewModel, ICredentialsValidator
         if (!IsEmailValid(EmailEntry))
         {
             EmailWarningColor = "Red";
-            //EmailWarningText = "Invalid email address!";
+            EmailWarningText = "Invalid email address!";
         }
         else
         {
             EmailWarningColor = "Green";
-            //EmailWarningText = "";
+            EmailWarningText = "";
         }
     }
 
@@ -72,17 +68,17 @@ public partial class LoginViewModel : BaseViewModel, ICredentialsValidator
         if (!IsPasswordValid(PasswordEntry))
         {
             PasswordWarningColor = "Red";
-            /*
+            
             PasswordWarningText = "Password must be at least 5 characters long, " +
                                   "must not contain any symbols, " +
                                   "must have at least 1 number " +
                                   "and at least 1 upper case character!";
-            */
+            
         }
         else
         {
             PasswordWarningColor = "Green";
-            //PasswordWarningText = "";
+            PasswordWarningText = "";
         }
     }
 
@@ -93,7 +89,8 @@ public partial class LoginViewModel : BaseViewModel, ICredentialsValidator
 
     public bool TryAuthUser()
     {
-        if (UserServices.ValidateUser(EmailEntry, PasswordEntry)){
+        if (UserServices.TryValidateUser(EmailEntry, PasswordEntry))
+        {
             SetLoggedinUser();
             return true;
         }

@@ -72,7 +72,7 @@ public class UserServices
         return _users.ContainsKey(email);
     }
 
-    public bool ValidateUser(string emailToValidate, string passwordToValidate)
+    public bool TryValidateUser(string emailToValidate, string passwordToValidate)
     {
         bool userIsFound = _users.TryGetValue(emailToValidate, out UserData user);
 
