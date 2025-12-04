@@ -16,7 +16,7 @@ public partial class LoginViewModel : BaseViewModel, ICredentialsValidator
 
     [ObservableProperty, NotifyPropertyChangedFor(nameof(IsLoginButtonEnabled))]
     private string _emailEntry = "";
-    
+
     [ObservableProperty, NotifyPropertyChangedFor(nameof(IsLoginButtonEnabled))]
     private string _passwordEntry = "";
     
@@ -25,10 +25,7 @@ public partial class LoginViewModel : BaseViewModel, ICredentialsValidator
 
     public UserServices UserServices { get; private set; }
 
-    public string LoginButtonText
-    {
-        get => IsBusy ? "Authenticating..." : "Log in!";
-    }
+    public string LoginButtonText => IsBusy ? "Authenticating..." : "Log in!";
 
     public bool IsLoginButtonEnabled =>
         (IsEmailValid(EmailEntry) || IsUserAdmin(EmailEntry, PasswordEntry)) && !IsBusy;
