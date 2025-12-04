@@ -16,11 +16,11 @@
         <Shadow Brush="Black" Offset="0,15" Radius="40" Opacity="0.4" />
     </Border.Shadow>
 
-    <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto"
-          ColumnDefinitions="*"
-          Padding="60"
-          RowSpacing="25"
-          MaximumWidthRequest="900">
+    <ScrollView MaximumWidthRequest="900">
+        <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto"
+            ColumnDefinitions="*"
+            Padding="60"
+            RowSpacing="25">
 
         <VerticalStackLayout Grid.Row="0" Spacing="15" HorizontalOptions="Center">
             <Border HeightRequest="120" 
@@ -30,28 +30,28 @@
                     StrokeThickness="3"
                     BackgroundColor="#30FFFFFF">
                 <Label Text="{Binding Initials}" 
-                       TextColor="White" 
-                       FontSize="40" 
-                       FontAttributes="Bold"
-                       HorizontalOptions="Center" 
-                       VerticalOptions="Center"/>
+                        TextColor="White" 
+                        FontSize="40" 
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center" 
+                        VerticalOptions="Center"/>
             </Border>
             <Label Text="My Profile" 
-                   TextColor="White" 
-                   FontSize="40" 
-                   FontAttributes="Bold" 
-                   HorizontalTextAlignment="Center"/>
+                    TextColor="White" 
+                    FontSize="40" 
+                    FontAttributes="Bold" 
+                    HorizontalTextAlignment="Center"/>
         </VerticalStackLayout>
 
         <VerticalStackLayout Grid.Row="1" Spacing="5">
             <Label Text="Username" TextColor="#E0E0E0" FontSize="18" Margin="5,0,0,0"/>
             <Border StrokeShape="RoundRectangle 15" BackgroundColor="#20FFFFFF" StrokeThickness="0" HeightRequest="60">
                 <Entry Text="{Binding Username}" 
-                       TextColor="White" 
-                       FontSize="20" 
-                       Placeholder="Enter username" 
-                       PlaceholderColor="#80FFFFFF"
-                       Margin="15,0"/>
+                        TextColor="White" 
+                        FontSize="20" 
+                        Placeholder="Enter username" 
+                        PlaceholderColor="#80FFFFFF"
+                        Margin="15,0"/>
             </Border>
         </VerticalStackLayout>
 
@@ -59,12 +59,12 @@
             <Label Text="Email Address" TextColor="#E0E0E0" FontSize="18" Margin="5,0,0,0"/>
             <Border StrokeShape="RoundRectangle 15" BackgroundColor="#20FFFFFF" StrokeThickness="0" HeightRequest="60">
                 <Entry Text="{Binding Email}" 
-                       TextColor="White" 
-                       FontSize="20" 
-                       Keyboard="Email"
-                       Placeholder="Enter email" 
-                       PlaceholderColor="#80FFFFFF"
-                       Margin="15,0"/>
+                        TextColor="White" 
+                        FontSize="20" 
+                        Keyboard="Email"
+                        Placeholder="Enter email" 
+                        PlaceholderColor="#80FFFFFF"
+                        Margin="15,0"/>
             </Border>
         </VerticalStackLayout>
 
@@ -73,11 +73,11 @@
                 <Label Text="Password" TextColor="#E0E0E0" FontSize="18" Margin="5,0,0,0"/>
                 <Border StrokeShape="RoundRectangle 15" BackgroundColor="#20FFFFFF" StrokeThickness="0" HeightRequest="60">
                     <Entry Text="PasswordPlaceholder" 
-                           IsPassword="True"
-                           IsReadOnly="True"
-                           TextColor="White" 
-                           FontSize="20" 
-                           Margin="15,0"/>
+                            IsPassword="True"
+                            IsReadOnly="True"
+                            TextColor="White" 
+                            FontSize="20" 
+                            Margin="15,0"/>
                 </Border>
             </VerticalStackLayout>
             
@@ -121,6 +121,7 @@
             </Grid>
         </VerticalStackLayout>
 
-    </Grid>
-</Border>
+        </Grid>
+    </ScrollView>
+    </Border>
 </ContentPage>
