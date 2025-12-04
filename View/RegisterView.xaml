@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:View="clr-namespace:View"
+             NavigationPage.HasBackButton="False"
+             x:Class="View.RegisterView">
+
+    <VerticalStackLayout HorizontalOptions="Center" Padding="50" WidthRequest="700" Margin="20" Spacing="10">
+
+        <Label Text="Sign up"
+               FontSize="100"
+               HorizontalOptions="Center"/>
+
+        <Entry Placeholder="Username" 
+               Text="{Binding UsernameEntry, Mode=TwoWay}"
+               Unfocused="Username_OnUnfocused"
+               Completed="RegisterButton_OnClickedAsync"/>
+        
+        <Entry Placeholder="Email" 
+               Text="{Binding EmailEntry, Mode=TwoWay}"
+               Unfocused="Email_OnUnfocused"
+               Completed="RegisterButton_OnClickedAsync"/>
+
+        <Label Text="{Binding EmailWarningText}" 
+               IsVisible="{Binding IsEmailWarning}" 
+               TextColor="{Binding EmailWarningColor}"/>
+
+        <Entry Placeholder="Password" 
+               Text="{Binding PasswordEntry}"
+               IsPassword="True"
+               Unfocused="Password_OnUnfocused"
+               Completed="RegisterButton_OnClickedAsync"/>
+
+        <Label Text="{Binding PasswordWarningText}" 
+               IsVisible="{Binding IsPasswordWarning}" 
+               TextColor="{Binding PasswordWarningColor}"/>
+
+        <Button x:Name="RegisterButton"
+                Text="Sign up" 
+                Clicked="RegisterButton_OnClickedAsync"
+                IsEnabled="{Binding IsRegisterButtonEnabled}"/>
+
+        <Button Text="Already have an account? Log in here!" 
+                TextColor="BlueViolet" 
+                BackgroundColor="Transparent"
+                Clicked="ToLoginButton_OnClicked"/>
+
+    </VerticalStackLayout>
+
+</ContentPage>

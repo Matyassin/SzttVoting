@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
-using ViewModel;
+using Services;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.Controls.Xaml;
 
 namespace SzttVoting
 {
@@ -14,13 +16,13 @@ namespace SzttVoting
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                });
+                })
+                .Services.AddSingleton<UserServices>();
 
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
-            builder.Services.AddSingleton<AppShell>();
-            builder.Services.AddSingleton<AppShellViewModel>();
+
             
             return builder.Build();
         }

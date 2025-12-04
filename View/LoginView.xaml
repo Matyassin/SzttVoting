@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:View="clr-namespace:View"
+             x:Class="View.LoginView">
+
+    <VerticalStackLayout HorizontalOptions="Center" Padding="50" WidthRequest="700" Margin="20" Spacing="10">
+
+        <Label Text="Log in"
+               FontSize="100"
+               HorizontalOptions="Center"/>
+
+        <Entry Placeholder="Email" 
+               Text="{Binding EmailEntry, Mode=TwoWay}"
+               Unfocused="Email_OnUnfocused"
+               Completed="LoginButton_OnClickedAsync"/>
+
+        <!--
+        <Label Text="{Binding EmailWarningText}" 
+               IsVisible="{Binding IsEmailWarning}" 
+               TextColor="{Binding EmailWarningColor}"/>
+        -->
+
+        <Entry Placeholder="Password" 
+               Text="{Binding PasswordEntry}"
+               IsPassword="True"
+               Unfocused="Password_OnUnfocused"
+               Completed="LoginButton_OnClickedAsync"/>
+
+        <!--
+        <Label Text="{Binding PasswordWarningText}" 
+               IsVisible="{Binding IsPasswordWarning}" 
+               TextColor="{Binding PasswordWarningColor}"/>
+        -->
+
+        <Button x:Name="LoginButton"
+                Text="{Binding LoginButtonText}" 
+                Clicked="LoginButton_OnClickedAsync"
+                IsEnabled="{Binding IsLoginButtonEnabled}"/>
+
+        <Button Text="Don't have an account? Sign up!" 
+                TextColor="BlueViolet" 
+                BackgroundColor="Transparent"
+                Clicked="ToRegisterButton_OnClickedAsync"/>
+
+    </VerticalStackLayout>
+
+</ContentPage>
