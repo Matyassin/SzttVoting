@@ -7,28 +7,33 @@
              x:Class="View.AdminView">
 
     <VerticalStackLayout>
-        <!-- HEADER -->
-        <Grid BackgroundColor="Grey" Padding="10"
+        <Grid BackgroundColor="SlateGray"
+              Padding="10"
               ColumnDefinitions="*, Auto">
 
-            <Label Grid.Column="0"
+        <Label Grid.Column="0"
                    Text="Welcome, admin!"
                    FontSize="15"
                    VerticalOptions="Center"/>
 
-            <Button Grid.Column="1"
+        <Button Grid.Column="1"
                     Text="Sign out!"
                     TextColor="BlueViolet"
                     BackgroundColor="Transparent"
                     VerticalOptions="Center"
-                    Clicked="Signout_OnClicked"/>
+                    Clicked="Signout_OnClickedAsync"/>
         </Grid>
-        <!-- HEADER END -->
-        
-        
-        
-        
-        
-    </VerticalStackLayout>
 
+        <VerticalStackLayout Padding="500,50,500,0" Spacing="15">
+            <Button Text="Create Vote"
+                    Clicked="CreateNewVote_OnClicked"/>
+
+            <Button Text="Ongoing Votes"
+                    Clicked="SeeOngoingVotes_OnClicked"/>
+
+            <Button Text="View Users"
+                    Clicked="SeeUsers_OnClicked"/>
+
+        </VerticalStackLayout>
+    </VerticalStackLayout>
 </ContentPage>

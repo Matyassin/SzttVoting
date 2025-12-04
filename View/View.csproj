@@ -30,10 +30,10 @@
 	  <Compile Update="RegisterView.xaml.cs">
 	    <DependentUpon>RegisterView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="AdminView.xaml.cs">
+	  <Compile Update="AdminViews\AdminView.xaml.cs">
 	    <DependentUpon>AdminView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="UserView.xaml.cs">
+	  <Compile Update="UserViews\UserView.xaml.cs">
 	    <DependentUpon>UserView.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
@@ -45,10 +45,10 @@
 	  <MauiXaml Update="RegisterView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="AdminView.xaml">
+	  <MauiXaml Update="AdminViews\AdminView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="UserView.xaml">
+	  <MauiXaml Update="UserViews\UserView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
         <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.111" />
