@@ -9,7 +9,10 @@ public class UserServices
 
     private Dictionary<string, UserData> _users = new();
     private readonly string _fileName = "userprofiles.json";
-    
+
+    public const string EmailPattern = @"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}";
+    public const string PasswordPattern = @"^(?=.*[A-Z])(?=.*\d)[a-zA-Z0-9]+$";
+
     public void SetLoggedInUser(string email)
     {
         LoggedInUser = _users[email];
@@ -27,7 +30,7 @@ public class UserServices
                 Guid.NewGuid().ToString(),
                 username,
                 email,
-                CryptographyServices.HashPassword(password)
+                BCrypt.Net.BCrypt.HashPassword(password)
             )
         );
 
@@ -76,7 +79,7 @@ public class UserServices
         if (!userIsFound)
             return false;
 
-        bool passwordMatches = CryptographyServices.IsPasswordValid(passwordToValidate, user.Password);
+        bool passwordMatches = BCrypt.Net.BCrypt.Verify(passwordToValidate, user.Password);
         return userIsFound && passwordMatches;
     }
 }

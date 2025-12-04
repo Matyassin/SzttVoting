@@ -20,83 +20,84 @@
                 Radius="40"
                 Opacity="0.4" />
     </Border.Shadow>
+
+
+    <ScrollView MaximumWidthRequest="1200">
+        <Grid RowDefinitions="Auto, Auto, Auto"
+              ColumnDefinitions="*"
+              Padding="80"
+              RowSpacing="50"> 
+
+            <VerticalStackLayout Grid.Row="0" Spacing="15">
+                <Label Text="{Binding HeaderMainText}" 
+                       TextColor="White"
+                       FontAttributes="Bold"
+                       FontSize="72" 
+                       HorizontalOptions="Center"
+                       HorizontalTextAlignment="Center"/>
             
+                <Label Text="Select an option below to get started" 
+                       TextColor="#E0E0E0"
+                       FontSize="28" 
+                       HorizontalOptions="Center"
+                       HorizontalTextAlignment="Center"/>
+            </VerticalStackLayout>
 
-    <Grid RowDefinitions="Auto, Auto, Auto"
-          ColumnDefinitions="*"
-          Padding="80"
-          RowSpacing="50"
-          MaximumWidthRequest="1200"> 
+            <BoxView Grid.Row="1" 
+                     HeightRequest="2" 
+                     Color="White" 
+                     Opacity="0.3" 
+                     WidthRequest="200" 
+                     HorizontalOptions="Center"/>
 
-        <VerticalStackLayout Grid.Row="0" Spacing="15">
-            <Label Text="{Binding HeaderMainText}" 
-                   TextColor="White"
-                   FontAttributes="Bold"
-                   FontSize="72" 
-                   HorizontalOptions="Center"
-                   HorizontalTextAlignment="Center"/>
-            
-            <Label Text="Select an option below to get started" 
-                   TextColor="#E0E0E0"
-                   FontSize="28" 
-                   HorizontalOptions="Center"
-                   HorizontalTextAlignment="Center"/>
-        </VerticalStackLayout>
+            <Grid Grid.Row="2" 
+                  ColumnDefinitions="*,*" 
+                  RowDefinitions="Auto,Auto" 
+                  ColumnSpacing="30" 
+                  RowSpacing="30">
 
-        <BoxView Grid.Row="1" 
-                 HeightRequest="2" 
-                 Color="White" 
-                 Opacity="0.3" 
-                 WidthRequest="200" 
-                 HorizontalOptions="Center"/>
+                <Button Grid.Row="0" Grid.Column="0"
+                        Text="Create Vote"
+                        Clicked="CreateNewVote_OnClicked"
+                        BackgroundColor="White"
+                        TextColor="#7B42F6"
+                        FontAttributes="Bold"
+                        FontSize="24"
+                        HeightRequest="100"
+                        CornerRadius="20"/>
 
-        <Grid Grid.Row="2" 
-              ColumnDefinitions="*,*" 
-              RowDefinitions="Auto,Auto" 
-              ColumnSpacing="30" 
-              RowSpacing="30">
+                <Button Grid.Row="0" Grid.Column="1"
+                        Text="Ongoing Votes"
+                        Clicked="SeeOngoingVotes_OnClicked"
+                        BackgroundColor="#30000000" 
+                        BorderColor="White"
+                        BorderWidth="2"
+                        TextColor="White"
+                        FontSize="24"
+                        HeightRequest="100"
+                        CornerRadius="20"/>
 
-            <Button Grid.Row="0" Grid.Column="0"
-                    Text="Create Vote"
-                    Clicked="CreateNewVote_OnClicked"
-                    BackgroundColor="White"
-                    TextColor="#7B42F6"
-                    FontAttributes="Bold"
-                    FontSize="24"
-                    HeightRequest="100"
-                    CornerRadius="20"/>
+                <Button Grid.Row="1" Grid.Column="0"
+                        Text="My Profile"
+                        Clicked="MyProfile_OnClicked"
+                        BackgroundColor="#30000000"
+                        BorderColor="White"
+                        BorderWidth="2"
+                        TextColor="White"
+                        FontSize="24"
+                        HeightRequest="100"
+                        CornerRadius="20"/>
 
-            <Button Grid.Row="0" Grid.Column="1"
-                    Text="Ongoing Votes"
-                    Clicked="SeeOngoingVotes_OnClicked"
-                    BackgroundColor="#30000000" 
-                    BorderColor="White"
-                    BorderWidth="2"
-                    TextColor="White"
-                    FontSize="24"
-                    HeightRequest="100"
-                    CornerRadius="20"/>
-
-            <Button Grid.Row="1" Grid.Column="0"
-                    Text="My Profile"
-                    Clicked="MyProfile_OnClicked"
-                    BackgroundColor="#30000000"
-                    BorderColor="White"
-                    BorderWidth="2"
-                    TextColor="White"
-                    FontSize="24"
-                    HeightRequest="100"
-                    CornerRadius="20"/>
-
-            <Button Grid.Row="1" Grid.Column="1"
-                    Text="Log Out"
-                    Clicked="Signout_OnClickedAsync"
-                    BackgroundColor="#80FF0000" 
-                    TextColor="White"
-                    FontSize="24"
-                    HeightRequest="100"
-                    CornerRadius="20"/>
-        </Grid>
-        </Grid>
+                <Button Grid.Row="1" Grid.Column="1"
+                        Text="Log Out"
+                        Clicked="Signout_OnClickedAsync"
+                        BackgroundColor="#80FF0000" 
+                        TextColor="White"
+                        FontSize="24"
+                        HeightRequest="100"
+                        CornerRadius="20"/>
+            </Grid>
+            </Grid>
+    </ScrollView>
     </Border>
 </ContentPage>
