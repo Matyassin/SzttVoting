@@ -14,7 +14,7 @@ public partial class NewPollViewModel : BaseViewModel
     private PollServices _pollServices;
     #endregion
     
-    #region View Properties
+    #region Properties
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CanPublish))]
@@ -31,10 +31,7 @@ public partial class NewPollViewModel : BaseViewModel
     [ObservableProperty] 
     [NotifyPropertyChangedFor(nameof(CanPublish))]
     private TimeSpan _deadlineTime = TimeSpan.FromHours(23);
-    
-    public bool CanPublish => TitleCheck && DescriptionCheck;
     public bool IsDiscardable => String.IsNullOrWhiteSpace(Title) || String.IsNullOrWhiteSpace(Description);
-    
     public ObservableCollection<OptionData> Options {get; set;}
     #endregion
     
@@ -79,22 +76,16 @@ public partial class NewPollViewModel : BaseViewModel
     }
     #endregion
     
-    #region Field Check
-
+    #region Field / Type Checks
+    public bool CanPublish => 
+        TitleCheck && DescriptionCheck && 
+        DeadlineCheck && OptionsCheck && 
+        UserStatusCheck;
     private bool TitleCheck => Title.Length < 30 && Title.Length > 0;
-
     private bool DescriptionCheck => Description.Length < 200 && Description.Length > 0;
-
-    private bool DeadlineCheck()
-    {
-        if (DeadlineDate + DeadlineTime <= DateTime.Now) return false;
-        return true;
-    }
-
-    private bool OptionsCheck()
-    {
-       // TODO - REMOVED FOR TESTING: if (Options.Count < 1) return false;
-        return true;
-    }
+    private bool DeadlineCheck => DeadlineDate + DeadlineTime > DateTime.Now;
+    private bool OptionsCheck => Options.Count > 1;
+    private bool UserStatusCheck => !_userServices.LoggedInUser.IsBlocked;
     #endregion
 }
+    
