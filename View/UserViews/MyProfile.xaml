@@ -51,8 +51,10 @@
                         FontSize="20" 
                         Placeholder="Enter username" 
                         PlaceholderColor="#80FFFFFF"
-                        Margin="15,0"/>
-            </Border>
+                        Margin="15,0"
+                        IsEnabled="False"/>
+                
+                    </Border>
         </VerticalStackLayout>
 
         <VerticalStackLayout Grid.Row="2" Spacing="5">
@@ -64,7 +66,8 @@
                         Keyboard="Email"
                         Placeholder="Enter email" 
                         PlaceholderColor="#80FFFFFF"
-                        Margin="15,0"/>
+                        Margin="15,0"
+                        IsEnabled="False"/>
             </Border>
         </VerticalStackLayout>
 
@@ -77,10 +80,12 @@
                             IsReadOnly="True"
                             TextColor="White" 
                             FontSize="20" 
-                            Margin="15,0"/>
+                            Margin="15,0"
+                            IsEnabled="False"/>
                 </Border>
             </VerticalStackLayout>
             
+            <!--
             <Button Grid.Column="1" 
                     Text="Reset" 
                     VerticalOptions="End"
@@ -89,6 +94,7 @@
                     BackgroundColor="#40FFFFFF" 
                     TextColor="White"
                     CornerRadius="15"/>
+            -->
         </Grid>
 
         <VerticalStackLayout Grid.Row="4" Spacing="30" Margin="0,20,0,0">
@@ -98,27 +104,17 @@
                 <Label Text="{Binding Guid}" TextColor="#AAFFFFFF" FontSize="14" FontAttributes="Italic"/>
             </StackLayout>
 
-            <Grid ColumnDefinitions="*,*" ColumnSpacing="20">
-                <Button Grid.Column="0"
-                        Text="Back"
-                        BackgroundColor="Transparent"
-                        BorderColor="White"
-                        BorderWidth="2"
-                        TextColor="White"
-                        HeightRequest="65"
-                        CornerRadius="20"
-                        FontSize="20"
-                        Clicked="BackButton_OnClicked"/>
-
-                <Button Grid.Column="1"
-                        Text="Save Changes"
-                        BackgroundColor="White"
-                        TextColor="#7B42F6"
-                        FontAttributes="Bold"
-                        HeightRequest="65"
-                        CornerRadius="20"
-                        FontSize="20"/>
-            </Grid>
+            <Button Grid.Column="0"
+                Text="Back"
+                BackgroundColor="Transparent"
+                BorderColor="White"
+                BorderWidth="2"
+                TextColor="White"
+                HeightRequest="65"
+                CornerRadius="20"
+                FontSize="20"
+                Clicked="BackButton_OnClicked"/>
+            
         </VerticalStackLayout>
 
         </Grid>

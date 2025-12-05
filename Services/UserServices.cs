@@ -7,7 +7,7 @@ public class UserServices : IDataService
 {
     public UserData LoggedInUser { get; private set; }
 
-    private Dictionary<string, UserData> _users = new();
+    public Dictionary<string, UserData> Users { get; private set; } = new();
     private readonly string _fileName = "userprofiles.json";
 
     public const string EmailPattern = @"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}";
@@ -15,7 +15,7 @@ public class UserServices : IDataService
 
     public void SetLoggedInUser(string email)
     {
-        LoggedInUser = _users[email];
+        LoggedInUser = Users[email];
     }
     
     public void ClearLoggedInUser()
@@ -25,7 +25,7 @@ public class UserServices : IDataService
 
     public void AddUser(string username, string email, string password)
     {
-        _users.Add(email,
+        Users.Add(email,
             new UserData(
                 Guid.NewGuid().ToString(),
                 username,
@@ -39,7 +39,7 @@ public class UserServices : IDataService
     
     public void Save()
     {
-        string json = JsonConvert.SerializeObject(_users, Formatting.Indented);
+        string json = JsonConvert.SerializeObject(Users, Formatting.Indented);
         string? slnPath = Directory.GetParent(Directory.GetCurrentDirectory())
             .Parent?
             .Parent?
@@ -69,17 +69,17 @@ public class UserServices : IDataService
         }
 
         string json = File.ReadAllText(filePath);
-        _users = JsonConvert.DeserializeObject<Dictionary<string, UserData>>(json);
+        Users = JsonConvert.DeserializeObject<Dictionary<string, UserData>>(json);
     }
 
     public bool ContainsEmail(string email)
     {
-        return _users.ContainsKey(email);
+        return Users.ContainsKey(email);
     }
 
     public bool TryValidateUser(string emailToValidate, string passwordToValidate)
     {
-        bool userIsFound = _users.TryGetValue(emailToValidate, out UserData user);
+        bool userIsFound = Users.TryGetValue(emailToValidate, out UserData user);
 
         if (!userIsFound)
             return false;

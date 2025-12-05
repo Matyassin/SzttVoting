@@ -9,5 +9,6 @@ public class AdminViewModel : BaseViewModel
     public AdminViewModel(UserServices userServices)
     {
         UserServices = userServices;
+
     }
 }
