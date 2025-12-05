@@ -47,6 +47,6 @@ public class PollServices : IDataService
         }
 
         string json = File.ReadAllText(filePath);
-        _allPolls = JsonConvert.DeserializeObject<Dictionary<string, Poll>>(json);
+        _allPolls = JsonConvert.DeserializeObject<Dictionary<string, Poll>>(json) ??  new Dictionary<string, Poll>();
     }
 }
