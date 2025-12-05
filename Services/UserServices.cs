@@ -7,7 +7,7 @@ public class UserServices : IDataService
 {
     public UserData LoggedInUser { get; private set; }
 
-    public Dictionary<string, UserData> Users { get; private set; } = new();
+    public Dictionary<string, UserData> Users;
     private readonly string _fileName = "userprofiles.json";
 
     public const string EmailPattern = @"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}";
@@ -69,7 +69,7 @@ public class UserServices : IDataService
         }
 
         string json = File.ReadAllText(filePath);
-        Users = JsonConvert.DeserializeObject<Dictionary<string, UserData>>(json);
+        Users = JsonConvert.DeserializeObject<Dictionary<string, UserData>>(json) ?? new Dictionary<string, UserData>();;
     }
 
     public void ToggleUserBlockStatus(string userEmail)
@@ -85,6 +85,7 @@ public class UserServices : IDataService
 
     public bool ContainsEmail(string email)
     {
+        if (string.IsNullOrEmpty(email)) return false;
         return Users.ContainsKey(email);
     }
 
