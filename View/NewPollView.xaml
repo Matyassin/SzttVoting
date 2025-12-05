@@ -32,53 +32,52 @@
 
             <HorizontalStackLayout Grid.Row="1">
                 <HorizontalStackLayout Spacing="25">
-                    <VerticalStackLayout WidthRequest="500">
-                    <VerticalStackLayout Spacing="8">
-                        <Label Text="Vote Title" TextColor="#E0E0E0" FontSize="18" Margin="5,0,0,0"/>
-                        <Border StrokeShape="RoundRectangle 15" BackgroundColor="#20FFFFFF" StrokeThickness="0" HeightRequest="60">
-                            <Entry Text="{Binding Title}" 
-                                   Placeholder="e.g. Best Framework?" 
-                                   PlaceholderColor="#80FFFFFF"
-                                   TextColor="White" FontSize="20" Margin="15,0"/>
-                        </Border>
-                    </VerticalStackLayout>
-
-                    <VerticalStackLayout Spacing="8">
-                        <Label Text="Description" TextColor="#E0E0E0" FontSize="18" Margin="5,0,0,0"/>
-                        <Border StrokeShape="RoundRectangle 15" BackgroundColor="#20FFFFFF" StrokeThickness="0" HeightRequest="120">
-                            <Editor Text="{Binding Description}" 
-                                    Placeholder="Explain what this vote is about..." 
-                                    PlaceholderColor="#80FFFFFF"
-                                    TextColor="White" FontSize="18" Margin="15,10"
-                                    AutoSize="TextChanges"/>
-                        </Border>
-                    </VerticalStackLayout>
-
-                    <VerticalStackLayout Spacing="8">
-                        <Label Text="Voting Deadline" TextColor="#E0E0E0" FontSize="18" Margin="5,0,0,0"/>
-                        <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
-                            <Border Grid.Column="0" StrokeShape="RoundRectangle 15" BackgroundColor="#20FFFFFF" StrokeThickness="0" HeightRequest="60">
-                                <DatePicker Date="{Binding DeadlineDate}" 
-                                            TextColor="White" 
-                                            FontSize="18"
-                                            Margin="15,0"
-                                            HorizontalOptions="Fill"/>
+                    <VerticalStackLayout WidthRequest="500" Spacing="25"> <VerticalStackLayout Spacing="8">
+                            <Label Text="Vote Title" TextColor="#E0E0E0" FontSize="18" Margin="5,0,0,0"/>
+                            <Border StrokeShape="RoundRectangle 15" BackgroundColor="#20FFFFFF" StrokeThickness="0" HeightRequest="60">
+                                <Entry Text="{Binding Title}" 
+                                       Placeholder="e.g. Best Framework?" 
+                                       PlaceholderColor="#80FFFFFF"
+                                       TextColor="White" FontSize="20" Margin="15,0"/>
                             </Border>
-                            <Border Grid.Column="1" StrokeShape="RoundRectangle 15" BackgroundColor="#20FFFFFF" StrokeThickness="0" HeightRequest="60">
-                                <TimePicker Time="{Binding DeadlineTime}" 
-                                            TextColor="White" 
-                                            FontSize="18"
-                                            Margin="15,0"
-                                            HorizontalOptions="Fill"/>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Spacing="8">
+                            <Label Text="Description" TextColor="#E0E0E0" FontSize="18" Margin="5,0,0,0"/>
+                            <Border StrokeShape="RoundRectangle 15" BackgroundColor="#20FFFFFF" StrokeThickness="0" HeightRequest="120">
+                                <Editor Text="{Binding Description}" 
+                                        Placeholder="Explain what this vote is about..." 
+                                        PlaceholderColor="#80FFFFFF"
+                                        TextColor="White" FontSize="18" Margin="15,10"
+                                        AutoSize="TextChanges"/>
                             </Border>
-                        </Grid>
-                    </VerticalStackLayout>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Spacing="8">
+                            <Label Text="Voting Deadline" TextColor="#E0E0E0" FontSize="18" Margin="5,0,0,0"/>
+                            <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
+                                <Border Grid.Column="0" StrokeShape="RoundRectangle 15" BackgroundColor="#20FFFFFF" StrokeThickness="0" HeightRequest="60">
+                                    <DatePicker Date="{Binding DeadlineDate}" 
+                                                TextColor="White" 
+                                                FontSize="18"
+                                                Margin="15,0"
+                                                HorizontalOptions="Fill"/>
+                                </Border>
+                                <Border Grid.Column="1" StrokeShape="RoundRectangle 15" BackgroundColor="#20FFFFFF" StrokeThickness="0" HeightRequest="60">
+                                    <TimePicker Time="{Binding DeadlineTime}" 
+                                                TextColor="White" 
+                                                FontSize="18"
+                                                Margin="15,0"
+                                                HorizontalOptions="Fill"/>
+                                </Border>
+                            </Grid>
+                        </VerticalStackLayout>
                     </VerticalStackLayout>
                 
-                    <VerticalStackLayout WidthRequest="500">
+                    <VerticalStackLayout WidthRequest="500" Spacing="15">
                         <Label Text="Vote Options" TextColor="White" FontSize="22" FontAttributes="Bold"/>
 
-                        <StackLayout BindableLayout.ItemsSource="{Binding Options}" Spacing="15">
+                        <VerticalStackLayout BindableLayout.ItemsSource="{Binding Options}" Spacing="15">
                             <BindableLayout.ItemTemplate>
                                 <DataTemplate>
                                     <Grid ColumnDefinitions="*, Auto" ColumnSpacing="10">
@@ -86,7 +85,9 @@
                                             <Entry Text="{Binding Text}" 
                                                    Placeholder="Option text..." 
                                                    PlaceholderColor="#80FFFFFF"
-                                                   TextColor="White" FontSize="18" Margin="15,0"/>
+                                                   TextColor="White" 
+                                                   FontSize="18" 
+                                                   Margin="15,0"/>
                                         </Border>
                                     
                                         <Button Grid.Column="1"
@@ -101,7 +102,7 @@
                                     </Grid>
                                 </DataTemplate>
                             </BindableLayout.ItemTemplate>
-                        </StackLayout>
+                        </VerticalStackLayout>
 
                         <Button Text="+ Add Option"
                                 Command="{Binding AddOptionCommand}"

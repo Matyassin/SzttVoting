@@ -1,29 +1,34 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using Newtonsoft.Json;
+
 namespace Model;
 
-public class Poll(UserData user, string title, string description, DateTime? deadline)
+public partial class Poll
+    (UserData user, string title, string description, DateTime? deadline, List<OptionData> options, List<VotesData> votes) 
+    : ObservableObject
 {
-    public string CreatorID = user.Guid;
-    public string Id = Guid.NewGuid().ToString();
-    public string Title = title;
-    public string Description = description;
-    public DateTime Created = DateTime.Now;
-    public DateTime? Deadline = deadline;
-    public bool IsActive = true;
+    [ObservableProperty]  private string _creatorID = user.Guid;
+    [ObservableProperty]  private string _id = Guid.NewGuid().ToString();
+    [ObservableProperty]  private string _title = title;
+    [ObservableProperty]  private string _description = description;
+    [ObservableProperty]  private DateTime _created = DateTime.Now;
+    [ObservableProperty]  private DateTime? _deadline = deadline;
+    [ObservableProperty]  private bool _isActive = true;
 
-    public List<OptionData> Options = new List<OptionData>();
-    private List<VotesData> Votes = new List<VotesData>();
+    [ObservableProperty]  private List<OptionData> _options = options;
+    [ObservableProperty]  private List<VotesData> _votes = votes;
 }
 
-public struct OptionData(string text)
+public partial class OptionData(string text) : ObservableObject
 {
-    public string Id = Guid.NewGuid().ToString();
-    public string Text;
+    [ObservableProperty] private string _id = Guid.NewGuid().ToString();
+    [ObservableProperty] private string _text = text;
 }
 
-public struct VotesData
+public partial class VotesData(UserData user, OptionData option) : ObservableObject
 {
-    public string Id;
-    public UserData Voter;
-    public OptionData RelatedOption;
-    public DateTime Created;
+    [ObservableProperty] private string _id;
+    [ObservableProperty] private string _voterID = user.Guid;
+    [ObservableProperty] private string _relatedOption = option.Id;
+    [ObservableProperty] private DateTime _created = DateTime.Now;
 }

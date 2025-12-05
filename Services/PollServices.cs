@@ -10,9 +10,9 @@ public class PollServices : IDataService
     private Dictionary<string, Poll> _allPolls = new Dictionary<string, Poll>();
 
 
-    public void AddPoll(UserData currUser,string title, string desc, DateTime deadline)
+    public void AddPoll(UserData currUser,string title, string desc, DateTime deadline, List<OptionData> options, List<VotesData> votes)
     {
-        _allPolls.Add(title, new Poll(currUser, title, desc, deadline));
+        _allPolls.Add(title, new Poll(currUser, title, desc, deadline, options, votes));
         Save();
     }
     public void Save()

@@ -42,19 +42,40 @@ public partial class CreatePollViewModel : BaseViewModel
     {
         _userServices = userServices;
         _pollServices = pollServices;
+        Options = new ObservableCollection<OptionData>();
     }
     
     #region Command Implementations
-
-    [RelayCommand]
-    public void AddOption() { }
-
-    [RelayCommand]
-    public void RemoveOption() { }
     
-    public async void Publish()
+    [RelayCommand]
+    public async void AddOption()
     {
-        _pollServices.AddPoll(_userServices.LoggedInUser, Title, Description, DeadlineDate + DeadlineTime);
+        if(Application.Current?.MainPage == null) return;
+        
+        string result = await Application.Current.MainPage.DisplayPromptAsync(
+            "Add Option", 
+            "Enter the option text:", 
+            accept: "Add", 
+            cancel: "Cancel");
+        
+        if (string.IsNullOrWhiteSpace(result)) return;
+        
+        Options.Add(new OptionData(result));
+    }
+
+    [RelayCommand]
+    public void RemoveOption(OptionData option)
+    {
+        if (Options.Contains(option))
+            Options.Remove(option);
+        OnPropertyChanged(nameof(CanPublish));
+    }
+    
+    //Because of the UI changes this has to be a method, which is called from the code behind,
+    //to be able to display a DisplayAlert and to tell the Navigation class to go back
+    public void Publish()
+    {
+        _pollServices.AddPoll(_userServices.LoggedInUser, Title, Description, DeadlineDate + DeadlineTime, Options.ToList(), new List<VotesData>());
     }
     #endregion
     
