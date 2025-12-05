@@ -33,7 +33,7 @@ public partial class LoginView : ContentPage
 
         if (_vm.IsUserAdmin(_vm.EmailEntry, _vm.PasswordEntry))
         {
-            await Navigation.PushAsync(new AdminView());
+            await Navigation.PushAsync(new AdminView(_vm.UserServices));
         }
         else if (_vm.TryAuthUser())
         {

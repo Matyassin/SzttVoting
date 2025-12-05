@@ -1,19 +1,16 @@
 using Services;
-using ViewModel;
 using ViewModel.UserViewModels;
 
 namespace View.UserViews;
 
 public partial class MyProfile : ContentPage
 {
-    private UserServices _userServices;
-    private MyProfileViewModel _vm;
+    private readonly MyProfileViewModel _vm;
     
     public MyProfile(UserServices userServices)
     {
         InitializeComponent();
-        _userServices = userServices;
-        _vm = new MyProfileViewModel(_userServices);
+        _vm = new MyProfileViewModel(userServices);
         BindingContext = _vm;
     }
 
