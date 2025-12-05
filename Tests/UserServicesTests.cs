@@ -8,7 +8,7 @@ public class UserServicesTests
     public void UserExistsInRepo()
     {
         var userService = new UserServices();
-        userService.Save("user", "helloka@gmail.com", "pass123");
+        userService.AddUser("user", "helloka@gmail.com", "pass123");
 
         Assert.True(userService.ContainsEmail("helloka@gmail.com"));
     }
@@ -18,7 +18,7 @@ public class UserServicesTests
     {
         var userService = new UserServices();
 
-        userService.Save("user", "szia@gmail.com", "pass123");
+        userService.AddUser("user", "szia@gmail.com", "pass123");
         userService.SetLoggedInUser("szia@gmail.com");
 
         Assert.Equal("szia@gmail.com", userService.LoggedInUser.Email);
@@ -29,7 +29,7 @@ public class UserServicesTests
     {
         var userService = new UserServices();
 
-        userService.Save("user", "puszi@gmail.com", "pass123");
+        userService.AddUser("user", "puszi@gmail.com", "pass123");
         userService.SetLoggedInUser("puszi@gmail.com");
 
         userService.ClearLoggedInUser();
