@@ -6,8 +6,8 @@ namespace ViewModel;
 
 public class ListPollsViewModel : BaseViewModel
 {
-    public ObservableCollection<PollData> UsersPolls = new();
-    public ObservableCollection<PollData> OthersPolls = new();
+    public ObservableCollection<PollData> UserPolls { get; private set; } = new();
+    public ObservableCollection<PollData> OtherPolls { get; private set; } = new();
 
     public PollServices PollService { get; private set; }
     public UserServices UserService { get; private set; }
@@ -25,11 +25,11 @@ public class ListPollsViewModel : BaseViewModel
         {
             if (UserService.LoggedInUser.Guid == pollData.CreatorID)
             {
-                UsersPolls.Add(pollData);
+                UserPolls.Add(pollData);
             }
             else
             {
-                OthersPolls.Add(pollData);
+                OtherPolls.Add(pollData);
             }
         }
     }
