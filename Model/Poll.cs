@@ -2,7 +2,7 @@ namespace Model;
 
 public class Poll(UserData user, string title, string description, DateTime? deadline)
 {
-    public UserData Creator = user;
+    public string CreatorID = user.Guid;
     public string Id = Guid.NewGuid().ToString();
     public string Title = title;
     public string Description = description;
