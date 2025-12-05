@@ -13,7 +13,11 @@ public partial class ListUsersViewModel : BaseViewModel
     public ListUsersViewModel(UserServices userServices)
     {
         UserServices = userServices;
-        Users = new ObservableCollection<UserData>(userServices.Users.Values.ToList());
+        Users = new ObservableCollection<UserData>(
+            userServices.Users.Values
+            .Where(u => !u.IsAdmin)
+            .ToList()
+        );
     }
 
     [RelayCommand]

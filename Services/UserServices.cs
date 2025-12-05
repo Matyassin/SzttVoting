@@ -15,7 +15,10 @@ public class UserServices : IDataService
 
     public void SetLoggedInUser(string email)
     {
-        LoggedInUser = Users[email];
+        if (Users.TryGetValue(email, out _))
+        {
+            LoggedInUser = Users[email];
+        }
     }
     
     public void ClearLoggedInUser()

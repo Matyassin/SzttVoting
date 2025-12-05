@@ -13,9 +13,10 @@ public partial class PollData : ObservableObject
     [ObservableProperty] private bool _isActive;
     [ObservableProperty] private List<OptionData> _options;
     [ObservableProperty] private List<VotesData> _votes;
-    public PollData(string creeatorGuid, string title, string description, DateTime? deadline, List<OptionData> options, List<VotesData> votes)
+
+    public PollData(string creatorGuid, string title, string description, DateTime? deadline, List<OptionData> options, List<VotesData> votes)
     {
-        CreatorID = creeatorGuid;
+        CreatorID = creatorGuid;
         Id = Guid.NewGuid().ToString();
         Title = title;
         Description = description;
