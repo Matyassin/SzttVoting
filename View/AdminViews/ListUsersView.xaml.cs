@@ -13,14 +13,4 @@ public partial class ListUsersView : ContentPage
         _vm = new ListUsersViewModel(userServices);
         BindingContext = _vm;
     }
-
-    private void Block_Btn_Clicked(object sender, EventArgs e)
-    {
-        if (sender is Button btn && btn.BindingContext is UserDisplayModel user)
-        {
-            _vm.UserServices.ToggleUserBlockStatus(user.Email);
-            user.IsBlocked = !user.IsBlocked;
-            btn.Text = user.IsBlocked ? "Unblock" : "Block";
-        }
-    }
 }

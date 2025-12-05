@@ -1,33 +1,29 @@
 ﻿using Services;
 using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Model;
 
 namespace ViewModel;
 
-public class ListUsersViewModel : BaseViewModel
+public partial class ListUsersViewModel : BaseViewModel
 {
-    public ObservableCollection<UserDisplayModel> Users { get; private set; } = new();
+    public ObservableCollection<UserData> Users { get; private set; }
     public UserServices UserServices { get; private set; }
-
+    
+    
     public ListUsersViewModel(UserServices userServices)
     {
         UserServices = userServices;
-
-        foreach (var user in userServices.Users.Values)
-        {
-            Users.Add(new UserDisplayModel
-            {
-                Username = user.Username,
-                Email = user.Email,
-                IsBlocked = user.IsBlocked
-            });
-        }
+        Users = new ObservableCollection<UserData>(userServices.Users.Values.ToList());
     }
-}
 
-// We make this class because Binding requires classes and properties and I refuse to turn structs to classes :)
-public class UserDisplayModel
-{
-    public string Username { get; set; }
-    public string Email { get; set; }
-    public bool IsBlocked { get; set; }
+    [RelayCommand]
+    private void ToggleBlock(UserData user)
+    {
+        
+        if (user == null) return;
+        
+        UserServices.ToggleUserBlockStatus(user.Email);
+    }
 }

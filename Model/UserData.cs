@@ -1,12 +1,14 @@
-using Newtonsoft.Json;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Model;
 
-public struct UserData(string id, string username,string email, string password, bool isBlocked = false)
+public partial class UserData
+    (string id, string username,string email, string password, bool isBlocked = false)
+    : ObservableObject
 {
-    [JsonProperty("id")] public string Guid = id;
-    [JsonProperty("username")] public string Username = username;
-    [JsonProperty("email")] public string Email = email;
-    [JsonProperty("password")] public string Password = password;
-    [JsonProperty("isBlocked")] public bool IsBlocked = isBlocked;
+    [ObservableProperty] private string _guid = id;
+    [ObservableProperty] private string _username = username;
+    [ObservableProperty] private string _email = email;
+    [ObservableProperty] private string _password = password;
+    [ObservableProperty] private bool _isBlocked = isBlocked;
 }
