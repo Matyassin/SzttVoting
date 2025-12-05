@@ -1,0 +1,13 @@
+﻿using Services;
+
+namespace ViewModel;
+
+public class AdminViewModel : BaseViewModel
+{
+    public UserServices UserServices { get; private set; }
+
+    public AdminViewModel(UserServices userServices)
+    {
+        UserServices = userServices;
+    }
+}

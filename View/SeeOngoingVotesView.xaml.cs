@@ -1,6 +1,6 @@
 using Services;
 
-namespace View.UserViews;
+namespace View;
 
 public partial class SeeOngoingVotesView : ContentPage
 {

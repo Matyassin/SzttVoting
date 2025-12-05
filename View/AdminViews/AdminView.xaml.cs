@@ -4,6 +4,8 @@ namespace View;
 
 public partial class AdminView : ContentPage
 {
+    private readonly AdminViewModel _vm;
+
     public AdminView()
     {
         InitializeComponent();
@@ -25,7 +27,7 @@ public partial class AdminView : ContentPage
 
     private void SeeOngoingVotes_OnClicked(object sender, EventArgs e)
     {
-        //Navigation.PushAsync();
+        //Navigation.PushAsync(new SeeOngoingVotesView());
     }
 
     private void SeeUsers_OnClicked(object sender, EventArgs e)

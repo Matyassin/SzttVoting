@@ -1,7 +1,7 @@
 using Services;
 using ViewModel.UserViewModels;
 
-namespace View.UserViews;
+namespace View;
 
 public partial class NewPollView : ContentPage
 {
