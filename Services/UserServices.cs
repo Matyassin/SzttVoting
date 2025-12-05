@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Services;
 
-public class UserServices
+public class UserServices : IDataService
 {
     public UserData LoggedInUser { get; private set; }
 

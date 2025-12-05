@@ -4,11 +4,17 @@ using Newtonsoft.Json;
 namespace Services;
 
 
-public class PollServices
+public class PollServices : IDataService
 {
     private string _fileName = "polldata.json";
     private Dictionary<string, Poll> _allPolls = new Dictionary<string, Poll>();
-    
+
+
+    public void AddPoll(UserData currUser,string title, string desc, DateTime deadline)
+    {
+        _allPolls.Add(title, new Poll(currUser, title, desc, deadline));
+        Save();
+    }
     public void Save()
     {
         string json = JsonConvert.SerializeObject(_allPolls, Formatting.Indented);
