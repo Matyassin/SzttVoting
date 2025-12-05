@@ -129,13 +129,14 @@
 
                 <Button Grid.Column="1"
                         Text="Publish Vote"
-                        Command="{Binding PublishCommand}"
                         BackgroundColor="White"
-                        TextColor="#7B42F6"
                         FontAttributes="Bold"
                         FontSize="20"
                         CornerRadius="20"
-                        HeightRequest="60"/>
+                        HeightRequest="60"
+                        TextColor="DarkViolet"
+                        IsEnabled="{Binding CanPublish}"
+                        Clicked="PublishButton_OnClicked"/>
             </Grid>
         </Grid>
     </ScrollView>

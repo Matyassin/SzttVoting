@@ -26,7 +26,7 @@ public partial class AdminView : ContentPage
 
     private void CreateNewVote_OnClicked(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new NewPollView(_vm.UserServices));
+        Navigation.PushAsync(new NewPollView(_vm.UserServices, _vm.PollServices));
     }
 
     private void ListOngoingVotes_OnClicked(object sender, EventArgs e)
