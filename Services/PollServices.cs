@@ -11,7 +11,7 @@ public class PollServices : IDataService
     public void AddPoll(UserData currUser, string title, string desc, DateTime deadline, List<OptionData> options, List<VotesData> votes)
     {
         Polls.Add(title,
-            new PollData(currUser,
+            new PollData(currUser.Guid,
                 title,
                 desc,
                 deadline,
@@ -55,6 +55,6 @@ public class PollServices : IDataService
         }
 
         string json = File.ReadAllText(filePath);
-        Polls = JsonConvert.DeserializeObject<Dictionary<string, PollData>>(json);
+        Polls = JsonConvert.DeserializeObject<Dictionary<string, PollData>>(json) ?? new Dictionary<string, PollData>();
     }
 }
