@@ -1,8 +1,9 @@
 {
   "fidesz@gmail.com": {
-    "id": "e9002892-aa86-4d53-b23a-252c7950047f",
+    "id": "7e616248-b983-4ee7-bd60-e798afa59dae",
     "username": "Fidesz",
     "email": "fidesz@gmail.com",
-    "password": "$2a$11$WVuVLEku4ZrWTJenCLqY5ugHev2WcdEmnj68EjkuihJNL5emaqoAW"
+    "password": "$2a$11$DIDMpcVU8aJHa436w8joW.9cs4qIJQ30nELYrqdd6GYJ0Fp8UWk9y",
+    "isBlocked": false
   }
 }
