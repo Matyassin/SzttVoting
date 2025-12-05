@@ -30,26 +30,32 @@ public partial class LoginView : ContentPage
             return;
 
         _vm.IsBusy = true;
+        try
+        {
+            if (await _vm.TryAuthUser())
+            {
+                if (_vm.IsLoggedInUserAdmin())
+                {
+                    await Navigation.PushAsync(new AdminView(_vm.UserService));
+                }else {
+                    await Navigation.PushAsync(new UserView(_vm.UserService));
+                }
+            }
+            else
+            {
+                await DisplayAlert("Incorrect credentials", "Try again later!", "OK");
+            }
+        }
+        finally
+        {
+            _vm.IsBusy = false;
+        }
 
-        if (_vm.IsUserAdmin(_vm.EmailEntry, _vm.PasswordEntry))
-        {
-            await Navigation.PushAsync(new AdminView(_vm.UserServices));
-        }
-        else if (_vm.TryAuthUser())
-        {
-            _vm.SetLoggedinUser();
-            await Navigation.PushAsync(new UserView(_vm.UserServices));
-        }
-        else
-        {
-            await DisplayAlert("Incorrect credentials", "Try again later!", "OK");
-        }
-
-        _vm.IsBusy = false;
+        
     }
 
     private async void ToRegisterButton_OnClickedAsync(object? sender, EventArgs e)
     {
-        await Navigation.PushAsync(new RegisterView(_vm.UserServices));
+        await Navigation.PushAsync(new RegisterView(_vm.UserService));
     }
 }

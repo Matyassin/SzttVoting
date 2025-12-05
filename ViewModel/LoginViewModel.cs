@@ -1,6 +1,7 @@
 using Services;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Model;
 
 namespace ViewModel;
 
@@ -23,21 +24,21 @@ public partial class LoginViewModel : BaseViewModel, ICredentialsValidator
     [ObservableProperty, NotifyPropertyChangedFor(nameof(IsLoginButtonEnabled)), NotifyPropertyChangedFor(nameof(LoginButtonText))]
     private bool _isBusy = false;
 
-    public UserServices UserServices { get; private set; }
+    public UserServices UserService { get; private set; }
 
     public string LoginButtonText => IsBusy ? "Authenticating..." : "Log in!";
 
     public bool IsLoginButtonEnabled =>
-        (IsEmailValid(EmailEntry) || IsUserAdmin(EmailEntry, PasswordEntry)) && !IsBusy;
+        IsEmailValid(EmailEntry) && !IsBusy;
 
     public LoginViewModel(UserServices userService)
     {
-        UserServices = userService;
+        UserService = userService;
     }
 
-    public void SetLoggedinUser()
+    private void SetLoggedinUser()
     {
-        UserServices.SetLoggedInUser(EmailEntry);
+        UserService.SetLoggedInUser(EmailEntry);
     }
     
     [RelayCommand]
@@ -81,28 +82,33 @@ public partial class LoginViewModel : BaseViewModel, ICredentialsValidator
 
     public bool IsEmailValid(string email)
     {
-        return UserServices.ContainsEmail(email);
+        return UserService.ContainsEmail(email);
     }
 
-    public bool TryAuthUser()
+    public async Task<bool> TryAuthUser()
     {
-        if (UserServices.TryValidateUser(EmailEntry, PasswordEntry))
+        bool returnV = await Task.Run( () =>
         {
-            SetLoggedinUser();
-            return true;
-        }
-
-        return false;
+            return UserService.TryValidateUser(EmailEntry, PasswordEntry);
+        });
+        
+        SetLoggedinUser();
+        return returnV;
     }
 
     public bool IsPasswordValid(string password)
     {
         return !(password.Length < 5 || string.IsNullOrWhiteSpace(password));
     }
-
-    public bool IsUserAdmin(string email, string password)
+    
+    public bool IsUserAdmin(UserData userToValidate)
     {
-        return email == "admin" && password == "admin";
+        return userToValidate.IsAdmin;
+    }
+    
+    public bool IsLoggedInUserAdmin()
+    {
+        return UserService.LoggedInUser.IsAdmin;
     }
 
     partial void OnEmailEntryChanged(string value)

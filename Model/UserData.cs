@@ -11,4 +11,5 @@ public partial class UserData
     [ObservableProperty] private string _email = email;
     [ObservableProperty] private string _password = password;
     [ObservableProperty] private bool _isBlocked = isBlocked;
+    [ObservableProperty] private bool _isAdmin = false;
 }

@@ -1,8 +1,10 @@
 {
-  "testuser@gmail.com": {
-    "id": "a7f863eb-3834-419c-8fff-d84d7df210f5",
-    "username": "Test User 1",
-    "email": "testuser@gmail.com",
-    "password": "$2a$11$1oohrLaJ/o884JLN7ufkGeQKGhwWcRCGdzXqFpwS5gYwKpS3yeKym"
+  "test@user.com": {
+    "Guid": "00363440-dc31-42b5-849d-8b774c28c203",
+    "Username": "Test User 1",
+    "Email": "test@user.com",
+    "Password": "$2a$11$SLOQH2Hhr9FLaZfSgc5FhOehy3OjU4yKZRMVzATE3LmzkZOdVNX6S",
+    "IsBlocked": false,
+    "IsAdmin": true
   }
 }
