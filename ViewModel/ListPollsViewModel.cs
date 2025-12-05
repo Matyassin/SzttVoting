@@ -6,8 +6,9 @@ namespace ViewModel;
 
 public class ListPollsViewModel : BaseViewModel
 {
-    public ObservableCollection<PollData> UsersPolls = new ObservableCollection<PollData>();
-    public ObservableCollection<PollData> OthersPolls = new ObservableCollection<PollData>();
+    public ObservableCollection<PollData> UsersPolls = new();
+    public ObservableCollection<PollData> OthersPolls = new();
+
     public PollServices PollService { get; private set; }
     public UserServices UserService { get; private set; }
 
@@ -15,15 +16,14 @@ public class ListPollsViewModel : BaseViewModel
     {
         PollService = pollServices;
         UserService = userServices;
-        SeperatePools();
+        SeperatePolls();
     }
 
-    public void SeperatePools()
+    public void SeperatePolls()
     {
-        var userGuid = UserService.LoggedInUser.Guid;
         foreach (var pollData in PollService.Polls.Values.ToList())
         {
-            if (userGuid == pollData.CreatorID)
+            if (UserService.LoggedInUser.Guid == pollData.CreatorID)
             {
                 UsersPolls.Add(pollData);
             }

@@ -1,5 +1,4 @@
 using System.Collections.ObjectModel;
-using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Model;
@@ -31,8 +30,11 @@ public partial class NewPollViewModel : BaseViewModel
     [ObservableProperty] 
     [NotifyPropertyChangedFor(nameof(CanPublish))]
     private TimeSpan _deadlineTime = TimeSpan.FromHours(23);
-    public bool IsDiscardable => String.IsNullOrWhiteSpace(Title) || String.IsNullOrWhiteSpace(Description);
-    public ObservableCollection<OptionData> Options {get; set;}
+
+    public bool IsDiscardable => string.IsNullOrWhiteSpace(Title) || string.IsNullOrWhiteSpace(Description);
+
+    public ObservableCollection<OptionData> Options { get; set; }
+
     #endregion
     
     public NewPollViewModel(UserServices userServices, PollServices pollServices)
@@ -47,7 +49,8 @@ public partial class NewPollViewModel : BaseViewModel
     [RelayCommand]
     public async void AddOption()
     {
-        if(Application.Current?.MainPage == null) return;
+        if (Application.Current?.MainPage == null)
+            return;
         
         string result = await Application.Current.MainPage.DisplayPromptAsync(
             "Add Option", 
@@ -55,7 +58,8 @@ public partial class NewPollViewModel : BaseViewModel
             accept: "Add", 
             cancel: "Cancel");
         
-        if (string.IsNullOrWhiteSpace(result)) return;
+        if (string.IsNullOrWhiteSpace(result))
+            return;
         
         Options.Add(new OptionData(result));
     }
@@ -64,7 +68,10 @@ public partial class NewPollViewModel : BaseViewModel
     public void RemoveOption(OptionData option)
     {
         if (Options.Contains(option))
+        {
             Options.Remove(option);
+        }
+
         OnPropertyChanged(nameof(CanPublish));
     }
     
@@ -78,14 +85,16 @@ public partial class NewPollViewModel : BaseViewModel
     
     #region Field / Type Checks
     public bool CanPublish => 
-        TitleCheck && DescriptionCheck && 
-        DeadlineCheck && OptionsCheck && 
-        UserStatusCheck;
+        TitleCheck && DescriptionCheck && DeadlineCheck && OptionsCheck && UserStatusCheck;
+
     private bool TitleCheck => Title.Length < 30 && Title.Length > 0;
+
     private bool DescriptionCheck => Description.Length < 200 && Description.Length > 0;
+
     private bool DeadlineCheck => DeadlineDate + DeadlineTime > DateTime.Now;
+
     private bool OptionsCheck => Options.Count > 1;
+
     private bool UserStatusCheck => !_userServices.LoggedInUser.IsBlocked;
     #endregion
 }
-    

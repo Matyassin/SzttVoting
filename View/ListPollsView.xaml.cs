@@ -7,10 +7,10 @@ public partial class ListPollsView : ContentPage
 {
     private readonly ListPollsViewModel _vm;
 
-    public ListPollsView(PollServices pollServices)
+    public ListPollsView(UserServices userServices, PollServices pollServices)
     {
         InitializeComponent();
-        _vm = new ListPollsViewModel(pollServices);
+        _vm = new ListPollsViewModel(userServices, pollServices);
         BindingContext = _vm;
     }
 }

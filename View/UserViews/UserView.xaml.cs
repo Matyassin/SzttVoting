@@ -32,7 +32,7 @@ public partial class UserView : ContentPage
 
     private void ListOngoingVotes_OnClicked(object? sender, EventArgs e)
     {
-        Navigation.PushAsync(new ListPollsView(_vm.PollServices));
+        Navigation.PushAsync(new ListPollsView(_vm.UserServices, _vm.PollServices));
     }
 
     private void MyProfile_OnClicked(object sender, EventArgs e)
