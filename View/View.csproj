@@ -27,6 +27,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="AdminViews\ListUsersView.xaml.cs">
+	    <DependentUpon>ListUsersView.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="RegisterView.xaml.cs">
 	    <DependentUpon>RegisterView.xaml</DependentUpon>
 	  </Compile>
@@ -46,6 +49,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="AdminViews\AdminView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="AdminViews\ListUsersView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UserViews\UserView.xaml">

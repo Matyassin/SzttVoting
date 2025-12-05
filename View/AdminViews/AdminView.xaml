@@ -29,10 +29,10 @@
                     Clicked="CreateNewVote_OnClicked"/>
 
             <Button Text="Ongoing Votes"
-                    Clicked="SeeOngoingVotes_OnClicked"/>
+                    Clicked="ListOngoingVotes_OnClicked"/>
 
             <Button Text="View Users"
-                    Clicked="SeeUsers_OnClicked"/>
+                    Clicked="ListUsers_OnClicked"/>
 
         </VerticalStackLayout>
     </VerticalStackLayout>

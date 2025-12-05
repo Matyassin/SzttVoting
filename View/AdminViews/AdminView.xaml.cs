@@ -1,4 +1,6 @@
+using Services;
 using ViewModel;
+using View.AdminViews;
 
 namespace View;
 
@@ -6,9 +8,11 @@ public partial class AdminView : ContentPage
 {
     private readonly AdminViewModel _vm;
 
-    public AdminView()
+    public AdminView(UserServices userServices)
     {
         InitializeComponent();
+        _vm = new AdminViewModel(userServices);
+        BindingContext = _vm;
     }
 
     private async void Signout_OnClickedAsync(object sender, EventArgs e)
@@ -22,16 +26,16 @@ public partial class AdminView : ContentPage
 
     private void CreateNewVote_OnClicked(object sender, EventArgs e)
     {
-        //Navigation.PushAsync(new NewPollView());
+        Navigation.PushAsync(new NewPollView(_vm.UserServices));
     }
 
-    private void SeeOngoingVotes_OnClicked(object sender, EventArgs e)
+    private void ListOngoingVotes_OnClicked(object sender, EventArgs e)
     {
-        //Navigation.PushAsync(new SeeOngoingVotesView());
+        Navigation.PushAsync(new ListOngoingVotesView(_vm.UserServices));
     }
 
-    private void SeeUsers_OnClicked(object sender, EventArgs e)
+    private void ListUsers_OnClicked(object sender, EventArgs e)
     {
-        //Navigation.PushAsync();
+        Navigation.PushAsync(new ListUsersView(_vm.UserServices));
     }
 }

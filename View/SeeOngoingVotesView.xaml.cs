@@ -2,11 +2,11 @@ using Services;
 
 namespace View;
 
-public partial class SeeOngoingVotesView : ContentPage
+public partial class ListOngoingVotesView : ContentPage
 {
     private UserServices _userServices;
 
-    public SeeOngoingVotesView(UserServices userServices)
+    public ListOngoingVotesView(UserServices userServices)
     {
         InitializeComponent();
         _userServices = userServices;

@@ -2,10 +2,11 @@ using Newtonsoft.Json;
 
 namespace Model;
 
-public struct UserData(string id, string username,string email, string password)
+public struct UserData(string id, string username,string email, string password, bool isBlocked = false)
 {
     [JsonProperty("id")] public string Guid = id;
     [JsonProperty("username")] public string Username = username;
     [JsonProperty("email")] public string Email = email;
     [JsonProperty("password")] public string Password = password;
+    [JsonProperty("isBlocked")] public bool IsBlocked = isBlocked;
 }

@@ -37,6 +37,6 @@ public partial class UserView : ContentPage
 
     private void SeeOngoingVotes_OnClicked(object? sender, EventArgs e)
     {
-        Navigation.PushAsync(new SeeOngoingVotesView(_vm.UserServices));
+        Navigation.PushAsync(new ListOngoingVotesView(_vm.UserServices));
     }
 }
