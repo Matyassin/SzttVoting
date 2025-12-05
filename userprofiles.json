@@ -4,6 +4,6 @@
     "username": "Fidesz",
     "email": "fidesz@gmail.com",
     "password": "$2a$11$DIDMpcVU8aJHa436w8joW.9cs4qIJQ30nELYrqdd6GYJ0Fp8UWk9y",
-    "isBlocked": false
+    "isBlocked": true
   }
 }

@@ -16,11 +16,11 @@ public partial class ListUsersView : ContentPage
 
     private void Block_Btn_Clicked(object sender, EventArgs e)
     {
-        // block the user
-    }
-
-    private void Unblock_Btn_Clicked(object sender, EventArgs e)
-    {
-        // unblock the user
+        if (sender is Button btn && btn.BindingContext is UserDisplayModel user)
+        {
+            _vm.UserServices.ToggleUserBlockStatus(user.Email);
+            user.IsBlocked = !user.IsBlocked;
+            btn.Text = user.IsBlocked ? "Unblock" : "Block";
+        }
     }
 }

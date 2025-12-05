@@ -17,7 +17,8 @@ public class ListUsersViewModel : BaseViewModel
             Users.Add(new UserDisplayModel
             {
                 Username = user.Username,
-                Email = user.Email
+                Email = user.Email,
+                IsBlocked = user.IsBlocked
             });
         }
     }
@@ -28,4 +29,5 @@ public class UserDisplayModel
 {
     public string Username { get; set; }
     public string Email { get; set; }
+    public bool IsBlocked { get; set; }
 }

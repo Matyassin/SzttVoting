@@ -72,6 +72,17 @@ public class UserServices : IDataService
         Users = JsonConvert.DeserializeObject<Dictionary<string, UserData>>(json);
     }
 
+    public void ToggleUserBlockStatus(string userEmail)
+    {
+        if (Users.TryGetValue(userEmail, out var user))
+        {
+            user.IsBlocked = !user.IsBlocked;
+            Users[userEmail] = user;
+        }
+
+        Save();
+    }
+
     public bool ContainsEmail(string email)
     {
         return Users.ContainsKey(email);
