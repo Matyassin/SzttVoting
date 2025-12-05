@@ -8,7 +8,8 @@ public class UserServices : IDataService
     public UserData LoggedInUser { get; private set; }
 
     public Dictionary<string, UserData> Users;
-    private readonly string _fileName = "userprofiles.json";
+    //Protected -> Testable
+    protected string _fileName = "userprofiles.json";
 
     public const string EmailPattern = @"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}";
     public const string PasswordPattern = @"^(?=.*[A-Z])(?=.*\d)[a-zA-Z0-9]+$";

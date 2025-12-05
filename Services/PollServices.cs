@@ -6,7 +6,9 @@ namespace Services;
 public class PollServices : IDataService
 {
     public Dictionary<string, PollData> Polls { get; private set; } = new();
-    private readonly string _fileName = "polldata.json";
+    
+    //Protected, not readonly -> Testable
+    protected string _fileName = "polldata.json";
 
     public void AddPoll(UserData currUser, string title, string desc, DateTime deadline, List<OptionData> options, List<VotesData> votes)
     {
