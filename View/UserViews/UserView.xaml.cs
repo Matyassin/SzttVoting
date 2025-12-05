@@ -1,5 +1,5 @@
-using ViewModel;
 using Services;
+using ViewModel;
 using View.UserViews;
 
 namespace View;
@@ -30,13 +30,13 @@ public partial class UserView : ContentPage
         Navigation.PushAsync(new NewPollView(_vm.UserServices, _vm.PollServices));
     }
 
+    private void ListOngoingVotes_OnClicked(object? sender, EventArgs e)
+    {
+        Navigation.PushAsync(new ListPollsView(_vm.PollServices));
+    }
+
     private void MyProfile_OnClicked(object sender, EventArgs e)
     {
         Navigation.PushAsync(new MyProfile(_vm.UserServices));
-    }
-
-    private void SeeOngoingVotes_OnClicked(object? sender, EventArgs e)
-    {
-        Navigation.PushAsync(new ListOngoingVotesView(_vm.UserServices));
     }
 }

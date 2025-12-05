@@ -68,7 +68,7 @@
 
                 <Button Grid.Row="0" Grid.Column="1"
                         Text="Ongoing Votes"
-                        Clicked="SeeOngoingVotes_OnClicked"
+                        Clicked="ListOngoingVotes_OnClicked"
                         BackgroundColor="#30000000" 
                         BorderColor="White"
                         BorderWidth="2"

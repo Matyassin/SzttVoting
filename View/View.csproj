@@ -36,6 +36,9 @@
 	  <Compile Update="AdminViews\AdminView.xaml.cs">
 	    <DependentUpon>AdminView.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="ListPollsView.xaml.cs">
+	    <DependentUpon>ListPollsView.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="UserViews\UserView.xaml.cs">
 	    <DependentUpon>UserView.xaml</DependentUpon>
 	  </Compile>

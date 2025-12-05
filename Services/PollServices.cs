@@ -3,21 +3,29 @@ using Newtonsoft.Json;
 
 namespace Services;
 
-
 public class PollServices : IDataService
 {
-    private string _fileName = "polldata.json";
-    private Dictionary<string, Poll> _allPolls = new Dictionary<string, Poll>();
+    public Dictionary<string, PollData> Polls { get; private set; } = new();
+    private readonly string _fileName = "polldata.json";
 
-
-    public void AddPoll(UserData currUser,string title, string desc, DateTime deadline, List<OptionData> options, List<VotesData> votes)
+    public void AddPoll(UserData currUser, string title, string desc, DateTime deadline, List<OptionData> options, List<VotesData> votes)
     {
-        _allPolls.Add(title, new Poll(currUser, title, desc, deadline, options, votes));
+        Polls.Add(title,
+            new PollData(currUser,
+                title,
+                desc,
+                deadline,
+                options,
+                votes
+            )
+        );
+
         Save();
     }
+
     public void Save()
     {
-        string json = JsonConvert.SerializeObject(_allPolls, Formatting.Indented);
+        string json = JsonConvert.SerializeObject(Polls, Formatting.Indented);
         string? slnPath = Directory.GetParent(Directory.GetCurrentDirectory())
             .Parent?
             .Parent?
@@ -47,6 +55,6 @@ public class PollServices : IDataService
         }
 
         string json = File.ReadAllText(filePath);
-        _allPolls = JsonConvert.DeserializeObject<Dictionary<string, Poll>>(json) ??  new Dictionary<string, Poll>();
+        Polls = JsonConvert.DeserializeObject<Dictionary<string, PollData>>(json);
     }
 }
