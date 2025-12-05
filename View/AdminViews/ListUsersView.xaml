@@ -14,11 +14,11 @@
                             StrokeThickness="0"
                             HorizontalOptions="Center"
                             VerticalOptions="Center"
-                            Padding="20"
+                            Padding="25"
                             BackgroundColor="SlateGray">
 
                         <Border.Shadow>
-                            <Shadow Brush="Black" Offset="0,15" Radius="40" Opacity="0.4" />
+                            <Shadow Brush="Black" Offset="0,15" Radius="40" Opacity="0.4"/>
                         </Border.Shadow>
 
                         <Grid ColumnDefinitions="*, Auto, Auto">
@@ -35,7 +35,7 @@
                             </VerticalStackLayout>
 
                             <Button Grid.Column="1"
-                                    Text="Block/Unbclock"
+                                    Text="Block/Unblock"
                                     Margin="10, 0"
                                     Clicked="Block_Btn_Clicked"/>
 
