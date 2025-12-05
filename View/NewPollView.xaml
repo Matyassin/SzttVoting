@@ -136,7 +136,6 @@
                         CornerRadius="20"
                         HeightRequest="60"
                         TextColor="DarkViolet"
-                        IsEnabled="{Binding CanPublish}"
                         Clicked="PublishButton_OnClicked"/>
             </Grid>
         </Grid>
