@@ -1,8 +1,7 @@
 ﻿using Services;
-using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using Model;
+using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace ViewModel;
 
@@ -10,8 +9,7 @@ public partial class ListUsersViewModel : BaseViewModel
 {
     public ObservableCollection<UserData> Users { get; private set; }
     public UserServices UserServices { get; private set; }
-    
-    
+        
     public ListUsersViewModel(UserServices userServices)
     {
         UserServices = userServices;
@@ -21,8 +19,8 @@ public partial class ListUsersViewModel : BaseViewModel
     [RelayCommand]
     private void ToggleBlock(UserData user)
     {
-        
-        if (user == null) return;
+        if (user == null)
+            return;
         
         UserServices.ToggleUserBlockStatus(user.Email);
     }

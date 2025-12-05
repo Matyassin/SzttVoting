@@ -31,7 +31,7 @@ public partial class AdminView : ContentPage
 
     private void ListOngoingVotes_OnClicked(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new ListOngoingVotesView(_vm.UserServices));
+        Navigation.PushAsync(new ListPollsView(_vm.PollServices));
     }
 
     private void ListUsers_OnClicked(object sender, EventArgs e)

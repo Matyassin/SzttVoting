@@ -11,6 +11,6 @@ public class AdminViewModel : BaseViewModel
     {
         UserServices = userServices;
         PollServices = new PollServices();
-
+        PollServices.Load();
     }
 }

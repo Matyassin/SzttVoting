@@ -7,7 +7,7 @@ using Services;
 
 namespace ViewModel.UserViewModels;
 
-public partial class CreatePollViewModel : BaseViewModel
+public partial class NewPollViewModel : BaseViewModel
 {
     #region Services
     private UserServices _userServices;
@@ -38,7 +38,7 @@ public partial class CreatePollViewModel : BaseViewModel
     public ObservableCollection<OptionData> Options {get; set;}
     #endregion
     
-    public CreatePollViewModel(UserServices userServices, PollServices pollServices)
+    public NewPollViewModel(UserServices userServices, PollServices pollServices)
     {
         _userServices = userServices;
         _pollServices = pollServices;
