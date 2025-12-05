@@ -22,8 +22,8 @@ public class UserServices
     {
         LoggedInUser = default;
     }
-    
-    public void Save(string username, string email, string password)
+
+    public void AddUser(string username, string email, string password)
     {
         _users.Add(email,
             new UserData(
@@ -33,7 +33,12 @@ public class UserServices
                 BCrypt.Net.BCrypt.HashPassword(password)
             )
         );
-
+        
+        Save();
+    }
+    
+    public void Save()
+    {
         string json = JsonConvert.SerializeObject(_users, Formatting.Indented);
         string? slnPath = Directory.GetParent(Directory.GetCurrentDirectory())
             .Parent?
