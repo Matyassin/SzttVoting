@@ -125,7 +125,7 @@
             </VerticalStackLayout>
 
             
-            <!-- ARCHIVED VOTES 
+            <!-- ARCHIVED VOTES -->
             <VerticalStackLayout Spacing="20">
                 <Label Text="Archived Votes"
                         FontSize="26"
@@ -170,7 +170,6 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </VerticalStackLayout>
-            -->
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
