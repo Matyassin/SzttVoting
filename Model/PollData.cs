@@ -34,7 +34,6 @@ public partial class OptionData(string text) : ObservableObject
     [ObservableProperty] private string _id = Guid.NewGuid().ToString();
     [ObservableProperty] private string _text = text;
     
-    //For the vote percentage
     [ObservableProperty, JsonIgnore] private string _percentageSelected = "0%";
 }
 
