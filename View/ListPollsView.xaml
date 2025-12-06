@@ -12,7 +12,10 @@
                 StrokeShape="RoundRectangle 40"
                 Margin="50"
                 StrokeThickness="2">
-        <Grid ColumnDefinitions="30*, 70*" Margin="20">
+        <Grid ColumnDefinitions="30*, 70*"
+              Margin="20">
+
+            <!-- LEFT SIDE -->
             <Border Grid.Column="0"
                     BackgroundColor="#20FFFFFF"
                     StrokeShape="RoundRectangle 40"
@@ -21,7 +24,6 @@
                 <ScrollView>
                 <VerticalStackLayout Spacing="50">
 
-                
                     <!-- MY VOTES -->
                     <VerticalStackLayout Spacing="10">
                         
@@ -46,20 +48,12 @@
                                         <Grid ColumnDefinitions="*, Auto, Auto">
                                             <VerticalStackLayout Grid.Column="0">
                                                 <Label Text="{Binding Title}"
-                                                       FontSize="18"
-                                                       TextColor="White"/>
-
-                                                <Label Text="{Binding Description}"
-                                                       FontSize="14"
-                                                       TextColor="White"/>
-
-                                                <Label Text="{Binding Created, StringFormat='Created: {0}'}"
-                                                       FontSize="14"
-                                                       TextColor="White"/>
+                                                        FontSize="18"
+                                                        TextColor="White"/>
 
                                                 <Label Text="{Binding Deadline, StringFormat='Deadline: {0}'}"
-                                                       FontSize="14"
-                                                       TextColor="White"/>
+                                                        FontSize="14"
+                                                        TextColor="White"/>
 
                                             </VerticalStackLayout>
 
@@ -96,14 +90,6 @@
                                             <VerticalStackLayout Grid.Column="0">
                                                 <Label Text="{Binding Title}"
                                                        FontSize="18"
-                                                       TextColor="White"/>
-
-                                                <Label Text="{Binding Description}"
-                                                       FontSize="14"
-                                                       TextColor="White"/>
-
-                                                <Label Text="{Binding Created, StringFormat='Created: {0}'}"
-                                                       FontSize="14"
                                                        TextColor="White"/>
 
                                                 <Label Text="{Binding Deadline, StringFormat='Deadline: {0}'}"
@@ -147,14 +133,6 @@
                                                        FontSize="18"
                                                        TextColor="White"/>
 
-                                                <Label Text="{Binding Description}"
-                                                       FontSize="14"
-                                                       TextColor="White"/>
-
-                                                <Label Text="{Binding Created, StringFormat='Created: {0}'}"
-                                                       FontSize="14"
-                                                       TextColor="White"/>
-
                                                 <Label Text="{Binding Deadline, StringFormat='Deadline: {0}'}"
                                                        FontSize="14"
                                                        TextColor="White"/>
@@ -172,8 +150,6 @@
             </Border>
 
             <!-- RIGHT SIDE -->
-            <!-- IsVisible = {Binding. , Converter={StaticResource IsNotNullConverter}} -->
-
             <VerticalStackLayout Grid.Column="2">
                 <VerticalStackLayout Grid.Column="1"
                                      BindingContext="{Binding SelectedPoll}"
@@ -191,15 +167,19 @@
                                    FontSize="24"
                                    Padding="20"
                                    TextColor="White"/>
-                            <Border StrokeThickness="1" Stroke="Black"/>
+                            
+                            <Border StrokeThickness="1"
+                                    Stroke="Black"/>
                             
                             <Label Text="{Binding Title}"
                                    FontSize="50"
                                    TextColor="White"
                                    HorizontalOptions="Start"/>
+                            
                             <Label Text="{Binding Description, StringFormat='Description: {0}'}" 
                                    HorizontalOptions="Start"
                                    FontAttributes="Italic"/>
+                            
                             <Label Text="{Binding Created, StringFormat='Created: {0}'}"
                                    FontSize="14"
                                    TextColor="White"/>
@@ -207,26 +187,33 @@
                             <Label Text="{Binding Deadline, StringFormat='Deadline: {0}'}"
                                    FontSize="14"
                                    TextColor="White"/>
+                            
                             <Border StrokeThickness="1"
                                     Stroke="Black"/>
+                            
                             <StackLayout>
                                 <HorizontalStackLayout BindableLayout.ItemsSource="{Binding Options}"
                                                         Spacing="10"
                                                         HorizontalOptions="Start">
+                                    
                                     <BindableLayout.ItemTemplate>
                                         <DataTemplate>
                                             <Border StrokeThickness="0"
-                                                    StrokeShape="RoundRectangle 40"
                                                     Stroke="Black">
+                                                
                                                 <RadioButton Content="{Binding Text}" 
                                                              HorizontalOptions="Center" 
                                                              VerticalOptions="Center"/>
+                                                
                                             </Border>
                                         </DataTemplate>
                                     </BindableLayout.ItemTemplate>
                                 </HorizontalStackLayout>
+                                
                                 <HorizontalStackLayout HorizontalOptions="End">
-                                    <Button Text="Save Your Vote!" />
+                                    <Button Text="Save"
+                                            />
+                                    
                                 </HorizontalStackLayout>
                             </StackLayout>
                      </VerticalStackLayout>
