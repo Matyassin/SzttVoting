@@ -3,12 +3,13 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="View.ListPollsView"
-             xmlns:DataType="clr-namespace:ViewModel;assembly=ViewModel"
+             xmlns:ViewModels="clr-namespace:ViewModel;assembly=ViewModel"
              xmlns:Converters="clr-namespace:ViewModel.Converter;assembly=ViewModel">
     
     <ContentPage.Resources>
         <Converters:IsNotNullConverter x:Key="IsNotNullConverter"/>
-        <Converters:RemainingTimeConverter x:Key="RemainingTimeCoverter"/>
+        <Converters:RemainingTimeConverter x:Key="RemainingTimeConverter"/>
+        <Converters:ComparisonConverter x:Key="ComparisonConverter"/>
     </ContentPage.Resources>
     
         <Border BackgroundColor="SlateGray" 
@@ -77,7 +78,7 @@
                                                         FontSize="18"
                                                         TextColor="White"/>
 
-                                                <Label Text="{Binding Deadline, Converter={StaticResource RemainingTimeCoverter}}"
+                                                <Label Text="{Binding Deadline, Converter={StaticResource RemainingTimeConverter}}"
                                                         FontSize="14"
                                                         TextColor="White"/>
 
@@ -137,7 +138,7 @@
                                                        FontSize="18"
                                                        TextColor="White"/>
 
-                                                <Label Text="{Binding Deadline, Converter={StaticResource RemainingTimeCoverter}}"
+                                                <Label Text="{Binding Deadline, Converter={StaticResource RemainingTimeConverter}}"
                                                        FontSize="14"
                                                        TextColor="White"/>
 
@@ -252,28 +253,33 @@
                                     Stroke="Black"/>
                             
                             <StackLayout>
-                                <HorizontalStackLayout BindableLayout.ItemsSource="{Binding Options}"
-                                                        Spacing="10"
-                                                        HorizontalOptions="Start">
-                                    
+                                <VerticalStackLayout BindableLayout.ItemsSource="{Binding Options}" 
+                                                     Spacing="10">
+        
                                     <BindableLayout.ItemTemplate>
                                         <DataTemplate>
-                                            <Border StrokeThickness="0"
-                                                    Stroke="Black">
-                                                
-                                                <RadioButton Content="{Binding Text}" 
-                                                             HorizontalOptions="Center" 
-                                                             VerticalOptions="Center"
-                                                             GroupName="PollOptions"/>
-                                                
+                                            <Border StrokeThickness="0" Padding="5">
+                                                <RadioButton Content="{Binding Text}"
+                                                             TextColor="White"
+                                                             FontSize="16"
+                                                             GroupName="MyPollOptions"
+                                                             Value="{Binding .}"
+                                                             CheckedChanged="OnOptionCheckedChanged">
+                                                <RadioButton.IsChecked>
+                                                    <MultiBinding Converter="{StaticResource ComparisonConverter}" Mode="OneWay">
+                                                        <Binding Path="." />
+                                                        <Binding Source="{RelativeSource AncestorType={x:Type ViewModels:ListPollsViewModel}}" Path="SelectedOption" />
+                                                    </MultiBinding>
+                                                </RadioButton.IsChecked>
+                                                </RadioButton>
                                             </Border>
                                         </DataTemplate>
                                     </BindableLayout.ItemTemplate>
-                                </HorizontalStackLayout>
+                                </VerticalStackLayout>
                                 
                                 <HorizontalStackLayout HorizontalOptions="End">
-                                    <Button Text="Save"
-                                            />
+                                    <Button Text="Submit Vote"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ViewModels:ListPollsViewModel}}, Path=SubmitVoteCommand}"/>
                                     
                                 </HorizontalStackLayout>
                             </StackLayout>
