@@ -5,6 +5,7 @@
              x:Class="View.ListPollsView"
              xmlns:DataType="clr-namespace:ViewModel;assembly=ViewModel"
              xmlns:Converters="clr-namespace:ViewModel.Converter;assembly=ViewModel">
+    
     <ContentPage.Resources>
         <Converters:IsNotNullConverter x:Key="IsNotNullConverter"/>
         <Converters:RemainingTimeConverter x:Key="RemainingTimeCoverter"/>
@@ -24,7 +25,8 @@
                     StrokeShape="RoundRectangle 40"
                     Padding="25"
                     StrokeThickness="0">
-                <ScrollView>
+                
+            <ScrollView>
                 <VerticalStackLayout Spacing="50">
 
                     <!-- MY VOTES -->
@@ -34,7 +36,9 @@
                                FontSize="26"
                                TextColor="White"
                                HorizontalOptions="Center"/>
+                        
                         <Border StrokeThickness="1"/>
+                        
                         <CollectionView ItemsSource="{Binding UserPolls}"
                                         SelectionMode="Single"
                                         SelectedItem="{Binding SelectedPoll, Mode=TwoWay}">
@@ -42,12 +46,31 @@
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
                                     <Border StrokeShape="RoundRectangle 20"
-                                            StrokeThickness="0"
-                                            Stroke="black"
-                                            BackgroundColor="SlateGray"
+                                            StrokeThickness="2"
                                             Margin="10"
-                                            Padding="20">
+                                            Padding="20"
+                                            BackgroundColor="SlateGray"
+                                            Stroke="Transparent">
 
+                                        
+                                        <!-- NEED THIS FOR SELECTION HIGHLIGHT LOGIC -->
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup Name="CommonStates">
+                                                <VisualState Name="Normal">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="Stroke" Value="Transparent"/>
+                                                    </VisualState.Setters>
+                                                </VisualState>
+
+                                                <VisualState Name="Selected">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="Stroke" Value="BlueViolet"/>
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+
+                                        
                                         <Grid ColumnDefinitions="*, Auto, Auto">
                                             <VerticalStackLayout Grid.Column="0">
                                                 <Label Text="{Binding Title}"
@@ -83,11 +106,30 @@
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
                                     <Border StrokeShape="RoundRectangle 20"
-                                            StrokeThickness="0"
-                                            Stroke="black"
-                                            BackgroundColor="SlateGray"
+                                            StrokeThickness="2"
                                             Margin="10"
-                                            Padding="20">
+                                            Padding="20"
+                                            BackgroundColor="SlateGray"
+                                            Stroke="Transparent">
+
+
+                                        <!-- WE NEED THIS FOR SELECTION HIGHLIGHT LOGIC -->
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup Name="CommonStates">
+                                                <VisualState Name="Normal">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="Stroke" Value="Transparent"/>
+                                                    </VisualState.Setters>
+                                                </VisualState>
+
+                                                <VisualState Name="Selected">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="Stroke" Value="BlueViolet"/>
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                        
 
                                         <Grid ColumnDefinitions="*, Auto, Auto">
                                             <VerticalStackLayout Grid.Column="0">
@@ -124,11 +166,30 @@
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
                                     <Border StrokeShape="RoundRectangle 20"
-                                            StrokeThickness="0"
-                                            Stroke="black"
-                                            BackgroundColor="SlateGray"
+                                            StrokeThickness="2"
                                             Margin="10"
-                                            Padding="20">
+                                            Padding="20"
+                                            BackgroundColor="SlateGray"
+                                            Stroke="Transparent">
+
+                                        
+                                        <!-- WE NEED THIS FOR SELECTION HIGHLIGHT LOGIC -->
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup Name="CommonStates">
+                                                <VisualState Name="Normal">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="Stroke" Value="Transparent"/>
+                                                    </VisualState.Setters>
+                                                </VisualState>
+
+                                                <VisualState Name="Selected">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="Stroke" Value="BlueViolet"/>
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                        
 
                                         <Grid ColumnDefinitions="*, Auto, Auto">
                                             <VerticalStackLayout Grid.Column="0">
