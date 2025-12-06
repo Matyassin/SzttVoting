@@ -12,23 +12,23 @@
               ColumnDefinitions="*, Auto">
 
         <Label Grid.Column="0"
-                   Text="Welcome, admin!"
-                   FontSize="15"
-                   VerticalOptions="Center"/>
+               Text="{Binding Username, StringFormat='Welcome, {0}!'}"
+               FontSize="15"
+               VerticalOptions="Center"/>
 
         <Button Grid.Column="1"
-                    Text="Sign out!"
-                    TextColor="BlueViolet"
-                    BackgroundColor="Transparent"
-                    VerticalOptions="Center"
-                    Clicked="Signout_OnClickedAsync"/>
+                Text="Sign out!"
+                TextColor="BlueViolet"
+                BackgroundColor="Transparent"
+                VerticalOptions="Center"
+                Clicked="Signout_OnClickedAsync"/>
         </Grid>
 
         <VerticalStackLayout Padding="500,50,500,0" Spacing="15">
             <Button Text="Create Vote"
                     Clicked="CreateNewVote_OnClicked"/>
 
-            <Button Text="Ongoing Votes"
+            <Button Text="View Votes"
                     Clicked="ListOngoingVotes_OnClicked"/>
 
             <Button Text="View Users"
