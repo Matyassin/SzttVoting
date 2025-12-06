@@ -47,7 +47,7 @@ public partial class ListPollsViewModel : BaseViewModel
         
         foreach (var pollData in PollService.Polls.Values.ToList())
         {
-            if (DateTime.Now > pollData.Deadline)
+            if (DateTime.Now > pollData.Deadline || !pollData.IsActive)
             {
                 pollData.IsActive = false;
                 ArchivedPolls.Add(pollData);
@@ -90,12 +90,14 @@ public partial class ListPollsViewModel : BaseViewModel
     [RelayCommand]
     private void CloseVote()
     {
-        if (SelectedOption == null)
+        if (SelectedPoll == null)
             return;
 
         SelectedPoll.IsActive = false;
         SeperatePolls();
         PollService.Save();
+        
+        CloseVoteCommand.NotifyCanExecuteChanged();
 
         OnPropertyChanged(nameof(CanVote));
         OnPropertyChanged(nameof(CanCloseVote));
