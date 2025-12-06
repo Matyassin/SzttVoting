@@ -23,7 +23,6 @@ public partial class ListPollsViewModel : BaseViewModel
     public bool CanSubmitVote =>
         SelectedPoll != null &&
         OtherPolls.Contains(SelectedPoll);
-    
 
     public bool CanCloseVote =>
         SelectedPoll != null &&
@@ -34,7 +33,13 @@ public partial class ListPollsViewModel : BaseViewModel
         SelectedPoll.Votes.Count == 0 &&
         (UserPolls.Contains(SelectedPoll) || (UserService.LoggedInUser.IsAdmin && SelectedPoll.IsActive));
 
-    public bool IsStatisticsVisible => SelectedPoll != null && !SelectedPoll.IsActive;
+    public bool CanDeleteVote =>
+        SelectedPoll != null &&
+        UserService.LoggedInUser.IsAdmin;
+
+    public bool IsStatisticsVisible =>
+        SelectedPoll != null && !SelectedPoll.IsActive;
+
 
     public ListPollsViewModel(UserServices userServices, PollServices pollServices)
     {

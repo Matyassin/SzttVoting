@@ -59,7 +59,8 @@ public class PollServices : IDataService
     public void RecalculatePercentage(PollData currPoll)
     {
         var totalVotes = currPoll.Votes.Count;
-        if (totalVotes == 0) return;
+        if (totalVotes == 0)
+            return;
 
         foreach (var voteOption in currPoll.Options)
         {
