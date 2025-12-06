@@ -73,7 +73,7 @@ public partial class ListPollsViewModel : BaseViewModel
         if (!CanVote()) return;
         
         var newVote = new VotesData(UserService.LoggedInUser.Guid, SelectedOption.Id);
-        PollService.AddVote(SelectedPoll ,newVote);
+        PollService.AddOrModifyVote(SelectedPoll ,newVote);
     }
     
     private bool CanVote() {
