@@ -5,171 +5,215 @@
              x:Class="View.ListPollsView"
              xmlns:DataType="clr-namespace:ViewModel;assembly=ViewModel">
 
-    <ScrollView WidthRequest="1000">
-        <VerticalStackLayout Spacing="40">
+    <Grid ColumnDefinitions="Auto, *">
+    
+        <ScrollView Grid.Column="0"
+                    WidthRequest="600"
+                    Padding="10">
+            
+            <VerticalStackLayout Spacing="40">
 
             
-            <!-- MY VOTES -->
-            <VerticalStackLayout Spacing="20">
-                <Label Text="My Votes"
-                       FontSize="26"
-                       TextColor="White"
-                       Padding="20,0,0,0"/>
+                <!-- MY VOTES -->
+                <VerticalStackLayout Spacing="20">
+                    <Label Text="My Votes"
+                           FontSize="26"
+                           TextColor="White"
+                           Padding="20,0,0,0"/>
 
-                <CollectionView ItemsSource="{Binding UserPolls}">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Border StrokeShape="RoundRectangle 40"
-                                    StrokeThickness="0"
-                                    HorizontalOptions="Center"
-                                    VerticalOptions="Center"
-                                    Padding="25"
-                                    BackgroundColor="SlateGray">
+                    <CollectionView ItemsSource="{Binding UserPolls}"
+                                    SelectionMode="Single"
+                                    SelectedItem="{Binding SelectedPoll, Mode=TwoWay}">
+                        
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border StrokeShape="RoundRectangle 40"
+                                        StrokeThickness="0"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center"
+                                        Padding="25"
+                                        BackgroundColor="SlateGray">
                                 
-                                <Border.Shadow>
-                                    <Shadow Brush="Black"
-                                            Offset="0,15"
-                                            Radius="40"
-                                            Opacity="0.4" />
-                                </Border.Shadow>
+                                    <Border.Shadow>
+                                        <Shadow Brush="Black"
+                                                Offset="0,15"
+                                                Radius="40"
+                                                Opacity="0.4" />
+                                    </Border.Shadow>
 
-                                <Grid ColumnDefinitions="*, Auto, Auto">
-                                    <VerticalStackLayout Grid.Column="0">
-                                        <Label Text="{Binding Title}"
-                                               FontSize="18"
-                                               TextColor="White"/>
+                                    <Grid ColumnDefinitions="*, Auto, Auto">
+                                        <VerticalStackLayout Grid.Column="0">
+                                            <Label Text="{Binding Title}"
+                                                   FontSize="18"
+                                                   TextColor="White"/>
 
-                                        <Label Text="{Binding Description}"
-                                               FontSize="14"
-                                               TextColor="White"/>
+                                            <Label Text="{Binding Description}"
+                                                   FontSize="14"
+                                                   TextColor="White"/>
 
-                                        <Label Text="{Binding Created, StringFormat='Created: {0}'}"
-                                               FontSize="14"
-                                               TextColor="White"/>
+                                            <Label Text="{Binding Created, StringFormat='Created: {0}'}"
+                                                   FontSize="14"
+                                                   TextColor="White"/>
 
-                                        <Label Text="{Binding Deadline, StringFormat='Deadline: {0}'}"
-                                               FontSize="14"
-                                               TextColor="White"/>
+                                            <Label Text="{Binding Deadline, StringFormat='Deadline: {0}'}"
+                                                   FontSize="14"
+                                                   TextColor="White"/>
 
-                                        
-                                    </VerticalStackLayout>
+                                        </VerticalStackLayout>
 
-                                    <Button Grid.Column="1"
-                                            Text="Modify"
-                                            Margin="10,0"/>
-
-                                    <Button Grid.Column="2"
-                                            Text="Close"
-                                            Margin="10,0"/>
-                                </Grid>
-                            </Border>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </VerticalStackLayout>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
 
             
-            <!-- OTHER VOTES -->
-            <VerticalStackLayout Spacing="20">
-                <Label Text="Other Votes"
-                       FontSize="26"
-                       TextColor="White"
-                       Padding="20,0,0,0"/>
+                <!-- OTHER VOTES -->
+                <VerticalStackLayout Spacing="20">
+                    <Label Text="Other Votes"
+                           FontSize="26"
+                           TextColor="White"
+                           Padding="20,0,0,0"/>
 
-                <CollectionView ItemsSource="{Binding OtherPolls}">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Border StrokeShape="RoundRectangle 40"
-                                    StrokeThickness="0"
-                                    HorizontalOptions="Center"
-                                    VerticalOptions="Center"
-                                    Padding="25"
-                                    BackgroundColor="SlateGray">
+                    <CollectionView ItemsSource="{Binding OtherPolls}"
+                                    SelectionMode="Single"
+                                    SelectedItem="{Binding SelectedPoll, Mode=TwoWay}">
+                        
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border StrokeShape="RoundRectangle 40"
+                                        StrokeThickness="0"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center"
+                                        Padding="25"
+                                        BackgroundColor="SlateGray">
                                 
-                                <Border.Shadow>
-                                    <Shadow Brush="Black"
-                                            Offset="0,15"
-                                            Radius="40"
-                                            Opacity="0.4" />
-                                </Border.Shadow>
+                                    <Border.Shadow>
+                                        <Shadow Brush="Black"
+                                                Offset="0,15"
+                                                Radius="40"
+                                                Opacity="0.4" />
+                                    </Border.Shadow>
 
-                                <Grid ColumnDefinitions="*, Auto, Auto">
-                                    <VerticalStackLayout Grid.Column="0">
-                                        <Label Text="{Binding Title}"
-                                               FontSize="18"
-                                               TextColor="White"/>
+                                    <Grid ColumnDefinitions="*, Auto, Auto">
+                                        <VerticalStackLayout Grid.Column="0">
+                                            <Label Text="{Binding Title}"
+                                                   FontSize="18"
+                                                   TextColor="White"/>
 
-                                        <Label Text="{Binding Description}"
-                                               FontSize="14"
-                                               TextColor="White"/>
+                                            <Label Text="{Binding Description}"
+                                                   FontSize="14"
+                                                   TextColor="White"/>
 
-                                        <Label Text="{Binding Created, StringFormat='Created: {0}'}"
-                                               FontSize="14"
-                                               TextColor="White"/>
+                                            <Label Text="{Binding Created, StringFormat='Created: {0}'}"
+                                                   FontSize="14"
+                                                   TextColor="White"/>
 
-                                        <Label Text="{Binding Deadline, StringFormat='Deadline: {0}'}"
-                                               FontSize="14"
-                                               TextColor="White"/>
+                                            <Label Text="{Binding Deadline, StringFormat='Deadline: {0}'}"
+                                                   FontSize="14"
+                                                   TextColor="White"/>
 
+
+                                        </VerticalStackLayout>
                                         
-                                    </VerticalStackLayout>
-
-                                    <Button Grid.Column="1"
-                                            Text="Vote"
-                                            Margin="10,0"/>
-                                </Grid>
-                            </Border>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </VerticalStackLayout>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
 
             
-            <!-- ARCHIVED VOTES -->
-            <VerticalStackLayout Spacing="20">
-                <Label Text="Archived Votes"
-                        FontSize="26"
-                        TextColor="White"
-                        Padding="20,0,0,0"/>
+                <!-- ARCHIVED VOTES -->
+                <VerticalStackLayout Spacing="20">
+                    <Label Text="Archived Votes"
+                            FontSize="26"
+                            TextColor="White"
+                            Padding="20,0,0,0"/>
 
-                <CollectionView ItemsSource="{Binding ArchivedVotes}">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Border StrokeShape="RoundRectangle 40"
-                                     StrokeThickness="0"
-                                     HorizontalOptions="Center"
-                                     VerticalOptions="Center"
-                                     Padding="25"
-                                     BackgroundColor="SlateGray">
+                    <CollectionView ItemsSource="{Binding ArchivedVotes}"
+                                    SelectionMode="Single"
+                                    SelectedItem="{Binding SelectedPoll, Mode=TwoWay}">
+                        
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border StrokeShape="RoundRectangle 40"
+                                         StrokeThickness="0"
+                                         HorizontalOptions="Center"
+                                         VerticalOptions="Center"
+                                         Padding="25"
+                                         BackgroundColor="SlateGray">
 
-                                <Border.Shadow>
-                                    <Shadow Brush="Black"
-                                             Offset="0,15"
-                                             Radius="40"
-                                             Opacity="0.4" />
-                                </Border.Shadow>
+                                    <Border.Shadow>
+                                        <Shadow Brush="Black"
+                                                 Offset="0,15"
+                                                 Radius="40"
+                                                 Opacity="0.4" />
+                                    </Border.Shadow>
 
-                                <Grid ColumnDefinitions="*, Auto, Auto">
-                                    <VerticalStackLayout Grid.Column="0">
-                                        <Label Text="{Binding Title}"
-                                                FontSize="18"
-                                                TextColor="White"/>
+                                    <Grid ColumnDefinitions="*, Auto, Auto">
+                                        <VerticalStackLayout Grid.Column="0">
+                                            <Label Text="{Binding Title}"
+                                                    FontSize="18"
+                                                    TextColor="White"/>
 
-                                        <Label Text="{Binding Description}"
-                                                FontSize="14"
-                                                TextColor="White"/>
+                                            <Label Text="{Binding Description}"
+                                                    FontSize="14"
+                                                    TextColor="White"/>
 
-                                    </VerticalStackLayout>
+                                        </VerticalStackLayout>
 
-                                    <Button Grid.Column="1"
-                                             Text="Vote"
-                                             Margin="10,0"/>
-                                </Grid>
-                            </Border>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
             </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- RIGHT SIDE -->
+        <!-- IsVisible = {Binding. , Converter={StaticResource IsNotNullConverter}} -->
+
+        <VerticalStackLayout Grid.Column="1"
+                             BindingContext="{Binding SelectedPoll}">
+
+            <Label Text="Selected Poll"
+                   FontSize="24"
+                   Padding="20"
+                   TextColor="White"/>
+
+            <Border StrokeShape="RoundRectangle 40"
+                    BackgroundColor="SlateGray"
+                    Padding="20"
+                    Margin="10">
+
+                <VerticalStackLayout Spacing="15">
+
+                    <Label Text="Rasputin"
+                       FontSize="18"
+                       TextColor="White"/>
+
+                    <Label Text="Sexy"
+                       FontSize="14"
+                       TextColor="White"/>
+
+                    <Label Text="Vagyok"
+                       FontSize="14"
+                       TextColor="White"/>
+
+                    <Label Text="Hellyeah"
+                       FontSize="14"
+                       TextColor="White"/>
+
+                    <Label Text="Kutya"
+                       FontSize="14"
+                       TextColor="White"/>
+                    
+                </VerticalStackLayout>
+            </Border>
         </VerticalStackLayout>
-    </ScrollView>
+
+    </Grid>
 </ContentPage>
