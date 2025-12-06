@@ -94,28 +94,4 @@ public partial class ListPollsViewModel : BaseViewModel
 
         SelectedOption = option;
     }
-
-    /*private OptionData? GetOptionOrNull()
-    {
-        VotesData? foundVote = null;
-        var votes = SelectedPoll.Votes;
-        foreach (var vote in votes)
-        {
-            if (vote.VoterID == UserService.LoggedInUser.Guid) 
-                foundVote = vote;
-                break;
-        }
-        if (foundVote == null) return null;
-        return GetOptionByVoteAndId(SelectedPoll, foundVote);
-    }
-
-    private OptionData? GetOptionByVoteAndId(PollData poll, VotesData vote)
-    {
-        foreach (var i in poll.Options)
-        {
-            if (i.Id == vote.RelatedOption)
-                return i;
-        }
-        return null;
-    }*/
 }
