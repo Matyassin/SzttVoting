@@ -2,7 +2,6 @@
 using Services;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 
 namespace ViewModel;
 
@@ -28,7 +27,12 @@ public partial class ListPollsViewModel : BaseViewModel
     {
         foreach (var pollData in PollService.Polls.Values.ToList())
         {
-            if (UserService.LoggedInUser.Guid == pollData.CreatorID)
+            if (DateTime.Now > pollData.Deadline)
+            {
+                pollData.IsActive = false;
+                ArchivedPolls.Add(pollData);
+            }
+            else if (UserService.LoggedInUser.Guid == pollData.CreatorID)
             {
                 UserPolls.Add(pollData);
             }
