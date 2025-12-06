@@ -9,8 +9,8 @@ namespace ViewModel.UserViewModels;
 public partial class NewPollViewModel : BaseViewModel
 {
     #region Services
-    private UserServices _userServices;
-    private PollServices _pollServices;
+    protected UserServices _userServices;
+    protected PollServices _pollServices;
     #endregion
     
     #region Properties
@@ -29,8 +29,8 @@ public partial class NewPollViewModel : BaseViewModel
     [ObservableProperty] 
     private TimeSpan _deadlineTime = TimeSpan.FromHours(23);
 
-    private string _errorMessageTitle = "";
-    private string _errorMessageDescription = "";
+    protected string _errorMessageTitle = "";
+    protected string _errorMessageDescription = "";
 
     public bool IsDiscardable => string.IsNullOrWhiteSpace(Title) || string.IsNullOrWhiteSpace(Description);
 
@@ -110,7 +110,7 @@ public partial class NewPollViewModel : BaseViewModel
         return TitleCheck() && DoesAlreadyExist() && DescriptionCheck() && DeadlineCheck() && OptionsCheck() && UserStatusCheck();
     }
 
-    private bool TitleCheck()
+    protected bool TitleCheck()
     {
         if (Title.Length > 0 && Title.Length < 50){
             return true;
@@ -120,7 +120,7 @@ public partial class NewPollViewModel : BaseViewModel
         return false;
     }
 
-    private bool DescriptionCheck()
+    protected bool DescriptionCheck()
     {
         if (Description.Length < 200 && Description.Length > 0) 
             return true;
@@ -130,7 +130,7 @@ public partial class NewPollViewModel : BaseViewModel
         return false;
     }
 
-    private bool DeadlineCheck()
+    protected bool DeadlineCheck()
     {
         if (DeadlineDate.Date + DeadlineTime >= DateTime.Now.AddHours(1)) 
             return true;
@@ -140,7 +140,7 @@ public partial class NewPollViewModel : BaseViewModel
         return false;
     }
 
-    private bool OptionsCheck()
+    protected bool OptionsCheck()
     {
         if (Options.Count > 1 && Options.Count < 10)
             return true;
@@ -150,7 +150,7 @@ public partial class NewPollViewModel : BaseViewModel
         return false;
     }
 
-    private bool UserStatusCheck()
+    protected bool UserStatusCheck()
     {
         if (!_userServices.LoggedInUser.IsBlocked)
             return true;
@@ -160,7 +160,7 @@ public partial class NewPollViewModel : BaseViewModel
         return false;
     }
 
-    private bool DoesAlreadyExist()
+    protected bool DoesAlreadyExist()
     {
         if (!_pollServices.Polls.ContainsKey(Title))
         {

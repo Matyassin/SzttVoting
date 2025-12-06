@@ -42,6 +42,10 @@
 	  <Compile Update="UserViews\UserView.xaml.cs">
 	    <DependentUpon>UserView.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="ModifyPollView.xaml.cs">
+	    <DependentUpon>NewPollView.xaml</DependentUpon>
+	    <SubType>Code</SubType>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -61,6 +65,10 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
         <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.111" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <AdditionalFiles Include="ModifyPollView.xaml" />
 	</ItemGroup>
 
 </Project>
