@@ -112,18 +112,6 @@ public partial class NewPollViewModel : BaseViewModel
 
     private bool TitleCheck()
     {
-        
-        /*if (Title == "Horthy Miklós")
-        {
-            Application.Current.MainPage.DisplayAlert(
-                ":>>", 
-                "A JÓ LOVAS KATONÁNAK DE JÓL VAGYON DOLGA, mert ESZIK IGYÜNK!!", 
-                cancel: "OK");
-            Thread.Sleep(100);
-            throw new Exception(":))");
-        }
-        */
-        
         if (Title.Length > 0 && Title.Length < 50){
             return true;
         }

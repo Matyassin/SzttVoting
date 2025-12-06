@@ -25,7 +25,7 @@ public partial class NewPollView : ContentPage
     private async void PublishButton_OnClicked(object? sender, EventArgs e)
     {
         if (await _vm.Publish()){
-            await DisplayAlert("Poll saved", "To change poll details, please go to \"Ongoing votes\" tab!", "OK");
+            await DisplayAlert("Poll saved", "To change poll details, please go to \"View votes\" tab!", "OK");
             await Navigation.PopAsync();
         }
     }
