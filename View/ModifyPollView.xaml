@@ -93,7 +93,7 @@
                                     
                                         <Button Grid.Column="1"
                                                 Text="✕"
-                                                Command="{Binding Source={RelativeSource AncestorType={x:Type ViewModels:NewPollViewModel}}, Path=RemoveOptionCommand}"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type ViewModels:ModifyPollViewModel}}, Path=RemoveOptionCommand}"
                                                 CommandParameter="{Binding .}"
                                                 BackgroundColor="#40FF0000"
                                                 TextColor="White"

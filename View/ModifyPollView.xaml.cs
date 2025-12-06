@@ -6,7 +6,7 @@ namespace View;
 
 public partial class ModifyPollView : ContentPage
 {
-    private ModifyPollViewModel _vm;
+    private readonly ModifyPollViewModel _vm;
 
     public ModifyPollView(UserServices _userServices, PollServices _pollServices, PollData _pollData)
     {
@@ -25,7 +25,8 @@ public partial class ModifyPollView : ContentPage
 
     private async void PublishButton_OnClicked(object? sender, EventArgs e)
     {
-        if (await _vm.Publish()){
+        if (await _vm.Publish())
+        {
             await DisplayAlert("Poll saved", "To change poll details, please go to \"View votes\" tab, and there \"Modify Poll\"", "OK");
             await Navigation.PopAsync();
         }

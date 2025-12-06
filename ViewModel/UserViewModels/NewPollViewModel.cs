@@ -1,19 +1,15 @@
+using Model;
+using Services;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Model;
-using Services;
 
 namespace ViewModel.UserViewModels;
 
 public partial class NewPollViewModel : BaseViewModel
 {
-    #region Services
-    protected UserServices _userServices;
-    protected PollServices _pollServices;
-    #endregion
-    
-    #region Properties
+    private readonly UserServices _userServices;
+    private readonly PollServices _pollServices;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsDiscardable))]
@@ -29,14 +25,14 @@ public partial class NewPollViewModel : BaseViewModel
     [ObservableProperty] 
     private TimeSpan _deadlineTime = TimeSpan.FromHours(23);
 
-    protected string _errorMessageTitle = "";
-    protected string _errorMessageDescription = "";
-
-    public bool IsDiscardable => string.IsNullOrWhiteSpace(Title) || string.IsNullOrWhiteSpace(Description);
+    private string _errorMessageTitle = "";
+    private string _errorMessageDescription = "";
 
     public ObservableCollection<OptionData> Options { get; set; }
 
-    #endregion
+    public bool IsDiscardable =>
+        string.IsNullOrWhiteSpace(Title) || string.IsNullOrWhiteSpace(Description);
+
     
     public NewPollViewModel(UserServices userServices, PollServices pollServices)
     {
@@ -52,19 +48,17 @@ public partial class NewPollViewModel : BaseViewModel
         OnPropertyChanged(nameof(CanPublish));
     }
     
-    #region Command Implementations
-    
     [RelayCommand]
-    public async void AddOption()
+    public async Task AddOption()
     {
         if (Application.Current?.MainPage == null)
             return;
         
         string result = await Application.Current.MainPage.DisplayPromptAsync(
-            "Add Option", 
-            "Enter the option text:", 
-            accept: "Add", 
-            cancel: "Cancel");
+                        "Add Option",
+                        "Enter the option text:",
+                        accept: "Add",
+                        cancel: "Cancel");
         
         if (string.IsNullOrWhiteSpace(result))
             return;
@@ -85,24 +79,31 @@ public partial class NewPollViewModel : BaseViewModel
     }
     
     //Because of the UI changes this has to be a method, which is called from the code behind,
-    //to be able to display a DisplayAlert and to tell the Navigation class to go back
+    //to be able to display a DisplayAlert and to tell the Navigation class to go back.
     public async Task<bool> Publish()
     {
-        if (CanPublish()){
-            _pollServices.AddPoll(_userServices.LoggedInUser, Title, Description, DeadlineDate + DeadlineTime, Options.ToList(), new List<VotesData>());
+        if (CanPublish())
+        {
+            _pollServices.AddPoll(_userServices.LoggedInUser,
+                Title,
+                Description,
+                DeadlineDate + DeadlineTime,
+                Options.ToList(),
+                new List<VotesData>()
+            );
+
             return true;
-        } else {
+        }
+
         await Application.Current.MainPage.DisplayAlert(
             _errorMessageTitle, 
             _errorMessageDescription, 
             cancel: "OK");
+
         return false;
-        }
     }
-    #endregion
     
-    #region Field / Type Checks
-    public bool CanPublish()
+    private bool CanPublish()
     {
         _errorMessageDescription = "";
         _errorMessageTitle = "";
@@ -110,66 +111,69 @@ public partial class NewPollViewModel : BaseViewModel
         return TitleCheck() && DoesAlreadyExist() && DescriptionCheck() && DeadlineCheck() && OptionsCheck() && UserStatusCheck();
     }
 
-    protected bool TitleCheck()
+    private bool TitleCheck()
     {
-        if (Title.Length > 0 && Title.Length < 50){
+        if (Title.Length > 0 && Title.Length < 50)
             return true;
-        }
+
         _errorMessageTitle = "Check the title entry!";
         _errorMessageDescription = "The title must be between 1 and 49 characters long!";
+
         return false;
     }
 
-    protected bool DescriptionCheck()
+    private bool DescriptionCheck()
     {
         if (Description.Length < 200 && Description.Length > 0) 
             return true;
 
         _errorMessageTitle = "Check the description entry!";
         _errorMessageDescription = "The description must be between 1 and 199 characters long!";
+
         return false;
     }
 
-    protected bool DeadlineCheck()
+    private bool DeadlineCheck()
     {
         if (DeadlineDate.Date + DeadlineTime >= DateTime.Now.AddHours(1)) 
             return true;
 
         _errorMessageTitle = "Check the time / date!";
         _errorMessageDescription = "The deadline must at least be 1 hour in the future!";
+
         return false;
     }
 
-    protected bool OptionsCheck()
+    private bool OptionsCheck()
     {
         if (Options.Count > 1 && Options.Count < 10)
             return true;
 
         _errorMessageTitle = "Check the options!";
         _errorMessageDescription = "Must have at least 2, and at maximum 9 options!";
+
         return false;
     }
 
-    protected bool UserStatusCheck()
+    private bool UserStatusCheck()
     {
         if (!_userServices.LoggedInUser.IsBlocked)
             return true;
 
         _errorMessageTitle = "Somebody was a naughty boy! UwU ;)";
         _errorMessageDescription = "Contact an administrator about this privilege restriction!";
+
         return false;
     }
 
-    protected bool DoesAlreadyExist()
+    private bool DoesAlreadyExist()
     {
         if (!_pollServices.Polls.ContainsKey(Title))
-        {
             return true;
-        }
 
         _errorMessageTitle = "This title already exists!";
         _errorMessageDescription = "Please try again with a different title!";
+
         return false;
     }
-    #endregion
 }

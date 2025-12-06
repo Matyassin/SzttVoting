@@ -17,10 +17,10 @@ public partial class ListPollsView : ContentPage
     
     private void OnOptionCheckedChanged(object sender, CheckedChangedEventArgs e)
     {
-        if (!e.Value) return;
+        if (!e.Value)
+            return;
 
         var radioButton = sender as RadioButton;
-        
         var selectedOption = radioButton?.Value as OptionData;
         
         if (BindingContext is ListPollsViewModel _vm && selectedOption != null)
@@ -32,6 +32,8 @@ public partial class ListPollsView : ContentPage
     private void Button_OnClicked(object? sender, EventArgs e)
     {
         if (_vm.CanModifyVote)
+        {
             Navigation.PushAsync(new ModifyPollView(_vm.UserService, _vm.PollService, _vm.SelectedPoll));
+        }
     }
 }
