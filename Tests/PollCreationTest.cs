@@ -5,7 +5,7 @@ namespace Tests;
 
 public class PollCreationTest
 {
-    private PollServices _pServices = new PollServicesHelper();
+    private PollServices _services = new PollServicesHelper();
     
     [Fact]
     public void TestCreatePoll()

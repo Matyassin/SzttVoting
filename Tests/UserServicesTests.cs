@@ -34,6 +34,6 @@ public class UserServicesTests
 
         userService.ClearLoggedInUser();
 
-        Assert.NotEqual("puszi@gmail.com", userService.LoggedInUser.Email);
+        Assert.Null(userService.LoggedInUser);
     }
 }
