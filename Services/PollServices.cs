@@ -43,7 +43,7 @@ public class PollServices : IDataService
             }
         }
         
-        //Polls[currPoll.Title].Votes.Add(currVote);
+        Polls[currPoll.Title].Votes.Add(currVote);
         Save();
     }
 
