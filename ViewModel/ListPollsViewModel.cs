@@ -22,7 +22,8 @@ public partial class ListPollsViewModel : BaseViewModel
 
     public bool CanSubmitVote =>
         SelectedPoll != null &&
-        OtherPolls.Contains(SelectedPoll);
+        OtherPolls.Contains(SelectedPoll) &&
+        SelectedPoll.Votes.All(vote => vote.VoterID != UserService.LoggedInUser.Guid);
 
     public bool CanCloseVote =>
         SelectedPoll != null &&
@@ -96,6 +97,8 @@ public partial class ListPollsViewModel : BaseViewModel
         
         var newVote = new VotesData(UserService.LoggedInUser.Guid, SelectedOption.Id);
         PollService.AddOrModifyVote(SelectedPoll, newVote);
+
+        OnPropertyChanged(nameof(CanSubmitVote));
     }
 
     [RelayCommand]
