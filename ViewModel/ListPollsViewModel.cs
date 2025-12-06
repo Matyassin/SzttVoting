@@ -72,7 +72,7 @@ public partial class ListPollsViewModel : BaseViewModel
             return;
         
         var newVote = new VotesData(UserService.LoggedInUser.Guid, SelectedOption.Id);
-        PollService.AddVote(SelectedPoll ,newVote);
+        PollService.AddOrModifyVote(SelectedPoll ,newVote);
     }
 
     [RelayCommand]

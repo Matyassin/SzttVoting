@@ -1,11 +1,16 @@
+using System.Diagnostics.Tracing;
+using Microsoft.Maui.Controls.Shapes;
 using Model;
 using Newtonsoft.Json;
+using Path = System.IO.Path;
 
 namespace Services;
 
 public class PollServices : IDataService
 {
     public Dictionary<string, PollData> Polls { get; private set; } = new();
+    
+    //Protected, not readonly -> Testable
     protected string _fileName = "polldata.json";
 
     public void AddPoll(UserData currUser, string title, string desc, DateTime deadline, List<OptionData> options, List<VotesData> votes)
@@ -23,22 +28,37 @@ public class PollServices : IDataService
         Save();
     }
 
-    public void AddVote(PollData currPoll, VotesData currVote)
+    public void AddOrModifyVote(PollData currPoll, VotesData currVote)
     {
-        //TODO - Check
-        Polls[currPoll.Title].Votes.Add(currVote);
+        //TODO - Seperate into different method (Modification), and clean up
+        var votes = Polls[currPoll.Title].Votes;
+        foreach (var vote in votes)
+        {
+            if (vote.VoterID == currVote.VoterID)
+            {
+                votes.Remove(vote);
+                votes.Add(currVote);
+                Save();
+                return;
+            }
+        }
+        
+        //Polls[currPoll.Title].Votes.Add(currVote);
         Save();
+    }
+
+    public void ModifyVote(VotesData currVote, VotesData existingVote)
+    {
+        
     }
 
     public OptionData? LoadPoll(String userId, PollData poll)
     {
-        if (!Polls.ContainsKey(poll.Title))
-            return null;
+        if (!Polls.ContainsKey(poll.Title)) return null;
 
         var userVote = poll.Votes.FirstOrDefault(vote => vote.VoterID == userId);
         
-        if (userVote is null)
-            return null;
+        if (userVote is null) return null;
 
         return poll.Options.FirstOrDefault(option => option.Id == userVote.RelatedOption);
     }
