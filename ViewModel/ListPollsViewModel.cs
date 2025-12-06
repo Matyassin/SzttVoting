@@ -24,11 +24,12 @@ public partial class ListPollsViewModel : BaseViewModel
 
     public bool CanCloseVote =>
         SelectedPoll != null &&
-        UserPolls.Contains(SelectedPoll) || UserService.LoggedInUser.IsAdmin;
+        (UserPolls.Contains(SelectedPoll) || (UserService.LoggedInUser.IsAdmin && !ArchivedPolls.Contains(SelectedPoll)));
 
     public bool CanModifyVote =>
-        // and no one has voted on this current poll &&
-        SelectedPoll?.Votes.Count == 0 && CanCloseVote || UserService.LoggedInUser.IsAdmin;
+        SelectedPoll != null &&
+        SelectedPoll.Votes.Count == 0 &&
+        (UserPolls.Contains(SelectedPoll) || (UserService.LoggedInUser.IsAdmin && !ArchivedPolls.Contains(SelectedPoll)));
 
     public ListPollsViewModel(UserServices userServices, PollServices pollServices)
     {
@@ -70,8 +71,8 @@ public partial class ListPollsViewModel : BaseViewModel
             return;
 
         OnPropertyChanged(nameof(CanVote));
-        OnPropertyChanged(nameof(CanModifyVote));
         OnPropertyChanged(nameof(CanCloseVote));
+        OnPropertyChanged(nameof(CanModifyVote));
 
         SelectedOption = PollService.LoadPoll(UserService.LoggedInUser.Guid, value);
     }
