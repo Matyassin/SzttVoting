@@ -7,6 +7,7 @@
              xmlns:Converters="clr-namespace:ViewModel.Converter;assembly=ViewModel">
     <ContentPage.Resources>
         <Converters:IsNotNullConverter x:Key="IsNotNullConverter"/>
+        <Converters:RemainingTimeConverter x:Key="RemainingTimeCoverter"/>
     </ContentPage.Resources>
         <Border BackgroundColor="SlateGray" 
                 StrokeShape="RoundRectangle 40"
@@ -51,7 +52,7 @@
                                                         FontSize="18"
                                                         TextColor="White"/>
 
-                                                <Label Text="{Binding Deadline, StringFormat='Deadline: {0}'}"
+                                                <Label Text="{Binding Deadline, Converter={StaticResource RemainingTimeCoverter}, StringFormat='Deadline: {0}'}"
                                                         FontSize="14"
                                                         TextColor="White"/>
 
@@ -92,7 +93,7 @@
                                                        FontSize="18"
                                                        TextColor="White"/>
 
-                                                <Label Text="{Binding Deadline, StringFormat='Deadline: {0}'}"
+                                                <Label Text="{Binding Deadline, Converter={StaticResource RemainingTimeCoverter}, StringFormat='Deadline: {0}'}"
                                                        FontSize="14"
                                                        TextColor="White"/>
 
@@ -133,11 +134,7 @@
                                                        FontSize="18"
                                                        TextColor="White"/>
 
-                                                <Label Text="{Binding Deadline, StringFormat='Deadline: {0}'}"
-                                                       FontSize="14"
-                                                       TextColor="White"/>
-
-                                            </VerticalStackLayout>
+                                                </VerticalStackLayout>
 
                                         </Grid>
                                     </Border>
@@ -203,7 +200,8 @@
                                                 
                                                 <RadioButton Content="{Binding Text}" 
                                                              HorizontalOptions="Center" 
-                                                             VerticalOptions="Center"/>
+                                                             VerticalOptions="Center"
+                                                             GroupName="PollOptions"/>
                                                 
                                             </Border>
                                         </DataTemplate>

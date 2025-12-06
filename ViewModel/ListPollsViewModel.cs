@@ -12,11 +12,10 @@ public partial class ListPollsViewModel : BaseViewModel
     public ObservableCollection<PollData> OtherPolls { get; private set; } = new();
     public ObservableCollection<PollData> ArchivedPolls { get; private set; } = new();
     
-    [ObservableProperty]
-    private PollData? _selectedPoll;
-
     public PollServices PollService { get; private set; }
     public UserServices UserService { get; private set; }
+
+    [ObservableProperty] private PollData? _selectedPoll;
 
     public ListPollsViewModel(UserServices userServices, PollServices pollServices)
     {
