@@ -88,6 +88,21 @@ public partial class ListPollsViewModel : BaseViewModel
     }
 
     [RelayCommand]
+    private void CloseVote()
+    {
+        if (SelectedOption == null)
+            return;
+
+        SelectedPoll.IsActive = false;
+        SeperatePolls();
+        PollService.Save();
+
+        OnPropertyChanged(nameof(CanVote));
+        OnPropertyChanged(nameof(CanCloseVote));
+        OnPropertyChanged(nameof(CanModifyVote));
+    }
+
+    [RelayCommand]
     private void SelectOption(OptionData option)
     {
         if (option == null)

@@ -296,6 +296,8 @@
                                                                 Path=CanModifyVote}"/>
 
                                     <Button Text="Close Vote"
+                                            Command="{Binding   Source={RelativeSource AncestorType={x:Type ViewModels:ListPollsViewModel}},
+                                                                Path=CloseVoteCommand}"
                                             IsVisible="{Binding Source={RelativeSource AncestorType={x:Type ViewModels:ListPollsViewModel}},
                                                                 Path=CanCloseVote}"/>
 
