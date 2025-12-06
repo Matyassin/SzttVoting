@@ -27,18 +27,18 @@ public class PollServices : IDataService
     {
         //TODO - Seperate into different method (Modification), and clean up
         var votes = Polls[currPoll.Title].Votes;
-        foreach (var vote in votes)
+        var existingVote = votes.FirstOrDefault(v => v.VoterID == currVote.VoterID);
+
+        if (existingVote != null)
         {
-            if (vote.VoterID == currVote.VoterID)
-            {
-                votes.Remove(vote);
-                votes.Add(currVote);
-            }
-            else
-            {
-                Polls[currPoll.Title].Votes.Add(currVote);
-            }
+            votes.Remove(existingVote);
+            votes.Add(currVote);
         }
+        else
+        {
+            votes.Add(currVote);
+        }
+
         Save();
     }
 
