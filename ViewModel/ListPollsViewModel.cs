@@ -1,8 +1,8 @@
 ﻿using Model;
 using Services;
+using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 
 namespace ViewModel;
 
@@ -19,7 +19,7 @@ public partial class ListPollsViewModel : BaseViewModel
     [ObservableProperty] private OptionData? _selectedOption;
 
     public bool CanVote =>
-        SelectedOption != null && SelectedPoll != null &&
+        SelectedPoll != null &&
         OtherPolls.Contains(SelectedPoll);
 
     public bool CanCloseVote =>
@@ -79,11 +79,11 @@ public partial class ListPollsViewModel : BaseViewModel
     [RelayCommand]
     private void SubmitVote()
     {
-        if (!CanVote)
+        if (!CanVote && SelectedOption == null)
             return;
         
         var newVote = new VotesData(UserService.LoggedInUser.Guid, SelectedOption.Id);
-        PollService.AddOrModifyVote(SelectedPoll ,newVote);
+        PollService.AddOrModifyVote(SelectedPoll, newVote);
     }
 
     [RelayCommand]
