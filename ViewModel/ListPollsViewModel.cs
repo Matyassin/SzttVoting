@@ -18,22 +18,23 @@ public partial class ListPollsViewModel : BaseViewModel
     [ObservableProperty] private PollData? _selectedPoll;
     [ObservableProperty] private OptionData? _selectedOption;
 
-    public bool CanVote =>
+    public bool CanSubmitVote =>
         SelectedPoll != null &&
         OtherPolls.Contains(SelectedPoll);
-
-    public bool CanCloseVote =>
-        SelectedPoll != null &&
-        (UserPolls.Contains(SelectedPoll) || (UserService.LoggedInUser.IsAdmin && !ArchivedPolls.Contains(SelectedPoll)));
 
     public bool CanModifyVote =>
         SelectedPoll != null &&
         SelectedPoll.Votes.Count == 0 &&
         (UserPolls.Contains(SelectedPoll) || (UserService.LoggedInUser.IsAdmin && !ArchivedPolls.Contains(SelectedPoll)));
 
+    public bool CanCloseVote =>
+        SelectedPoll != null &&
+        (UserPolls.Contains(SelectedPoll) || (UserService.LoggedInUser.IsAdmin && !ArchivedPolls.Contains(SelectedPoll)));
+
     public bool CanDeleteVote =>
         SelectedPoll != null &&
         (UserPolls.Contains(SelectedPoll) || UserService.LoggedInUser.IsAdmin);
+
 
     public ListPollsViewModel(UserServices userServices, PollServices pollServices)
     {
@@ -73,7 +74,7 @@ public partial class ListPollsViewModel : BaseViewModel
         if (value is null)
             return;
 
-        OnPropertyChanged(nameof(CanVote));
+        OnPropertyChanged(nameof(CanSubmitVote));
         OnPropertyChanged(nameof(CanCloseVote));
         OnPropertyChanged(nameof(CanModifyVote));
 
@@ -83,11 +84,17 @@ public partial class ListPollsViewModel : BaseViewModel
     [RelayCommand]
     private void SubmitVote()
     {
-        if (!CanVote || SelectedOption == null)
+        if (!CanSubmitVote || SelectedOption == null)
             return;
         
         var newVote = new VotesData(UserService.LoggedInUser.Guid, SelectedOption.Id);
         PollService.AddOrModifyVote(SelectedPoll, newVote);
+    }
+
+    [RelayCommand]
+    private void ModifyVote()
+    {
+        return;
     }
 
     [RelayCommand]
@@ -102,7 +109,7 @@ public partial class ListPollsViewModel : BaseViewModel
         
         CloseVoteCommand.NotifyCanExecuteChanged();
 
-        OnPropertyChanged(nameof(CanVote));
+        OnPropertyChanged(nameof(CanSubmitVote));
         OnPropertyChanged(nameof(CanCloseVote));
         OnPropertyChanged(nameof(CanModifyVote));
     }
