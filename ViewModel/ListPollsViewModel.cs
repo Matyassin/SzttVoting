@@ -35,7 +35,7 @@ public partial class ListPollsViewModel : BaseViewModel
 
     public bool CanDeleteVote =>
         SelectedPoll != null &&
-        (UserPolls.Contains(SelectedPoll) || UserService.LoggedInUser.IsAdmin);
+        UserService.LoggedInUser.IsAdmin;
 
     public bool IsStatisticsVisible =>
         SelectedPoll != null && !SelectedPoll.IsActive;
