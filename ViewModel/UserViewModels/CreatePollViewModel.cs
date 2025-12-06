@@ -106,13 +106,8 @@ public partial class NewPollViewModel : BaseViewModel
     {
         _errorMessageDescription = "";
         _errorMessageTitle = "";
-        
-        if (TitleCheck() && DoesAlreadyExist()&& DescriptionCheck() && DeadlineCheck() && OptionsCheck() && UserStatusCheck() )
-        {
-            return true;
-        }
-        
-        return false;
+
+        return TitleCheck() && DoesAlreadyExist() && DescriptionCheck() && DeadlineCheck() && OptionsCheck() && UserStatusCheck();
     }
 
     private bool TitleCheck()
@@ -141,6 +136,7 @@ public partial class NewPollViewModel : BaseViewModel
     {
         if (Description.Length < 200 && Description.Length > 0) 
             return true;
+
         _errorMessageTitle = "Check the description entry!";
         _errorMessageDescription = "The description must be between 1 and 199 characters long!";
         return false;
@@ -150,6 +146,7 @@ public partial class NewPollViewModel : BaseViewModel
     {
         if (DeadlineDate.Date + DeadlineTime >= DateTime.Now.AddHours(1)) 
             return true;
+
         _errorMessageTitle = "Check the time / date!";
         _errorMessageDescription = "The deadline must at least be 1 hour in the future!";
         return false;
@@ -159,6 +156,7 @@ public partial class NewPollViewModel : BaseViewModel
     {
         if (Options.Count > 0 && Options.Count < 10)
             return true;
+
         _errorMessageTitle = "Check the options!";
         _errorMessageDescription = "Must have at least one, and maximum 9 options!";
         return false;
@@ -168,6 +166,7 @@ public partial class NewPollViewModel : BaseViewModel
     {
         if (!_userServices.LoggedInUser.IsBlocked)
             return true;
+
         _errorMessageTitle = "Somebody was a naughty boy! UwU ;)";
         _errorMessageDescription = "Contact an administrator about this privilege restriction!";
         return false;
@@ -179,6 +178,7 @@ public partial class NewPollViewModel : BaseViewModel
         {
             return true;
         }
+
         _errorMessageTitle = "This title already exists!";
         _errorMessageDescription = "Please try again with a different title!";
         return false;

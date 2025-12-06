@@ -7,8 +7,7 @@ public class UserServices : IDataService
 {
     public UserData LoggedInUser { get; private set; }
 
-    public Dictionary<string, UserData> Users;
-    //Protected -> Testable
+    public Dictionary<string, UserData> Users = new();
     protected string _fileName = "userprofiles.json";
 
     public const string EmailPattern = @"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}";
@@ -89,7 +88,9 @@ public class UserServices : IDataService
 
     public bool ContainsEmail(string email)
     {
-        if (string.IsNullOrEmpty(email)) return false;
+        if (string.IsNullOrEmpty(email))
+            return false;
+
         return Users.ContainsKey(email);
     }
 
