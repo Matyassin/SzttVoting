@@ -197,7 +197,7 @@
                                                 <Label Text="{Binding Title}"
                                                        FontSize="18"
                                                        TextColor="White"/>
-
+                                                
                                                 </VerticalStackLayout>
 
                                         </Grid>
@@ -259,6 +259,7 @@
                                     <BindableLayout.ItemTemplate>
                                         <DataTemplate>
                                             <Border StrokeThickness="0" Padding="5">
+                                                <HorizontalStackLayout>
                                                 <RadioButton Content="{Binding Text}"
                                                              TextColor="White"
                                                              FontSize="16"
@@ -268,15 +269,20 @@
                                                              IsEnabled="{Binding Source={RelativeSource AncestorType={x:Type ViewModels:ListPollsViewModel}},
                                                                                  Path=CanVote}">
 
-                                                <RadioButton.IsChecked>
-                                                    <MultiBinding Converter="{StaticResource ComparisonConverter}" Mode="OneWay">
-                                                        <Binding  Path="." />
-                                                        <Binding  Source="{RelativeSource AncestorType={x:Type ViewModels:ListPollsViewModel}}"
-                                                                  Path="SelectedOption" />
-                                                        
-                                                    </MultiBinding>
-                                                </RadioButton.IsChecked>
+                                                    <RadioButton.IsChecked>
+                                                        <MultiBinding Converter="{StaticResource ComparisonConverter}" Mode="OneWay">
+                                                            <Binding  Path="." />
+                                                            <Binding  Source="{RelativeSource AncestorType={x:Type ViewModels:ListPollsViewModel}}"
+                                                                      Path="SelectedOption" />
+                                                        </MultiBinding>
+                                                    </RadioButton.IsChecked>
                                                 </RadioButton>
+                                                    <Label Text="{Binding PercentageSelected}" 
+                                                           Padding="5" 
+                                                           TextColor="BlueViolet"
+                                                           IsVisible="{Binding Source={RelativeSource AncestorType={x:Type ViewModels:ListPollsViewModel}}, 
+                                                                Path=IsStatisticsVisible}"/>
+                                                </HorizontalStackLayout>
                                             </Border>
                                         </DataTemplate>
                                     </BindableLayout.ItemTemplate>

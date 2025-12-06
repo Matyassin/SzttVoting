@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Model;
@@ -32,6 +33,9 @@ public partial class OptionData(string text) : ObservableObject
 {
     [ObservableProperty] private string _id = Guid.NewGuid().ToString();
     [ObservableProperty] private string _text = text;
+    
+    //For the vote percentage
+    [ObservableProperty, JsonIgnore] private string _percentageSelected = "0%";
 }
 
 public partial class VotesData(string guid, string relatedOption) : ObservableObject

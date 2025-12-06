@@ -47,6 +47,17 @@ public class PollServices : IDataService
         
     }
 
+    public void RecalculatePercentage(PollData currPoll)
+    {
+        var totalVotes = currPoll.Votes.Count;
+        if (totalVotes == 0) return;
+
+        foreach (var voteOption in currPoll.Options)
+        {
+            voteOption.PercentageSelected = $"{(currPoll.Votes.Count(v => v.RelatedOption == voteOption.Id) / totalVotes) * 100}%";
+        }
+    }
+
     public OptionData? LoadPoll(string userId, PollData poll)
     {
         if (!Polls.ContainsKey(poll.Title))

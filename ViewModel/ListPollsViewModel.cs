@@ -15,7 +15,9 @@ public partial class ListPollsViewModel : BaseViewModel
     public PollServices PollService { get; private set; }
     public UserServices UserService { get; private set; }
 
-    [ObservableProperty] private PollData? _selectedPoll;
+    [ObservableProperty, NotifyPropertyChangedFor(nameof(IsStatisticsVisible))] 
+    private PollData? _selectedPoll;
+    
     [ObservableProperty] private OptionData? _selectedOption;
 
     public bool CanVote =>
@@ -24,12 +26,14 @@ public partial class ListPollsViewModel : BaseViewModel
 
     public bool CanCloseVote =>
         SelectedPoll != null &&
-        (UserPolls.Contains(SelectedPoll) || (UserService.LoggedInUser.IsAdmin && !ArchivedPolls.Contains(SelectedPoll)));
+        (UserPolls.Contains(SelectedPoll) || (UserService.LoggedInUser.IsAdmin && SelectedPoll.IsActive));
 
     public bool CanModifyVote =>
         SelectedPoll != null &&
         SelectedPoll.Votes.Count == 0 &&
-        (UserPolls.Contains(SelectedPoll) || (UserService.LoggedInUser.IsAdmin && !ArchivedPolls.Contains(SelectedPoll)));
+        (UserPolls.Contains(SelectedPoll) || (UserService.LoggedInUser.IsAdmin && SelectedPoll.IsActive));
+
+    public bool IsStatisticsVisible => SelectedPoll != null && !SelectedPoll.IsActive;
 
     public ListPollsViewModel(UserServices userServices, PollServices pollServices)
     {
@@ -49,8 +53,8 @@ public partial class ListPollsViewModel : BaseViewModel
         {
             if (DateTime.Now > pollData.Deadline || !pollData.IsActive)
             {
-                pollData.IsActive = false;
                 ArchivedPolls.Add(pollData);
+                PollService.RecalculatePercentage(pollData);
             }
             else if (UserService.LoggedInUser.Guid == pollData.CreatorID)
             {
