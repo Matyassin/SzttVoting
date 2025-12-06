@@ -23,6 +23,15 @@ public class PollServices : IDataService
         Save();
     }
 
+    public void RemovePoll(string title)
+    {
+        if (Polls.ContainsKey(title))
+        {
+            Polls.Remove(title);
+            Save();
+        }
+    }
+
     public void AddOrModifyVote(PollData currPoll, VotesData currVote)
     {
         //TODO - Seperate into different method (Modification), and clean up

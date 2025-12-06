@@ -117,7 +117,27 @@ public partial class ListPollsViewModel : BaseViewModel
     [RelayCommand]
     private void DeleteVote()
     {
-        return;
+        if (SelectedPoll == null)
+            return;
+
+        PollService.RemovePoll(SelectedPoll.Title);
+
+        if (UserPolls.Contains(SelectedPoll))
+        {
+            UserPolls.Remove(SelectedPoll);
+        }
+        else if (OtherPolls.Contains(SelectedPoll))
+        {
+            OtherPolls.Remove(SelectedPoll);
+        }
+        else if (ArchivedPolls.Contains(SelectedPoll))
+        {
+            ArchivedPolls.Remove(SelectedPoll);
+        }
+
+        OnPropertyChanged(nameof(CanSubmitVote));
+        OnPropertyChanged(nameof(CanCloseVote));
+        OnPropertyChanged(nameof(CanModifyVote));
     }
 
     [RelayCommand]
