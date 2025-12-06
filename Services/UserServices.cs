@@ -8,7 +8,6 @@ public class UserServices : IDataService
     public UserData LoggedInUser { get; private set; }
 
     public Dictionary<string, UserData> Users = new();
-    //Protected -> Testable
     protected string _fileName = "userprofiles.json";
 
     public const string EmailPattern = @"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}";
