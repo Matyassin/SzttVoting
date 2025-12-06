@@ -12,7 +12,7 @@ public partial class PollData : ObservableObject
     [ObservableProperty] private DateTime _created;
     [ObservableProperty] private DateTime? _deadline;
     [ObservableProperty] private bool _isActive;
-    [ObservableProperty] private ObservableCollection<OptionData> _options;
+    [ObservableProperty] private List<OptionData> _options;
     [ObservableProperty] private List<VotesData> _votes;
 
     public PollData(string creatorGuid, string title, string description, DateTime? deadline, List<OptionData> options, List<VotesData> votes)
