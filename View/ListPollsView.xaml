@@ -9,10 +9,12 @@
         <Converters:IsNotNullConverter x:Key="IsNotNullConverter"/>
         <Converters:RemainingTimeConverter x:Key="RemainingTimeCoverter"/>
     </ContentPage.Resources>
+    
         <Border BackgroundColor="SlateGray" 
                 StrokeShape="RoundRectangle 40"
                 Margin="50"
                 StrokeThickness="2">
+            
         <Grid ColumnDefinitions="30*, 70*"
               Margin="20">
 
@@ -52,7 +54,7 @@
                                                         FontSize="18"
                                                         TextColor="White"/>
 
-                                                <Label Text="{Binding Deadline, Converter={StaticResource RemainingTimeCoverter}, StringFormat='Deadline: {0}'}"
+                                                <Label Text="{Binding Deadline, Converter={StaticResource RemainingTimeCoverter}}"
                                                         FontSize="14"
                                                         TextColor="White"/>
 
@@ -93,7 +95,7 @@
                                                        FontSize="18"
                                                        TextColor="White"/>
 
-                                                <Label Text="{Binding Deadline, Converter={StaticResource RemainingTimeCoverter}, StringFormat='Deadline: {0}'}"
+                                                <Label Text="{Binding Deadline, Converter={StaticResource RemainingTimeCoverter}}"
                                                        FontSize="14"
                                                        TextColor="White"/>
 
