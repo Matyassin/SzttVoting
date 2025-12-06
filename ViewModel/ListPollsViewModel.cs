@@ -18,8 +18,9 @@ public partial class ListPollsViewModel : BaseViewModel
     [ObservableProperty] private PollData? _selectedPoll;
     [ObservableProperty] private OptionData? _selectedOption;
 
-    private bool CanVote =>
-        SelectedOption != null && SelectedPoll != null;
+    public bool CanVote =>
+        SelectedOption != null && SelectedPoll != null &&
+        OtherPolls.Contains(SelectedPoll);
 
     public ListPollsViewModel(UserServices userServices, PollServices pollServices)
     {
@@ -60,6 +61,7 @@ public partial class ListPollsViewModel : BaseViewModel
         if (value is null)
             return;
 
+        OnPropertyChanged(nameof(CanVote));
         SelectedOption = PollService.LoadPoll(UserService.LoggedInUser.Guid, value);
     }
 
