@@ -1,13 +1,19 @@
 ﻿using Model;
 using Services;
 using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace ViewModel;
 
-public class ListPollsViewModel : BaseViewModel
+public partial class ListPollsViewModel : BaseViewModel
 {
     public ObservableCollection<PollData> UserPolls { get; private set; } = new();
     public ObservableCollection<PollData> OtherPolls { get; private set; } = new();
+    public ObservableCollection<PollData> ArchivedPolls { get; private set; } = new();
+    
+    [ObservableProperty]
+    private PollData? _selectedPoll;
 
     public PollServices PollService { get; private set; }
     public UserServices UserService { get; private set; }
