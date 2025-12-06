@@ -154,11 +154,11 @@ public partial class NewPollViewModel : BaseViewModel
 
     private bool OptionsCheck()
     {
-        if (Options.Count > 0 && Options.Count < 10)
+        if (Options.Count > 1 && Options.Count < 10)
             return true;
 
         _errorMessageTitle = "Check the options!";
-        _errorMessageDescription = "Must have at least one, and maximum 9 options!";
+        _errorMessageDescription = "Must have at least 2, and at maximum 9 options!";
         return false;
     }
 
