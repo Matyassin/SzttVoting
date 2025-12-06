@@ -28,7 +28,7 @@ public partial class ListPollsViewModel : BaseViewModel
 
     public bool CanModifyVote =>
         // and no one has voted on this current poll &&
-        CanCloseVote;
+        SelectedPoll?.Votes.Count == 0 && CanCloseVote;
 
     public ListPollsViewModel(UserServices userServices, PollServices pollServices)
     {
@@ -79,7 +79,7 @@ public partial class ListPollsViewModel : BaseViewModel
     [RelayCommand]
     private void SubmitVote()
     {
-        if (!CanVote && SelectedOption == null)
+        if (!CanVote || SelectedOption == null)
             return;
         
         var newVote = new VotesData(UserService.LoggedInUser.Guid, SelectedOption.Id);
