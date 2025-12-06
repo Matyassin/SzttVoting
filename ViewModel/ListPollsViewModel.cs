@@ -10,16 +10,25 @@ public partial class ListPollsViewModel : BaseViewModel
 {
     public ObservableCollection<PollData> UserPolls { get; private set; } = new();
     public ObservableCollection<PollData> OtherPolls { get; private set; } = new();
-    
     public ObservableCollection<PollData> ArchivedPolls { get; private set; } = new();
-    
     public PollServices PollService { get; private set; }
     public UserServices UserService { get; private set; }
 
-    [ObservableProperty] private PollData? _selectedPoll;
+    [ObservableProperty] 
+    private PollData? _selectedPoll;
+
+    partial void OnSelectedPollChanged(PollData? value)
+    {
+        SelectedOption = null;
+        
+        if (value is null) return;
+
+        SelectedOption = PollService.LoadPoll(UserService.LoggedInUser.Guid, value);
+    }
     
-    [ObservableProperty, NotifyCanExecuteChangedFor(nameof(SubmitVoteCommand))] 
-    private OptionData? _selectedOption;
+    
+    [ObservableProperty]
+    public OptionData? _selectedOption;
     
     
 
@@ -63,7 +72,7 @@ public partial class ListPollsViewModel : BaseViewModel
     {
         if (!CanVote()) return;
         
-        var newVote = new VotesData(UserService.LoggedInUser.Guid, SelectedOption);
+        var newVote = new VotesData(UserService.LoggedInUser.Guid, SelectedOption.Id);
         PollService.AddVote(SelectedPoll ,newVote);
     }
     
@@ -78,6 +87,30 @@ public partial class ListPollsViewModel : BaseViewModel
 
         SelectedOption = option;
     }
+
+    /*private OptionData? GetOptionOrNull()
+    {
+        VotesData? foundVote = null;
+        var votes = SelectedPoll.Votes;
+        foreach (var vote in votes)
+        {
+            if (vote.VoterID == UserService.LoggedInUser.Guid) 
+                foundVote = vote;
+                break;
+        }
+        if (foundVote == null) return null;
+        return GetOptionByVoteAndId(SelectedPoll, foundVote);
+    }
+
+    private OptionData? GetOptionByVoteAndId(PollData poll, VotesData vote)
+    {
+        foreach (var i in poll.Options)
+        {
+            if (i.Id == vote.RelatedOption)
+                return i;
+        }
+        return null;
+    }*/
 
     #endregion
 }

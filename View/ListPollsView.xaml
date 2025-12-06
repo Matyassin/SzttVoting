@@ -8,7 +8,8 @@
     
     <ContentPage.Resources>
         <Converters:IsNotNullConverter x:Key="IsNotNullConverter"/>
-        <Converters:RemainingTimeConverter x:Key="RemainingTimeCoverter"/>
+        <Converters:RemainingTimeConverter x:Key="RemainingTimeConverter"/>
+        <Converters:ComparisonConverter x:Key="ComparisonConverter"/>
     </ContentPage.Resources>
     
         <Border BackgroundColor="SlateGray" 
@@ -77,7 +78,7 @@
                                                         FontSize="18"
                                                         TextColor="White"/>
 
-                                                <Label Text="{Binding Deadline, Converter={StaticResource RemainingTimeCoverter}}"
+                                                <Label Text="{Binding Deadline, Converter={StaticResource RemainingTimeConverter}}"
                                                         FontSize="14"
                                                         TextColor="White"/>
 
@@ -137,7 +138,7 @@
                                                        FontSize="18"
                                                        TextColor="White"/>
 
-                                                <Label Text="{Binding Deadline, Converter={StaticResource RemainingTimeCoverter}}"
+                                                <Label Text="{Binding Deadline, Converter={StaticResource RemainingTimeConverter}}"
                                                        FontSize="14"
                                                        TextColor="White"/>
 
@@ -263,8 +264,14 @@
                                                              FontSize="16"
                                                              GroupName="MyPollOptions"
                                                              Value="{Binding .}"
-                                                             CheckedChanged="OnOptionCheckedChanged"/>
-                    
+                                                             CheckedChanged="OnOptionCheckedChanged">
+                                                <RadioButton.IsChecked>
+                                                    <MultiBinding Converter="{StaticResource ComparisonConverter}" Mode="OneWay">
+                                                        <Binding Path="." />
+                                                        <Binding Source="{RelativeSource AncestorType={x:Type ViewModels:ListPollsViewModel}}" Path="SelectedOption" />
+                                                    </MultiBinding>
+                                                </RadioButton.IsChecked>
+                                                </RadioButton>
                                             </Border>
                                         </DataTemplate>
                                     </BindableLayout.ItemTemplate>

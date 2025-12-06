@@ -1,5 +1,8 @@
+using System.Diagnostics.Tracing;
+using Microsoft.Maui.Controls.Shapes;
 using Model;
 using Newtonsoft.Json;
+using Path = System.IO.Path;
 
 namespace Services;
 
@@ -31,6 +34,17 @@ public class PollServices : IDataService
         Polls[currPoll.Title].Votes.Add(currVote);
         
         Save();
+    }
+
+    public OptionData? LoadPoll(String userId, PollData poll)
+    {
+        if (!Polls.ContainsKey(poll.Title)) return null;
+
+        var userVote = poll.Votes.FirstOrDefault(vote => vote.VoterID == userId);
+        
+        if (userVote is null) return null;
+
+        return poll.Options.FirstOrDefault(option => option.Id == userVote.RelatedOption);
     }
 
     public void Save()
