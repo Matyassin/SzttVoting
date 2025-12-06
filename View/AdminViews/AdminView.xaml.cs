@@ -20,6 +20,7 @@ public partial class AdminView : ContentPage
         bool answer = await DisplayAlert("Sign Out?", "Are you sure you want to log out?", "Yes", "No");
         if (answer)
         {
+            _vm.UserServices.ClearLoggedInUser();
             await Navigation.PopToRootAsync();
         }
     }
