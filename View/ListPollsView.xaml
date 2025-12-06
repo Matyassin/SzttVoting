@@ -211,11 +211,11 @@
             </Border>
 
             <!-- RIGHT SIDE -->
-            <VerticalStackLayout Grid.Column="2">
+            <ScrollView Grid.Column="2">
                 <VerticalStackLayout Grid.Column="1"
                                      BindingContext="{Binding SelectedPoll}"
                                      IsVisible="{Binding ., Converter={StaticResource IsNotNullConverter}}">
-                    
+
 
                     <Border BackgroundColor="#20FFFFFF"
                             StrokeShape="RoundRectangle 40"
@@ -228,19 +228,19 @@
                                    FontSize="24"
                                    Padding="20"
                                    TextColor="White"/>
-                            
+
                             <Border StrokeThickness="1"
                                     Stroke="Black"/>
-                            
+
                             <Label Text="{Binding Title}"
                                    FontSize="50"
                                    TextColor="White"
                                    HorizontalOptions="Start"/>
-                            
+
                             <Label Text="{Binding Description, StringFormat='Description: {0}'}" 
                                    HorizontalOptions="Start"
                                    FontAttributes="Italic"/>
-                            
+
                             <Label Text="{Binding Created, StringFormat='Created: {0}'}"
                                    FontSize="14"
                                    TextColor="White"/>
@@ -248,19 +248,19 @@
                             <Label Text="{Binding Deadline, StringFormat='Deadline: {0}'}"
                                    FontSize="14"
                                    TextColor="White"/>
-                            
+
                             <Border StrokeThickness="1"
                                     Stroke="Black"/>
-                            
+
                             <StackLayout>
                                 <VerticalStackLayout BindableLayout.ItemsSource="{Binding Options}" 
                                                      Spacing="10">
-        
+
                                     <BindableLayout.ItemTemplate>
                                         <DataTemplate>
                                             <Border StrokeThickness="0" Padding="5">
                                                 <HorizontalStackLayout>
-                                                <RadioButton Content="{Binding Text}"
+                                                    <RadioButton Content="{Binding Text}"
                                                              TextColor="White"
                                                              FontSize="16"
                                                              GroupName="MyPollOptions"
@@ -269,14 +269,14 @@
                                                              IsEnabled="{Binding Source={RelativeSource AncestorType={x:Type ViewModels:ListPollsViewModel}},
                                                                                  Path=CanSubmitVote}">
 
-                                                    <RadioButton.IsChecked>
-                                                        <MultiBinding Converter="{StaticResource ComparisonConverter}" Mode="OneWay">
-                                                            <Binding  Path="." />
-                                                            <Binding  Source="{RelativeSource AncestorType={x:Type ViewModels:ListPollsViewModel}}"
+                                                        <RadioButton.IsChecked>
+                                                            <MultiBinding Converter="{StaticResource ComparisonConverter}" Mode="OneWay">
+                                                                <Binding  Path="." />
+                                                                <Binding  Source="{RelativeSource AncestorType={x:Type ViewModels:ListPollsViewModel}}"
                                                                       Path="SelectedOption" />
-                                                        </MultiBinding>
-                                                    </RadioButton.IsChecked>
-                                                </RadioButton>
+                                                            </MultiBinding>
+                                                        </RadioButton.IsChecked>
+                                                    </RadioButton>
                                                     <Label Text="{Binding PercentageSelected}" 
                                                            Padding="5" 
                                                            TextColor="BlueViolet"
@@ -290,7 +290,7 @@
 
                                 <HorizontalStackLayout HorizontalOptions="End"
                                                        Spacing="10">
-                                    
+
                                     <Button Text="Submit Vote"
                                             Command="{Binding   Source={RelativeSource AncestorType={x:Type ViewModels:ListPollsViewModel}},
                                                                 Path=SubmitVoteCommand}"
@@ -317,10 +317,10 @@
 
                                 </HorizontalStackLayout>
                             </StackLayout>
-                     </VerticalStackLayout>
+                        </VerticalStackLayout>
                     </Border>
                 </VerticalStackLayout>
-            </VerticalStackLayout>
+            </ScrollView>
         </Grid>
     </Border>
 </ContentPage>
