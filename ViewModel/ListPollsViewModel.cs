@@ -20,9 +20,10 @@ public partial class ListPollsViewModel : BaseViewModel
     
     [ObservableProperty] private OptionData? _selectedOption;
 
-    public bool CanVote =>
+    public bool CanSubmitVote =>
         SelectedPoll != null &&
         OtherPolls.Contains(SelectedPoll);
+    
 
     public bool CanCloseVote =>
         SelectedPoll != null &&
@@ -53,6 +54,7 @@ public partial class ListPollsViewModel : BaseViewModel
         {
             if (DateTime.Now > pollData.Deadline || !pollData.IsActive)
             {
+                pollData.IsActive = false;
                 ArchivedPolls.Add(pollData);
                 PollService.RecalculatePercentage(pollData);
             }
@@ -74,7 +76,7 @@ public partial class ListPollsViewModel : BaseViewModel
         if (value is null)
             return;
 
-        OnPropertyChanged(nameof(CanVote));
+        OnPropertyChanged(nameof(CanSubmitVote));
         OnPropertyChanged(nameof(CanCloseVote));
         OnPropertyChanged(nameof(CanModifyVote));
 
@@ -84,11 +86,17 @@ public partial class ListPollsViewModel : BaseViewModel
     [RelayCommand]
     private void SubmitVote()
     {
-        if (!CanVote || SelectedOption == null)
+        if (!CanSubmitVote || SelectedOption == null)
             return;
         
         var newVote = new VotesData(UserService.LoggedInUser.Guid, SelectedOption.Id);
         PollService.AddOrModifyVote(SelectedPoll, newVote);
+    }
+
+    [RelayCommand]
+    private void ModifyVote()
+    {
+        return;
     }
 
     [RelayCommand]
@@ -103,7 +111,33 @@ public partial class ListPollsViewModel : BaseViewModel
         
         CloseVoteCommand.NotifyCanExecuteChanged();
 
-        OnPropertyChanged(nameof(CanVote));
+        OnPropertyChanged(nameof(CanSubmitVote));
+        OnPropertyChanged(nameof(CanCloseVote));
+        OnPropertyChanged(nameof(CanModifyVote));
+    }
+
+    [RelayCommand]
+    private void DeleteVote()
+    {
+        if (SelectedPoll == null)
+            return;
+
+        PollService.RemovePoll(SelectedPoll.Title);
+
+        if (UserPolls.Contains(SelectedPoll))
+        {
+            UserPolls.Remove(SelectedPoll);
+        }
+        else if (OtherPolls.Contains(SelectedPoll))
+        {
+            OtherPolls.Remove(SelectedPoll);
+        }
+        else if (ArchivedPolls.Contains(SelectedPoll))
+        {
+            ArchivedPolls.Remove(SelectedPoll);
+        }
+
+        OnPropertyChanged(nameof(CanSubmitVote));
         OnPropertyChanged(nameof(CanCloseVote));
         OnPropertyChanged(nameof(CanModifyVote));
     }

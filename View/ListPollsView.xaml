@@ -267,7 +267,7 @@
                                                              Value="{Binding .}"
                                                              CheckedChanged="OnOptionCheckedChanged"
                                                              IsEnabled="{Binding Source={RelativeSource AncestorType={x:Type ViewModels:ListPollsViewModel}},
-                                                                                 Path=CanVote}">
+                                                                                 Path=CanSubmitVote}">
 
                                                     <RadioButton.IsChecked>
                                                         <MultiBinding Converter="{StaticResource ComparisonConverter}" Mode="OneWay">
@@ -295,9 +295,11 @@
                                             Command="{Binding   Source={RelativeSource AncestorType={x:Type ViewModels:ListPollsViewModel}},
                                                                 Path=SubmitVoteCommand}"
                                             IsVisible="{Binding Source={RelativeSource AncestorType={x:Type ViewModels:ListPollsViewModel}},
-                                                                Path=CanVote}"/>
+                                                                Path=CanSubmitVote}"/>
 
                                     <Button Text="Modify Vote"
+                                            Command="{Binding   Source={RelativeSource AncestorType={x:Type ViewModels:ListPollsViewModel}},
+                                                                Path=ModifyVoteCommand}"
                                             IsVisible="{Binding Source={RelativeSource AncestorType={x:Type ViewModels:ListPollsViewModel}},
                                                                 Path=CanModifyVote}"/>
 
@@ -306,6 +308,12 @@
                                                                 Path=CloseVoteCommand}"
                                             IsVisible="{Binding Source={RelativeSource AncestorType={x:Type ViewModels:ListPollsViewModel}},
                                                                 Path=CanCloseVote}"/>
+
+                                    <Button Text="Delete Vote"
+                                            Command="{Binding   Source={RelativeSource AncestorType={x:Type ViewModels:ListPollsViewModel}},
+                                                                Path=DeleteVoteCommand}"
+                                            IsVisible="{Binding Source={RelativeSource AncestorType={x:Type ViewModels:ListPollsViewModel}},
+                                                                Path=CanDeleteVote}"/>
 
                                 </HorizontalStackLayout>
                             </StackLayout>
