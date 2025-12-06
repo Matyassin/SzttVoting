@@ -31,6 +31,10 @@ public partial class ListPollsViewModel : BaseViewModel
         SelectedPoll.Votes.Count == 0 &&
         (UserPolls.Contains(SelectedPoll) || (UserService.LoggedInUser.IsAdmin && !ArchivedPolls.Contains(SelectedPoll)));
 
+    public bool CanDeleteVote =>
+        SelectedPoll != null &&
+        (UserPolls.Contains(SelectedPoll) || UserService.LoggedInUser.IsAdmin);
+
     public ListPollsViewModel(UserServices userServices, PollServices pollServices)
     {
         PollService = pollServices;
@@ -49,7 +53,6 @@ public partial class ListPollsViewModel : BaseViewModel
         {
             if (DateTime.Now > pollData.Deadline || !pollData.IsActive)
             {
-                pollData.IsActive = false;
                 ArchivedPolls.Add(pollData);
             }
             else if (UserService.LoggedInUser.Guid == pollData.CreatorID)
@@ -102,6 +105,12 @@ public partial class ListPollsViewModel : BaseViewModel
         OnPropertyChanged(nameof(CanVote));
         OnPropertyChanged(nameof(CanCloseVote));
         OnPropertyChanged(nameof(CanModifyVote));
+    }
+
+    [RelayCommand]
+    private void DeleteVote()
+    {
+        return;
     }
 
     [RelayCommand]
