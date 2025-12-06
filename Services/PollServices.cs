@@ -25,6 +25,14 @@ public class PollServices : IDataService
         Save();
     }
 
+    public void AddVote(PollData currPoll, VotesData currVote)
+    {
+        //TODO - Check
+        Polls[currPoll.Title].Votes.Add(currVote);
+        
+        Save();
+    }
+
     public void Save()
     {
         string json = JsonConvert.SerializeObject(Polls, Formatting.Indented);

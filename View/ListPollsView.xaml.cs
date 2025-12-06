@@ -1,3 +1,4 @@
+using Model;
 using Services;
 using ViewModel;
 
@@ -12,5 +13,19 @@ public partial class ListPollsView : ContentPage
         InitializeComponent();
         _vm = new ListPollsViewModel(userServices, pollServices);
         BindingContext = _vm;
+    }
+    
+    private void OnOptionCheckedChanged(object sender, CheckedChangedEventArgs e)
+    {
+        if (!e.Value) return;
+
+        var radioButton = sender as RadioButton;
+        
+        var selectedOption = radioButton?.Value as OptionData;
+        
+        if (BindingContext is ListPollsViewModel _vm && selectedOption != null)
+        {
+            _vm.SelectOptionCommand.Execute(selectedOption);
+        }
     }
 }

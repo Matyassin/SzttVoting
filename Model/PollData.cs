@@ -35,10 +35,10 @@ public partial class OptionData(string text) : ObservableObject
     [ObservableProperty] private string _text = text;
 }
 
-public partial class VotesData(UserData user, OptionData option) : ObservableObject
+public partial class VotesData(string guid, OptionData option) : ObservableObject
 {
-    [ObservableProperty] private string _id;
-    [ObservableProperty] private string _voterID = user.Guid;
+    [ObservableProperty] private string _id = Guid.NewGuid().ToString();
+    [ObservableProperty] private string _voterID = guid;
     [ObservableProperty] private string _relatedOption = option.Id;
     [ObservableProperty] private DateTime _created = DateTime.Now;
 }
