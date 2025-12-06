@@ -268,7 +268,9 @@
                                                 <RadioButton.IsChecked>
                                                     <MultiBinding Converter="{StaticResource ComparisonConverter}" Mode="OneWay">
                                                         <Binding Path="." />
-                                                        <Binding Source="{RelativeSource AncestorType={x:Type ViewModels:ListPollsViewModel}}" Path="SelectedOption" />
+                                                        <Binding Source="{RelativeSource AncestorType={x:Type ViewModels:ListPollsViewModel}}"
+                                                                 Path="SelectedOption" />
+                                                        
                                                     </MultiBinding>
                                                 </RadioButton.IsChecked>
                                                 </RadioButton>
@@ -279,7 +281,8 @@
                                 
                                 <HorizontalStackLayout HorizontalOptions="End">
                                     <Button Text="Submit Vote"
-                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ViewModels:ListPollsViewModel}}, Path=SubmitVoteCommand}"/>
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ViewModels:ListPollsViewModel}},
+                                                              Path=SubmitVoteCommand}"/>
                                     
                                 </HorizontalStackLayout>
                             </StackLayout>

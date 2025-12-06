@@ -63,8 +63,6 @@ public partial class ListPollsViewModel : BaseViewModel
         SelectedOption = PollService.LoadPoll(UserService.LoggedInUser.Guid, value);
     }
 
-    #region Vote
-
     [RelayCommand]
     private void SubmitVote()
     {
@@ -107,6 +105,4 @@ public partial class ListPollsViewModel : BaseViewModel
         }
         return null;
     }*/
-
-    #endregion
 }

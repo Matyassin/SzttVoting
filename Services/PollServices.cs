@@ -1,16 +1,11 @@
-using System.Diagnostics.Tracing;
-using Microsoft.Maui.Controls.Shapes;
 using Model;
 using Newtonsoft.Json;
-using Path = System.IO.Path;
 
 namespace Services;
 
 public class PollServices : IDataService
 {
     public Dictionary<string, PollData> Polls { get; private set; } = new();
-    
-    //Protected, not readonly -> Testable
     protected string _fileName = "polldata.json";
 
     public void AddPoll(UserData currUser, string title, string desc, DateTime deadline, List<OptionData> options, List<VotesData> votes)
@@ -38,12 +33,12 @@ public class PollServices : IDataService
             {
                 votes.Remove(vote);
                 votes.Add(currVote);
-                Save();
-                return;
+            }
+            else
+            {
+                Polls[currPoll.Title].Votes.Add(currVote);
             }
         }
-        
-        Polls[currPoll.Title].Votes.Add(currVote);
         Save();
     }
 
@@ -52,13 +47,15 @@ public class PollServices : IDataService
         
     }
 
-    public OptionData? LoadPoll(String userId, PollData poll)
+    public OptionData? LoadPoll(string userId, PollData poll)
     {
-        if (!Polls.ContainsKey(poll.Title)) return null;
+        if (!Polls.ContainsKey(poll.Title))
+            return null;
 
         var userVote = poll.Votes.FirstOrDefault(vote => vote.VoterID == userId);
         
-        if (userVote is null) return null;
+        if (userVote is null)
+            return null;
 
         return poll.Options.FirstOrDefault(option => option.Id == userVote.RelatedOption);
     }
