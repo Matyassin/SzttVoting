@@ -28,4 +28,10 @@ public partial class ListPollsView : ContentPage
             _vm.SelectOptionCommand.Execute(selectedOption);
         }
     }
+
+    private void Button_OnClicked(object? sender, EventArgs e)
+    {
+        if (_vm.CanModifyVote)
+            Navigation.PushAsync(new ModifyPollView(_vm.UserService, _vm.PollService, _vm.SelectedPoll));
+    }
 }
