@@ -26,12 +26,12 @@ Győződjön meg róla, hogy telepítve van a **.NET 9 SDK**.
 
 ## Rövid használati útmutató
 (A teljes dokumentációk a Documents mappában találhatóak.) <br><br>
-Bejelentkezés után a felhasználó-t egy Welcome Page fogadja, ahol létrehozhat új szavazatokat, megnézheti az összes szavazást, megtekintheti saját profilja adatait, valamint ki is léphet a rendszerből.
+Bejelentkezés után a felhasználó-t egy Welcome Page fogadja, ahol létrehozhat új szavazásokat, megnézheti az összes szavazást, megtekintheti saját profilja adatait, valamint ki is léphet a rendszerből.
 
 - Új szavazat létrehozása:
   <img width="1875" height="941" alt="image" src="https://github.com/user-attachments/assets/055cdca8-5d1f-4eea-8882-5de42f58ff5e" />
-  - Adott szavazat létrehozása után a felhasználó saját szavazata megtekinthető a View Polls gombra kattintva a Welcome Page-en.
+  - Adott szavazás létrehozása után a felhasználó saját szavazásai megtekinthetők a View Polls gombra kattintva a Welcome Page-en.
  
 - Szavazatok megtekintése:
   <img width="1831" height="893" alt="image" src="https://github.com/user-attachments/assets/21e7537e-cc35-4147-87f6-7223ee047723" />
-  - Ezen az oldalon a felhasználó szavazhat még le nem zárt szavazásokra, módosíthatja saját szavazatait (ha azokra még nem érkezett szavazat), lezárhatja saját szavzásait és megtekintheti az Archívumban lévő szavazások statisztikáit is.
+  - Ezen az oldalon a felhasználó szavazhat még le nem zárt szavazásokra, módosíthatja saját szavazatait (ha azon szavazásokra még nem érkezett szavazat), lezárhatja saját szavzásait és megtekintheti az Archívumban lévő szavazások statisztikáit is.
