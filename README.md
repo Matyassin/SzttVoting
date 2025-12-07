@@ -25,7 +25,7 @@ Győződjön meg róla, hogy telepítve van a **.NET 9 SDK**.
    - Futtassa a programot.
 
 ## Rövid használati útmutató
-(A teljes dokumentációk a Documents mappában találhatók.)
+(A teljes dokumentációk a Documents mappában találhatók.) <br>
 Bejelentkezés után a felhasználó-t egy Welcome Page fogadja, ahol létrehozhat új szavazatokat, megnézheti az összes szavazatot, megtekintheti saját profilja adatait, valamint ki is léphet a rendszerből.
 
 - Új szavazat létrehozása:
