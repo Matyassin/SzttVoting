@@ -1,8 +1,11 @@
 using Model;
 using Services;
 using System.Collections.ObjectModel;
+using System.Runtime.InteropServices.JavaScript;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
+using ViewModel.Messages;
 
 namespace ViewModel.UserViewModels;
 
@@ -10,7 +13,8 @@ public partial class ModifyPollViewModel : BaseViewModel
 {
     private readonly UserServices _userServices;
     private readonly PollServices _pollServices;
-    private readonly PollData _pollToChange;
+    private PollData _pollToChange;
+    private PollData _pollTemp;
 
     public ObservableCollection<OptionData> Options { get; set; }
 
@@ -37,13 +41,20 @@ public partial class ModifyPollViewModel : BaseViewModel
         _userServices = userServices;
         _pollServices = pollServices;
         _pollToChange = pollData;
+        
+        _pollTemp = new PollData(pollData.CreatorID, 
+            pollData.Title, 
+            pollData.Description, 
+            pollData.Deadline, 
+            pollData.Options.Select(o => new OptionData(o)).ToList(), 
+            new List<VotesData>());
 
-        Title = pollData.Title;
-        Description = pollData.Description;
-        DeadlineDate = pollData.Deadline.Value.Date;
-        DeadlineTime = pollData.Deadline.Value.TimeOfDay;
+        Title = _pollTemp.Title;
+        Description = _pollTemp.Description;
+        DeadlineDate = _pollTemp.Deadline.Value.Date;
+        DeadlineTime = _pollTemp.Deadline.Value.TimeOfDay;
 
-        Options = new ObservableCollection<OptionData>(pollData.Options);
+        Options = new ObservableCollection<OptionData>(_pollTemp.Options);
 
         Options.CollectionChanged += (sender, e) =>
         {
@@ -87,18 +98,20 @@ public partial class ModifyPollViewModel : BaseViewModel
     {
         if (CanPublish())
         {
-            if (_pollToChange.Title != Title)
-            {
-                _pollServices.Polls.Remove(_pollToChange.Title);
-            }
+            _pollServices.Polls.Remove(_pollToChange.Title);
 
-            _pollToChange.Title = Title;
-            _pollToChange.Description = Description;
-            _pollToChange.Deadline = DeadlineDate + DeadlineTime;
-            _pollToChange.Options = Options.ToList();
-            _pollToChange.Created = DateTime.UtcNow;
-            _pollServices.Polls[_pollToChange.Title] = _pollToChange;
+            _pollTemp.Title = Title;
+            _pollTemp.Description = Description;
+            _pollTemp.Deadline = DeadlineDate + DeadlineTime;
+            _pollTemp.Options = Options.ToList();
+            _pollTemp.Created = DateTime.UtcNow;
+            _pollServices.AddPoll(_pollTemp);
+            
             _pollServices.Save();
+            _pollToChange = default;
+            _pollTemp = default;
+            
+            WeakReferenceMessenger.Default.Send(new PollChangedMessage("Refresh"));
 
             return true;
         }
@@ -121,7 +134,7 @@ public partial class ModifyPollViewModel : BaseViewModel
 
     private bool TitleCheck()
     {
-        if (Title.Length > 0 && Title.Length < 50)
+        if ( (Title.Length > 0 && Title.Length < 50) || _pollToChange.Title.Equals(_pollToChange.Title))
             return true;
 
         _errorMessageTitle = "Check the title entry!";
