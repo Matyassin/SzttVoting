@@ -4,6 +4,10 @@
 Ez az alkalmazás a BME Szoftvertechnológia és technikák tárgy II. házi feladatának megoldását tartalmazza.
 Az alkalmazás **.NET MAUI** alapú, és támogatja a **Windows10.0.19041.0** és **Mac Catalyst 9.0** platformokat.
 
+## Rövid ismertető
+Az alkalmazás egy egyszerű közösségi jellegű szavazóplatform, ahol regisztrált felhasználók különböző témákban szavazásokat hozhatnak létre, mások pedig ezeken részt vehetnek.
+Az rendszer nem publikus, csak regisztrált felhasználók férhetnek hozzá.
+
 ### Csapat
 Csapatnév: OOP Enjoyers
 - Végh Mátyás      - FEGRL2
@@ -20,4 +24,13 @@ Győződjön meg róla, hogy telepítve van a **.NET 9 SDK**.
    - Startup project-ként az SzttVoting projekt fájl lesz kijelölve, ha nem így történt jelölje ki ezt a projektet, mint "Startup project".
    - Futtassa a programot.
 
-## Rövid ismertető
+## Rövid használati útmutató
+(A teljes dokumentációk a Documents mappában találhatók.)
+Bejelentkezés után a felhasználó-t egy Welcome Page fogadja, ahol készíthet új szavazatokat, megnézheti az összes szavazatot, megtekintheti saját profilja adatait, valamint ki is léphet a rendszerből.
+
+- Új szavazat létrehozása:
+  <img width="1875" height="941" alt="image" src="https://github.com/user-attachments/assets/055cdca8-5d1f-4eea-8882-5de42f58ff5e" />
+  - Adott szavazat létrehozása után a felhasználó saját szavazata megtekinthető a View Polls gombra kattintva a Welcome Page-en.
+ 
+- Szavazatok megtekintése:
+  - Ezen az oldalon a felhasználó szavazhat még le nem zárt szavazásokra, módosíthatja saját szavazatait (ha azokra még nem érkezett szavazat), lezárhatja saját szavazatait és megtekintheti az Archívumban lévő szavazatok statisztikáit is.
