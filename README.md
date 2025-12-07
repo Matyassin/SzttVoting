@@ -33,8 +33,5 @@ Bejelentkezés után a felhasználó-t egy Welcome Page fogadja, ahol létrehozh
   - Adott szavazat létrehozása után a felhasználó saját szavazata megtekinthető a View Polls gombra kattintva a Welcome Page-en.
  
 - Szavazatok megtekintése:
-<img width="1831" height="893" alt="image" src="https://github.com/user-attachments/assets/21e7537e-cc35-4147-87f6-7223ee047723" />
+  <img width="1831" height="893" alt="image" src="https://github.com/user-attachments/assets/21e7537e-cc35-4147-87f6-7223ee047723" />
   - Ezen az oldalon a felhasználó szavazhat még le nem zárt szavazásokra, módosíthatja saját szavazatait (ha azokra még nem érkezett szavazat), lezárhatja saját szavazatait és megtekintheti az Archívumban lévő szavazatok statisztikáit is.
-
-- Adminisztrátor felhasználó:
-  - Az adminisztrátori jogkör a Documents 
