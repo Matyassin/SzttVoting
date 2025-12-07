@@ -41,7 +41,7 @@ public class InputValidationTests
     }
 
     [Fact]
-    public void PasswordLengthLessThanFiveCharacters()
+    public void PasswordLengthLessThanFiveChrs()
     {
         var vm = new RegisterViewModel(new UserServices());
         Assert.False(vm.IsPasswordValid("Wsd1"));
@@ -55,7 +55,7 @@ public class InputValidationTests
     }
 
     [Fact]
-    public void PasswordContainsOnlyLowercaseCharacters()
+    public void PasswordContainsOnlyLowercaseChrs()
     {
         var vm = new RegisterViewModel(new UserServices());
         Assert.False(vm.IsPasswordValid("wasdf1"));
