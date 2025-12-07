@@ -5,7 +5,7 @@ namespace Services;
 
 public class UserServices : IDataService
 {
-    public UserData LoggedInUser { get; private set; }
+    public UserData? LoggedInUser { get; private set; }
 
     public Dictionary<string, UserData> Users = new();
     protected string _fileName = "userprofiles.json";
@@ -68,11 +68,26 @@ public class UserServices : IDataService
         if (!File.Exists(filePath))
         {
             File.WriteAllText(filePath, "{}");
-            return;
         }
 
         string json = File.ReadAllText(filePath);
-        Users = JsonConvert.DeserializeObject<Dictionary<string, UserData>>(json) ?? new Dictionary<string, UserData>();;
+        Users = JsonConvert.DeserializeObject<Dictionary<string, UserData>>(json) ?? new Dictionary<string, UserData>();
+
+        if (Users.Count == 0)
+        {
+            UserData admin = new(
+                Guid.NewGuid().ToString(),
+                "admin",
+                "admin@gmail.com",
+                BCrypt.Net.BCrypt.HashPassword("Admin1"),
+                false
+            );
+
+            admin.IsAdmin = true;
+
+            Users.Add(admin.Email, admin);
+            Save();
+        }
     }
 
     public void ToggleUserBlockStatus(string userEmail)

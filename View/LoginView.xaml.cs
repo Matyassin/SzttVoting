@@ -30,6 +30,7 @@ public partial class LoginView : ContentPage
             return;
 
         _vm.IsBusy = true;
+
         try
         {
             if (await _vm.TryAuthUser())
@@ -37,7 +38,9 @@ public partial class LoginView : ContentPage
                 if (_vm.IsLoggedInUserAdmin())
                 {
                     await Navigation.PushAsync(new AdminView(_vm.UserService));
-                }else {
+                }
+                else
+                {
                     await Navigation.PushAsync(new UserView(_vm.UserService));
                 }
             }
@@ -50,8 +53,6 @@ public partial class LoginView : ContentPage
         {
             _vm.IsBusy = false;
         }
-
-        
     }
 
     private async void ToRegisterButton_OnClickedAsync(object? sender, EventArgs e)
