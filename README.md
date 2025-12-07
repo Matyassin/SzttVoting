@@ -11,6 +11,6 @@ Győződjön meg róla, hogy telepítve van a **.NET 9 SDK** .
    - Klónozza le a repository-t: git clone https://github.com/Matyassin/SzttVoting vagy használja az IDE vagy más külső szoftver által felkínált lehetőségeket.
      
 2. <ins>A program futtatása:</ins>
-   - "Startup project"-ként az SzttVoting projekt fájl lesz kijelölve, ha nem így történt jelölje ki ezt a projektet, mint "Startup project".
+   - Startup project-ként az SzttVoting projekt fájl lesz kijelölve, ha nem így történt jelölje ki ezt a projektet, mint "Startup project".
    - Futtassa a programot.
      
