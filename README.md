@@ -6,7 +6,7 @@ Az alkalmazás **.NET MAUI** alapú, és támogatja a **Windows10.0.19041.0** é
 
 ## Rövid ismertető
 Az alkalmazás egy egyszerű közösségi jellegű szavazóplatform, ahol regisztrált felhasználók különböző témákban szavazásokat hozhatnak létre, mások pedig ezeken részt vehetnek.
-Az rendszer nem publikus, csak regisztrált felhasználók férhetnek hozzá.
+A rendszer nem publikus, csak regisztrált felhasználók férhetnek hozzá.
 
 ### Csapat
 Csapatnév: OOP Enjoyers
