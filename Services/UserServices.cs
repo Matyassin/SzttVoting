@@ -8,10 +8,27 @@ public class UserServices : IDataService
     public UserData? LoggedInUser { get; private set; }
 
     public Dictionary<string, UserData> Users = new();
-    protected string _fileName = "userprofiles.json";
+    protected string _filePath;
 
     public const string EmailPattern = @"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}";
     public const string PasswordPattern = @"^(?=.*[A-Z])(?=.*\d)[a-zA-Z0-9]+$";
+
+    public UserServices()
+    {
+        string? slnPath = Directory.GetParent(Directory.GetCurrentDirectory())
+            ?.Parent
+            ?.Parent
+            ?.Parent
+            ?.Parent
+            ?.FullName;
+
+        _filePath = Path.Combine(slnPath, "userprofiles.json");
+    }
+
+    public UserServices(string filePath)
+    {
+        _filePath = filePath;
+    }
 
     public void SetLoggedInUser(string email)
     {
@@ -50,7 +67,7 @@ public class UserServices : IDataService
             .Parent?
             .FullName;
 
-        string filePath = Path.Combine(slnPath, _fileName);
+        string filePath = Path.Combine(slnPath, _filePath);
         File.WriteAllText(filePath, json);
     }
 
@@ -63,7 +80,7 @@ public class UserServices : IDataService
             .Parent?
             .FullName;
 
-        string filePath = Path.Combine(slnPath, _fileName);
+        string filePath = Path.Combine(slnPath, _filePath);
 
         if (!File.Exists(filePath))
         {
