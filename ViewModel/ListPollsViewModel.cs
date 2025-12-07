@@ -3,6 +3,8 @@ using Services;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
+using ViewModel.Messages;
 
 namespace ViewModel;
 
@@ -46,6 +48,11 @@ public partial class ListPollsViewModel : BaseViewModel
     {
         PollService = pollServices;
         UserService = userServices;
+        
+        WeakReferenceMessenger.Default.Register<PollChangedMessage>(this, (r, m) =>
+        {
+            SeperatePolls();
+        });
 
         SeperatePolls();
     }
@@ -104,7 +111,8 @@ public partial class ListPollsViewModel : BaseViewModel
     [RelayCommand]
     private void ModifyVote()
     {
-        return;
+        SelectedOption = null;
+        SelectedPoll = null;
     }
 
     [RelayCommand]

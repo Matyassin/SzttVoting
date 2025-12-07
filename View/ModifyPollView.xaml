@@ -24,7 +24,7 @@
               Padding="50"
               RowSpacing="20"
               HeightRequest="700"> <Label Grid.Row="0"
-                   Text="Create New Vote"
+                   Text="Modify Your Vote"
                    TextColor="White"
                    FontSize="40"
                    FontAttributes="Bold"
@@ -130,7 +130,7 @@
                         Clicked="CancelButton_OnClicked"/>
 
                 <Button Grid.Column="1"
-                        Text="Publish Vote"
+                        Text="Confirm Edit"
                         BackgroundColor="White"
                         FontAttributes="Bold"
                         FontSize="20"

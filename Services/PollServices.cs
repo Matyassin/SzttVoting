@@ -22,6 +22,12 @@ public class PollServices : IDataService
 
         Save();
     }
+    
+    public void AddPoll(PollData pollToAdd)
+    {
+        Polls.Add(pollToAdd.Title,pollToAdd);
+        Save();
+    }
 
     public void RemovePoll(string title)
     {

@@ -34,6 +34,7 @@ public partial class ListPollsView : ContentPage
         if (_vm.CanModifyVote)
         {
             Navigation.PushAsync(new ModifyPollView(_vm.UserService, _vm.PollService, _vm.SelectedPoll));
+            _vm.ModifyVoteCommand.Execute(null);
         }
     }
 }

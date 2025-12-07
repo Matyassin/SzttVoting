@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices.JavaScript;
 using System.Text.Json.Serialization;
 using CommunityToolkit.Mvvm.ComponentModel;
 
@@ -29,12 +30,24 @@ public partial class PollData : ObservableObject
     }
 }
 
-public partial class OptionData(string text) : ObservableObject
+public partial class OptionData : ObservableObject
 {
-    [ObservableProperty] private string _id = Guid.NewGuid().ToString();
-    [ObservableProperty] private string _text = text;
+    [ObservableProperty] private string _id;
+    [ObservableProperty] private string _text;
     
     [ObservableProperty, JsonIgnore] private string _percentageSelected = "0%";
+
+    public OptionData(string text)
+    {
+        Id = Guid.NewGuid().ToString();
+        Text = text;
+    }
+    public OptionData() { }
+    public OptionData(OptionData option)
+    {
+        this.Id = option.Id;
+        this.Text = option.Text;
+    }
 }
 
 public partial class VotesData(string guid, string relatedOption) : ObservableObject
