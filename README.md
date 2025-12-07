@@ -4,6 +4,12 @@
 Ez az alkalmazás a BME Szoftvertechnológia és technikák tárgy II. házi feladatának megoldását tartalmazza.
 Az alkalmazás **.NET MAUI** alapú, és támogatja a **Windows10.0.19041.0** és **Mac Catalyst 9.0** platformokat.
 
+### Csapat
+Csapatnév: OOP Enjoyers
+- Végh Mátyás      - FEGRL2
+- Fabriczius Dávid - LNC97H
+- Horváth Simon    - DQUXW4
+- Török Simon      - EN6EDS
 
 ## Telepítési útmutató
 Győződjön meg róla, hogy telepítve van a **.NET 9 SDK** .
