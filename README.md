@@ -3,4 +3,4 @@
 
 Ez az alkalmazás a BME Szoftvertechnológia és technikák tárgy II. házi feladatának megoldását tartalmazza.
 
-#Getting Started
+# Getting Started
