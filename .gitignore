@@ -96,3 +96,4 @@ releases/
 **/*.csproj
 /polldata.json
 /userprofiles.json
+/Documents/Tests.md
